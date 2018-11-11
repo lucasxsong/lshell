@@ -23,12 +23,13 @@ void callExit() {
 // be then used to generate argument objects. 
 // *****
 vector<string> parseInput (string userInput) {
-    string delimiters("&" "||" ";");
+    string delimiters("&&" "||" ";");
     vector<string> parsedStrings;
 
     stringstream ss(userInput);
     string argument;
 
+    // This while loop separates the user input into substrings based on the connectors "&& || ; ". White spaces still need to be removed.
     while (getline(ss, argument)) {
         size_t prev = 0;
         size_t pos;
@@ -52,8 +53,9 @@ string printHost() {
     if (gethostname(name, size) != -1) {
         string s(name);
         return s;
+        //return "host";
     } 
-    return " ";
+    return "host";
 }
 
 string printUser() {
@@ -70,7 +72,7 @@ void runInput() {
     string name = printUser();
     string host = printHost();
 
-    cout << "@" << name << "$ ";
+    cout << host << "@" << name << "$ ";
     getline(cin, userInput);
 
     if (userInput == "exit" ||userInput == "Exit") { 
@@ -78,8 +80,8 @@ void runInput() {
     }
     
     vector<string> parsedInput = parseInput(userInput);
-
-    cout << parsedInput.at(1);
+    cout << "first input: " << parsedInput.at(0);
+    cout << "second input: " << parsedInput.at(1);
 }
 
 
