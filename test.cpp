@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "main.cpp"
+#include "input.cpp"
 
 TEST(InputTest, ParseInputTest) {
     vector<string> test;
