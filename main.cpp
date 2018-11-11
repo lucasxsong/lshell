@@ -22,14 +22,15 @@ void callExit() {
 // tokenizes yet again to remove spaces in the substrings. Returns a vector of strings to
 // be then used to generate argument objects. 
 // *****
-vector<string> parseInput (string userInput) {
+vector<string> parseInput(string userInput) {
     string delimiters("&&" "||" ";");
     vector<string> parsedStrings;
 
     stringstream ss(userInput);
     string argument;
 
-    // This while loop separates the user input into substrings based on the connectors "&& || ; ". White spaces still need to be removed.
+    // This while loop separates the user input into substrings based on the connectors 
+    //"&& || ; ". White space still need to be removed.
     while (getline(ss, argument)) {
         size_t prev = 0;
         size_t pos;
@@ -47,15 +48,22 @@ vector<string> parseInput (string userInput) {
     return parsedStrings;
 }
 
+//void separateInput() {
+    
+//}
+
+//*****
+// These two functions call local user and local host to be printed in terminal
+//*****
+
 string printHost() {
     size_t size = 1024;
     char name[size];
     if (gethostname(name, size) != -1) {
         string s(name);
         return s;
-        //return "host";
     } 
-    return "host";
+    return "Local";
 }
 
 string printUser() {
@@ -86,7 +94,7 @@ void runInput() {
 
 
 
-int main () {
+int main() {
     while (runShell) {
         runInput();
     }
