@@ -1,6 +1,5 @@
 #include <iostream>
-#include <iostream>
-#include "input.cpp"
+#include "input.h"
 
 
 
