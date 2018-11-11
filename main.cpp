@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <limits.h>
 #include <stdlib.h>
+#include <sstream>
 
 using namespace std;
 
@@ -25,17 +26,34 @@ vector<string> parseInput (string userInput) {
     string delimiters("&" "||" ";");
     vector<string> parsedStrings;
 
+    stringstream ss(userInput);
+    string argument;
+
+    while (getline(ss, argument)) {
+        size_t prev = 0;
+        size_t pos;
+        while ((pos = argument.find_first_of(delimiters, prev)) != string::npos) {
+            if (pos > prev) {
+                parsedStrings.push_back(userInput.substr(prev, pos-prev));
+            }
+            prev = pos + 1;
+        }
+        if (prev < argument.length()) {
+            parsedStrings.push_back(userInput.substr(prev, string::npos));
+        }
+    }
+
     return parsedStrings;
 }
 
 string printHost() {
-   /*
-    char* name;
-    size_t size = 1023;
+    size_t size = 1024;
+    char name[size];
     if (gethostname(name, size) != -1) {
-        cout << name;
-    } */
-    return getenv("LOGIN");
+        string s(name);
+        return s;
+    } 
+    return " ";
 }
 
 string printUser() {
@@ -50,7 +68,7 @@ string printUser() {
 void runInput() {
     string userInput;
     string name = printUser();
-    //string host = printHost();
+    string host = printHost();
 
     cout << "@" << name << "$ ";
     getline(cin, userInput);
@@ -60,10 +78,9 @@ void runInput() {
     }
     
     vector<string> parsedInput = parseInput(userInput);
+
+    cout << parsedInput.at(1);
 }
-
-
-
 
 
 
