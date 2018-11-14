@@ -32,3 +32,4 @@ class input {
 
 bool runShell = true;
 
+#endif
