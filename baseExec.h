@@ -13,18 +13,11 @@ class arg;
 class baseExec {
     protected:
         baseExec() { }
+
         std::vector<arg*> a;
     public:
         virtual void execute() = 0;
 
-};
-
-class echo : public baseExec {
-    protected:
-        echo() {};
-        echo(std::string input);
-    public: 
-        void execute();
 };
 
 /*****
@@ -33,5 +26,13 @@ class echo : public baseExec {
 *****/
 
 //*** DERIVED CLASSES ***//
+
+class echo : public baseExec {
+    protected:
+        echo() {};
+        echo(std::string input);
+    public: 
+        void execute();
+};
 
 #endif
