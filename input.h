@@ -1,34 +1,26 @@
 #ifndef INPUT_H
 #define	INPUT_H 
 
-#include <string>
-#include <vector>
-#include <string.h>
-#include <stdio.h>
-#include <algorithm>
-#include <unistd.h>
-#include <limits.h>
-#include <stdlib.h>
-#include <sstream>
-#include <iostream>
-
 #include "baseExec.h"
+#include <iostream>
 
 using namespace std;
 
+class baseExec;
+
 class input {
     protected: 
-        string preParse;
+        string userInput;
         vector<string> preExec;
         baseExec* e;
     public:
-        void callExit();
+        input(){}
+        bool runShell();
         void runInput();
         void parseInput();
         void parseArguments();
         string printUser();
-        string printnHost();
+        string printHost();
 };
 
-bool runShell = true;
-
+#endif

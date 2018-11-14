@@ -1,7 +1,21 @@
 #include "input.h"
+#include <string>
+#include <vector>
+#include <string.h>
+#include <stdio.h>
+#include <algorithm>
+#include <unistd.h>
+#include <limits.h>
+#include <stdlib.h>
+#include <sstream>
+#include <iostream>
 
-void callExit() {
-    runShell = false;
+bool input::runShell() {
+    if (userInput != "quit" && userInput != "Quit") {
+        cout << "See you next time!" << endl;
+        return false;
+    }
+    return true;
 }
 
 // *****
@@ -9,9 +23,8 @@ void callExit() {
 // tokenizes yet again to remove spaces in the substrings. Returns a vector of strings to
 // be then used to generate argument objects. 
 // *****
-vector<string> parseInput(string userInput) {
+void input::parseInput() {
     string delimiters("&&" "||" ";");
-    vector<string> parsedStrings;
 
     stringstream ss(userInput);
     string argument;
@@ -23,29 +36,29 @@ vector<string> parseInput(string userInput) {
         size_t pos;
         while ((pos = argument.find_first_of(delimiters, prev)) != string::npos) {
             if (pos > prev) {
-                parsedStrings.push_back(userInput.substr(prev, pos-prev));
+                this->preExec.push_back(userInput.substr(prev, pos-prev));
             }
             prev = pos + 1;
         }
         if (prev < argument.length()) {
-            parsedStrings.push_back(userInput.substr(prev, string::npos));
+            this->preExec.push_back(userInput.substr(prev, string::npos));
         }
     }
 
-    return parsedStrings;
+    return;
 }
 
 // still need to edit function to note what connector tokenizes each exec list
 
 
-void parseArguments() {
+void input::parseArguments() {
     
 }
 
 //*****
 // These two functions call local user and local host to be printed in terminal
 //*****
-string printHost() {
+string input::printHost() {
     size_t size = 1024;
     char name[size];
     if (gethostname(name, size) != -1) {
@@ -55,7 +68,7 @@ string printHost() {
     return "Local";
 }
 
-string printUser() {
+string input::printUser() {
     char* name = getlogin();
     return name;
 }
@@ -64,19 +77,13 @@ string printUser() {
 // Takes in user input and passes it onto parseInput, to eventually create an Argument object 
 // that will make it easier to link together arguments with connectors
 //*****
-void runInput() {
-    string userInput;
+void input::runInput() {
     string name = printUser();
     string host = printHost();
 
     cout << host << "@" << name << "$ ";
-    getline(cin, userInput);
-
-    if (userInput == "exit" ||userInput == "Exit") { 
-        callExit();
-    }
+    getline(cin, this->userInput);
     
-    vector<string> parsedInput = parseInput(userInput);
+    parseInput();
 }
 
-#endif

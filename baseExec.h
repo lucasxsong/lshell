@@ -8,18 +8,18 @@
 // This is the base class for the executable objects that will be 
 // instantiated by different user input.
 *****/
-class Arg;
+class arg;
 
 class baseExec {
     protected:
         baseExec() { }
-        std::vector<Arg*> a;
+        std::vector<arg*> a;
     public:
         virtual void execute() = 0;
 
 };
 
-class echo : public: baseExec {
+class echo : public baseExec {
     protected:
         echo() {};
         echo(std::string input);
