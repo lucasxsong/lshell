@@ -32,7 +32,31 @@ class echo : public baseExec {
         echo() {};
         echo(std::string input);
     public: 
-        void execute();
+        void execute(); //prints arguments on newline
+};
+
+class ls : public baseExec {
+    protected:
+	ls() {};
+	ls(std::string input);
+    public:
+	void execute(); //print files in directory
+};
+
+class cd : public baseExec {
+    protected:
+	cd() {};
+	cd(std::string input);
+    public:
+	void execute(); //change directory based on argument passed in
+};
+
+class mkdir : public baseExec {
+    protected:
+	mkdir() {};
+	mkdir(std::string input);
+    public:
+	void execute();
 };
 
 #endif

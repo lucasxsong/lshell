@@ -1,6 +1,8 @@
 #ifndef ___ARG_H____
 #define ___ARG_H____
 
+#include <vector>
+
 /*****
 // This is the base class for arguments. Flags, text, and comments should 
 // inherit from this class 
@@ -8,7 +10,7 @@
 
 class Arg {
     protected:
-    
+    	
     public:
         Arg() {}
         virtual void execute() = 0;
@@ -20,7 +22,5 @@ class Arg {
 *****/
 
 //*** Derived Classes ***//
-
-
 
 #endif 

@@ -18,7 +18,7 @@ bool runShell = true;
 
 void callExit() {
     cout << "See you soon" << endl;
-	runShell = false;
+    runShell = false;
 }
 
 // *****
@@ -56,8 +56,9 @@ vector<string> parseInput(string userInput) {
 // Takes in vector of previously parsed user input and separates substrings into list of 
 // executables (e.g., ls, echo, mkdir, etc.) and list of arguments (i.e., flags, filename,
 // or comment)
+// I split this up into two parts for now, one for executables and one for the arguments
 // *****
-void parseArguments() {
+vector<string> parseExecutable(vector<string> ) {
     
 }
 
@@ -83,6 +84,9 @@ string printUser() {
 // Takes in user input and passes it onto parseInput, to eventually create an Argument object 
 // that will make it easier to link together arguments with connectors
 // *****
+// Not 100% sure but I think there could be issues in the future with scope of these variables
+// The vectors life expectancy exists only in this function so it could cause problems later if
+// we call other functions in main.cpp other than runInput()
 void runInput() {
     string userInput;
     string name = printUser();
@@ -93,9 +97,19 @@ void runInput() {
 
     if (userInput == "exit" ||userInput == "Exit") { 
         callExit();
+	return;
     }
     
     vector<string> parsedInput = parseInput(userInput);
+    
+    // Following 3 lines of code can be removed later, the purpose of this is to print contents
+    // of parsedInput vector
+    // Each line printed should be the executable + any/all arguments for said executable
+    for (int i = 0; i < parsedInput.size(); i++) {
+	cout << parsedInput.at(i) << endl;
+    }
+
+    
 }
 
 #endif
