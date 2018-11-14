@@ -28,6 +28,7 @@ class Input {
         ~Input();
         Input(std::string userString);
         void clearInput();
+        std::vector<std::vector <std::string> > returnParsedExec();
         std::vector<std::string> returnStrings();
         std::vector<std::string> returnConnectors();
         void callExit();

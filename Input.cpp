@@ -1,5 +1,9 @@
 #include "Input.h"
 
+/*****
+// Base constructors for input object creation, includes constructor with one parameter
+// to make gtest instantiation easier
+*****/
 Input::Input() { 
     exit = false;
 }
@@ -11,12 +15,19 @@ Input::Input(std::string userString) {
     exit = false;
 }
 
+/*****
+// Flushes implicit vectors/data members for next input
+*****/
 void Input::clearInput() {
     userInput = "";
     parsedStrings.clear();
     connectors.clear();
+    parsedExec.clear();
 }
 
+/*****
+// Helper functions to return vectors for gtest
+*****/
 std::vector<std::string> Input::returnStrings() {
     return parsedStrings;
 }
@@ -25,13 +36,19 @@ std::vector<std::string> Input::returnConnectors() {
     return connectors;
 }
 
-// *****
+std::vector<std::vector <std::string> > Input::returnParsedExec() {
+    return parsedExec;
+}
+
+/*****
 // Takes in user input and passes it onto parseInput, to eventually create an Argument object 
 // that will make it easier to link together arguments with connectors
-// *****
+*****/
+//*** MARKED AS RESOLVED*** 
 // Not 100% sure but I think there could be issues in the future with scope of these variables
 // The vectors life expectancy exists only in this function so it could cause problems later if
-// we call other functions in main.cpp other than runInput()
+// we call other functions in main.cpp other than runInput() 
+//*** MARKED AS RESOLVED*** 
 void Input::runInput() {
     std::string name = returnUser();
     std::string host = returnHost();
@@ -60,11 +77,11 @@ bool Input::checkExit() {
     return false;
 }
 
-// *****
+/*****
 // Takes in user input and tokenizes string into substrings based on connectors, and then
 // tokenizes yet again to remove spaces in the substrings. Returns a vector of strings to
 // be then used to generate argument objects. 
-// *****
+*****/
 void Input::parseInput() {
     std::string delimiters("&&" "||" ";");
 
@@ -112,9 +129,10 @@ void Input::parseInput() {
     return;
 }
 
-
+/*****
 // This is a helper function that is virtually the same as the first step of parse input, using spaces as
 // delimiters instead of the connectors to remove spaces from string withSpaces
+*****/
 std::vector<std::string> Input::parseSpaces(std::string withSpaces) {
     std::string delimiters(" ");
 
@@ -141,29 +159,25 @@ std::vector<std::string> Input::parseSpaces(std::string withSpaces) {
     return noSpaces;
 }
 
+/*****
+// This function parses the user string for connectors to add to the connectors vector
+*****/
 void Input::parseConnectors() {
     std::string connectors("&&" "||" ";");
+    // ** TO DO ** //
 }
-
-// *****
-// Takes in vector of previously parsed user input and separates substrings into list of 
-// executables (e.g., ls, echo, mkdir, etc.) and list of arguments (i.e., flags, filename,
-// or comment)
-// I split this up into two parts for now, one for executables and one for the arguments
-// *****
 
 /*****
-// Constructs executable tree based on connectors, sets baseExec* head to the head node of 
-// this tree. head-> eval should execute the tree with respect to the connectors
+// Constructs executable tree based on 2d vector and connector vector, sets baseExec* head to the 
+// head node of  this tree. head-> eval should execute the tree with respect to the connectors
 *****/
-
 void Input::makeExecutableTree() {
-    
+    // ** TO DO ** // 
 }
 
-//*****
+/*****
 // These two functions call local user and local host to be printed in terminal
-//*****
+*****/
 std::string Input::returnHost() {
     size_t size = 1024;
     char name[size];
