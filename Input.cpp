@@ -11,6 +11,12 @@ Input::Input(std::string userString) {
     exit = false;
 }
 
+void Input::clearInput() {
+    userInput = "";
+    parsedStrings.clear();
+    connectors.clear();
+}
+
 std::vector<std::string> Input::returnStrings() {
     return parsedStrings;
 }
@@ -39,13 +45,6 @@ void Input::runInput() {
         callExit();
 	return;
     }
-    
-    // Following 3 lines of code can be removed later, the purpose of this is to print contents
-    // of parsedInput vector
-    // Each line printed should be the executable + any/all arguments for said executable
-    //for (int i = 0; i < parsedInput.size(); i++) {
-	//cout << parsedInput.at(i) << endl;
-    //}
 }
 
 void Input::callExit() {
@@ -81,18 +80,69 @@ void Input::parseInput() {
             if (pos > prev) {
                 int connector = pos - prev + 1;
                 parsedStrings.push_back(userInput.substr(prev, pos-prev));
-                connectors.push_back(userInput.substr(connector, 1));
+                //connectors.push_back(userInput.substr(connector, 1));
             }
             prev = pos + 1;
         }
         if (prev < argument.length()) {
             int connector = pos - prev + 1;
             parsedStrings.push_back(userInput.substr(prev, std::string::npos));
-            connectors.push_back(userInput.substr(connector, 1));
         }
+    }
+    
+
+    // This for loop removes the spaces from the parsed substrings so that the exec object creation is easier
+    for (int i = 0; i < parsedStrings.size(); ++i) {
+        std::vector<std::string> toPush = parseSpaces(parsedStrings.at(i));
+        parsedExec.push_back(toPush);
+    }
+
+    //*** TESTER ***//
+    // Following 3 lines of code can be removed later, the purpose of this is to print contents
+    // of parsedInput vector
+    // Each line printed should be the executable + any/all arguments for said executable
+    for (int i = 0; i < parsedExec.size(); i++) {
+        std::cout << "vector " << i << ":";
+        for (int j = 0; j < parsedExec.at(i).size(); ++j) {
+            std::cout << parsedExec.at(i).at(j);
+        }
+        std::cout << std::endl;
     }
 
     return;
+}
+
+
+// This is a helper function that is virtually the same as the first step of parse input, using spaces as
+// delimiters instead of the connectors to remove spaces from string withSpaces
+std::vector<std::string> Input::parseSpaces(std::string withSpaces) {
+    std::string delimiters(" ");
+
+    std::stringstream ss(withSpaces);
+    std::string argument;
+    std::vector<std::string> noSpaces;
+
+    // This while loop separates the user input into substrings based on the connectors 
+    //"&& || ; ". White space still need to be removed.
+    while (getline(ss, argument)) {
+        size_t prev = 0;
+        size_t pos;
+        while ((pos = argument.find_first_of(delimiters, prev)) != std::string::npos) {
+            if (pos > prev) {
+                noSpaces.push_back(withSpaces.substr(prev, pos-prev));
+            }
+            prev = pos + 1;
+        }
+        if (prev < argument.length()) {
+            noSpaces.push_back(withSpaces.substr(prev, std::string::npos));
+        }
+    }
+
+    return noSpaces;
+}
+
+void Input::parseConnectors() {
+    std::string connectors("&&" "||" ";");
 }
 
 // *****
@@ -107,7 +157,7 @@ void Input::parseInput() {
 // this tree. head-> eval should execute the tree with respect to the connectors
 *****/
 
-void Input::parseExecutableTree() {
+void Input::makeExecutableTree() {
     
 }
 

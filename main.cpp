@@ -4,10 +4,12 @@
 
 int main() {
     Input* i = new Input();
-    while (!i->checkExit()) {
+
+    while (!i->checkExit()){
         i->runInput();
         i->parseInput();
-    }
+        i->clearInput();
+    } 
 
     return 0;
 }
