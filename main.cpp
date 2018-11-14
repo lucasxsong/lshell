@@ -1,11 +1,11 @@
 #include <iostream>
 #include "input.h"
-
-
+//#include "baseExec.h"
 
 int main() {
-    while (runShell) {
-        runInput();
+    input* i;
+    while (i->runShell() == true) {
+        i->runInput();
     }
 
     return 0;

@@ -6,3 +6,7 @@ cmake_install.cmake
 Makefile
 .DS_Store
 test
+input
+baseExec.h.gch
+input.h.gch
+
