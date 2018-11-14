@@ -4,7 +4,6 @@
 #include <vector>
 #include "Arg.h"
 
-
 class Arg;
 
 /*****
@@ -18,7 +17,7 @@ class baseNode {
 };
 
 /*****
-// This is the base class for the connector nodes (2 children).
+// This is the base class for the connector nodes (2 CHILD NODES).
 *****/
 class Connector : public baseNode {
     protected:
@@ -60,7 +59,7 @@ class SemiColon : public Connector {
 
 /*****
 // This is the base class for the executable objects that will be 
-// instantiated by different user input.
+// instantiated by different user input. (LEAF NODE/ONE CHILD NODES)
 *****/
 class baseExec : public baseNode {
     protected:

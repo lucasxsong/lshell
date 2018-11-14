@@ -19,11 +19,15 @@ class Input {
     protected: 
         std::string userInput;
         std::vector<std::string> parsedStrings;
+        std::vector<std::string> connectors;
         baseNode* head; // pointer to top of executable tree
 		bool exit; // true if exit
     public:
 		Input();
         ~Input();
+        Input(std::string userString);
+        std::vector<std::string> returnStrings();
+        std::vector<std::string> returnConnectors();
         void callExit();
 		bool checkExit(); // returns true if needs to exit
         void runInput();

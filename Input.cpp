@@ -1,10 +1,22 @@
 #include "Input.h"
 
-Input::Input() {
-
+Input::Input() { 
+    exit = false;
 }
 
-Input::~Input() {
+Input::~Input() { }
+
+Input::Input(std::string userString) {
+    userInput = userString;
+    exit = false;
+}
+
+std::vector<std::string> Input::returnStrings() {
+    return parsedStrings;
+}
+
+std::vector<std::string> Input::returnConnectors() {
+    return connectors;
 }
 
 // *****
@@ -67,12 +79,16 @@ void Input::parseInput() {
         size_t pos;
         while ((pos = argument.find_first_of(delimiters, prev)) != std::string::npos) {
             if (pos > prev) {
+                int connector = pos - prev + 1;
                 parsedStrings.push_back(userInput.substr(prev, pos-prev));
+                connectors.push_back(userInput.substr(connector, 1));
             }
             prev = pos + 1;
         }
         if (prev < argument.length()) {
+            int connector = pos - prev + 1;
             parsedStrings.push_back(userInput.substr(prev, std::string::npos));
+            connectors.push_back(userInput.substr(connector, 1));
         }
     }
 
