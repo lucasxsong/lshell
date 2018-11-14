@@ -2,19 +2,19 @@
 #define ___BASEEXEC_H___
 
 #include <vector>
-#include "arg.h"
+#include "Arg.h"
 
 /*****
 // This is the base class for the executable objects that will be 
 // instantiated by different user input.
 *****/
-class arg;
+class Arg;
 
 class baseExec {
     protected:
         baseExec() { }
 
-        std::vector<arg*> a;
+        std::vector<Arg*> a;
     public:
         virtual void execute() = 0;
 

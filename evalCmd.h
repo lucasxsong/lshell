@@ -2,8 +2,8 @@
 #define ___EVALCMD_H___
 
 #include <vector>
-#include "baseExec.h"
-#include "arg.h"
+#include "BaseExec.h"
+#include "Arg.h"
 
 class baseExec;
 

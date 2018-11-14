@@ -1,11 +1,12 @@
 #include <iostream>
-#include "input.h"
-
+#include "Input.h"
 
 
 int main() {
-    while (runShell) {
-        runInput();
+    Input* i = new Input();
+    while (!i->checkExit()) {
+        i->runInput();
+        i->parseInput();
     }
 
     return 0;
