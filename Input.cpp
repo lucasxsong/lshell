@@ -85,7 +85,13 @@ void Input::parseInput() {
 // or comment)
 // I split this up into two parts for now, one for executables and one for the arguments
 // *****
-void Input::parseExecutable() {
+
+/*****
+// Constructs executable tree based on connectors, sets baseExec* head to the head node of 
+// this tree. head-> eval should execute the tree with respect to the connectors
+*****/
+
+void Input::parseExecutableTree() {
     
 }
 

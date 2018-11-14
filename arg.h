@@ -27,7 +27,7 @@ class fileName : public Arg { // class for filename string
     protected:
 
     public:
-}
+};
 
 class a : public Arg { // class for tag -a 
     protected:

@@ -12,14 +12,14 @@
 #include <sstream>
 #include <iostream>
 
-#include "BaseExec.h"
-class baseExec;
+#include "BaseNode.h"
+class baseNode;
 
 class Input {
     protected: 
         std::string userInput;
         std::vector<std::string> parsedStrings;
-        baseExec* e;
+        baseNode* head; // pointer to top of executable tree
 		bool exit; // true if exit
     public:
 		Input();
@@ -28,7 +28,7 @@ class Input {
 		bool checkExit(); // returns true if needs to exit
         void runInput();
         void parseInput();
-        void parseExecutable(); // instantiates baseExec e object w/ argList
+        void parseExecutableTree(); // instantiates baseExec e object w/ argList
         //void parseArguments();
         std::string returnUser();
         std::string returnHost();

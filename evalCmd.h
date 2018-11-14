@@ -13,7 +13,7 @@ class baseExec;
 ******/
 class Evalcmd {
     protected: 
-        baseExec* e; //points to specific executable object
+        baseNode* e; //points to specific executable object
     public: 
         Evalcmd();
 
