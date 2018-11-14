@@ -52,6 +52,11 @@ vector<string> parseInput(string userInput) {
     return parsedStrings;
 }
 
+// *****
+// Takes in vector of previously parsed user input and separates substrings into list of 
+// executables (e.g., ls, echo, mkdir, etc.) and list of arguments (i.e., flags, filename,
+// or comment)
+// *****
 void parseArguments() {
     
 }
@@ -74,10 +79,10 @@ string printUser() {
     return name;
 }
 
-//*****
+// *****
 // Takes in user input and passes it onto parseInput, to eventually create an Argument object 
 // that will make it easier to link together arguments with connectors
-//*****
+// *****
 void runInput() {
     string userInput;
     string name = printUser();
