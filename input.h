@@ -30,7 +30,8 @@ class Input {
         Input(std::string userString);
         void clearInput();
 
-        std::vector<std::vector <std::string> > returnParsedExec();
+        std::vector<baseExec* > returnParsedExec();
+        std::vector<std::vector <std::string> > returnParsedNoSpace();
         std::vector<std::string> returnStrings();
         std::vector<std::string> returnConnectors();
 

@@ -29,6 +29,14 @@ void Input::clearInput() {
 /*****
 // Helper functions to return vectors for gtest
 *****/
+std::vector<baseExec* > Input::returnParsedExec() {
+    return parsedExec;
+}
+
+std::vector<std::vector <std::string> > Input::returnParsedNoSpace() {
+    return parsedNoSpace;
+}
+
 std::vector<std::string> Input::returnStrings() {
     return parsedStrings;
 }
@@ -37,9 +45,9 @@ std::vector<std::string> Input::returnConnectors() {
     return connectors;
 }
 
-std::vector<std::vector <std::string> > Input::returnParsedExec() {
-    return parsedExec;
-}
+
+
+
 
 /*****
 // Takes in user input and passes it onto parseInput, to eventually create an Argument object 
@@ -109,13 +117,13 @@ void Input::parseInput() {
     }
     
 
-    // This for loop removes the spaces from the parsed substrings so that the exec object creation is easier
+    // parsedNoSpace vector creation
     for (int i = 0; i < parsedStrings.size(); ++i) {
         std::vector<std::string> toPush = parseSpaces(parsedStrings.at(i));
         parsedNoSpace.push_back(toPush);
     }
 
-    // This for loop takes in the no space vector and makes a vector pointers to exec objects
+    // parsedExec vector creation
     for (int i = 0; i < parsedNoSpace.size(); ++i) {
         baseExec* b = makeExec(parsedNoSpace.at(i));
         parsedExec.push_back(b);
@@ -170,8 +178,45 @@ std::vector<std::string> Input::parseSpaces(std::string withSpaces) {
 // This is a helper function that returns a baseExec object based on the zero index of
 // the vector passed in and takes the rest of the vector as the argument list
 *****/
+//** TO DO: tolower() all of the arguments at exec.at(0) so that ECHO = echo **//
 baseExec* Input::makeExec(std::vector<std::string> exec) {
-
+    if (exec.at(0) == "echo") {
+        echo* b = new echo();
+        exec.erase(exec.begin());
+        b->addArg(exec);
+        return b;
+    }
+    if (exec.at(0) == "ls") {
+        ls* b = new ls();
+        exec.erase(exec.begin());
+        b->addArg(exec);
+        return b;
+    }
+    if (exec.at(0) == "cd") {
+        cd* b = new cd();
+        exec.erase(exec.begin());
+        b->addArg(exec);
+        return b;
+    }
+    if (exec.at(0) == "mkdir") {
+        mkdir* b = new mkdir();
+        exec.erase(exec.begin());
+        b->addArg(exec);
+        return b;
+    }
+    if (exec.at(0) == "echo") {
+        echo* b = new echo();
+        exec.erase(exec.begin());
+        b->addArg(exec);
+        return b;
+    }
+    else { //error test case
+        std::cout << "Rshell: " << exec.at(0) << ": command not found"  << std::endl;
+        error* b = new error();
+        exec.erase(exec.begin());
+        b->addArg(exec);
+        return b;
+    }
 }
 
 /*****

@@ -64,11 +64,12 @@ class SemiColon : public Connector {
 *****/
 class baseExec : public baseNode {
     protected:
-        baseExec() { }
         std::string comment;
-
         std::vector<Arg*> a;
     public:
+        // Function for adding arguments to vector a with a string passed in
+        virtual void addArg(std::vector<std::string> arg) = 0;
+        baseExec() { }
         virtual void execute() = 0;
 
 };
@@ -82,34 +83,54 @@ class baseExec : public baseNode {
 
 class echo : public baseExec {
     protected:
+        std::vector<Arg*> a;
+    public: 
+        void addArg(std::vector<std::string> arg);
+        void execute(); //prints arguments on newline
         echo() {};
         echo(std::string input);
-    public: 
-        void execute(); //prints arguments on newline
 };
 
 class ls : public baseExec {
     protected:
-	ls() {};
-	ls(std::string input);
+        std::vector<Arg*> a;
     public:
-	void execute(); //print files in directory
+        void addArg(std::vector<std::string> arg);
+	    void execute(); //print files in directory
+        ls() {};
+	    ls(std::string input);
 };
 
 class cd : public baseExec {
     protected:
-	cd() {};
-	cd(std::string input);
+        std::vector<Arg*> a;
     public:
-	void execute(); //change directory based on argument passed in
+        void addArg(std::vector<std::string> arg);
+        cd() {};
+	    cd(std::string input);
+	    void execute(); //change directory based on argument passed in
 };
 
 class mkdir : public baseExec {
     protected:
-	mkdir() {};
-	mkdir(std::string input);
+        std::vector<Arg*> a;
     public:
-	void execute();
+        void addArg(std::vector<std::string> arg);
+        mkdir() {};
+	    mkdir(std::string input);
+	    void execute();
 };
 
+// created when user input does not match a function
+class error : public baseExec { 
+    protected:
+        std::vector<Arg*> a;
+    public:
+        void addArg(std::vector<std::string> arg);
+        error() {};
+	    error(std::string input);
+	    void execute() {
+            std::cout << "error" << std::endl;
+        }
+};
 #endif
