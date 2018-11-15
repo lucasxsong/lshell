@@ -125,6 +125,10 @@ void Input::parseInput() {
         parsedExec.push_back(toPush);
     }
 
+    parseConnectors();
+    makeExecutableTree();
+
+
     //*** TESTER ***//
     // Following 3 lines of code can be removed later, the purpose of this is to print contents
     // of parsedInput vector
@@ -173,44 +177,33 @@ std::vector<std::string> Input::parseSpaces(std::string withSpaces) {
 
 /*****
 // This is a helper function that returns a baseExec object based on the zero index of
-// the vector passed in and takes the rest of the vector as the argument list
+// the vector passed in and takes the rest of the vector as the argument list // exec = nospace
 *****/
 //** TO DO: tolower() all of the arguments at exec.at(0) so that ECHO = echo **//
 baseExec* Input::makeExec(std::vector<std::string> exec) {
     if (exec.at(0) == "echo") {
         echo* b = new echo();
-        exec.erase(exec.begin());
         b->addArg(exec);
         return b;
     }
     if (exec.at(0) == "ls") {
         ls* b = new ls();
-        exec.erase(exec.begin());
         b->addArg(exec);
         return b;
     }
     if (exec.at(0) == "cd") {
         cd* b = new cd();
-        exec.erase(exec.begin());
         b->addArg(exec);
         return b;
     }
     if (exec.at(0) == "mkdir") {
         mkdir* b = new mkdir();
-        exec.erase(exec.begin());
-        b->addArg(exec);
-        return b;
-    }
-    if (exec.at(0) == "echo") {
-        echo* b = new echo();
-        exec.erase(exec.begin());
         b->addArg(exec);
         return b;
     }
     else { //error test case
         std::cout << "Rshell: " << exec.at(0) << ": command not found"  << std::endl;
         error* b = new error();
-        exec.erase(exec.begin());
         b->addArg(exec);
         return b;
     }
@@ -273,11 +266,13 @@ void Input::parseConnectors() {
 void Input::makeExecutableTree() {
     // Case for no connectors
     if (connectors.size() == 0) {
+        //std::cout << "case with no connectors" << std::endl;
         head = parsedExec.at(0); 
     }
 
     // Case for connectors
     else {
+        std::cout << "case with more than one connector" << std::endl;
         int i = 0;
         head = connectors.at(0);
         baseNode* temp = head;
@@ -292,6 +287,10 @@ void Input::makeExecutableTree() {
     }
 
     return;
+}
+
+void Input::callExecute() {
+    head->execute();
 }
 
 /*****

@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "input.h"
 
+using namespace std;
+
 TEST(InputTest, ParseInputTest) {
     vector<string> test;
     test.push_back("argument1 ");
@@ -8,7 +10,20 @@ TEST(InputTest, ParseInputTest) {
     test.push_back(" argument3 ");
     test.push_back(" argument4");
     Input i("argument1 && argument2 ; argument3 || argument4");
-    vector<string> toTest = Input.returnStrings();
+    vector<string> toTest = i.returnStrings();
+    for (int i = 0; i < toTest.size(); ++i) {
+        EXPECT_EQ(test.at(i), toTest.at(i));
+    }
+}
+
+TEST(InputTest, ParseSpacesTest) {
+    vector<string> test;
+    test.push_back("argument1");
+    test.push_back("argument2");
+    test.push_back("argument3");
+    test.push_back("argument4");
+    Input i("argument1 && argument2 ; argument3 || argument4");
+    vector< <string> toTest = i.returnStrings();
     for (int i = 0; i < toTest.size(); ++i) {
         EXPECT_EQ(test.at(i), toTest.at(i));
     }
@@ -25,6 +40,7 @@ TEST(InputTest, ConnectorsTest) {
         EXPECT_EQ(test.at(i), toTest.at(i));
     }
 }
+
 
 
 

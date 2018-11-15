@@ -8,6 +8,7 @@ int main() {
     while (!i->checkExit()){
         i->runInput();
         i->parseInput();
+        i->callExecute();
         i->clearInput();
     } 
 

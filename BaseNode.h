@@ -103,11 +103,12 @@ class baseExec : public baseNode {
     protected:
         std::string comment;
         std::vector<std::string> a;
-        std::string input;
     public:
         // Function for adding arguments to vector a with a string passed in
         void addArg(std::vector<std::string> arg) {
-            a = arg;
+            for (int i = 1; i < arg.size(); ++i) {
+                a.push_back(arg.at(i));
+            }
             return;
         }
         baseExec() { }
@@ -124,13 +125,11 @@ class baseExec : public baseNode {
 class echo : public baseExec {
     protected:
         char* fileName;
+        std::string userInput;
     public: 
         echo() {}
-        echo(std::string input) {
-            this->input = input;
-        }
-        void addArg(std::vector<std::string> arg) {
-            a = arg;
+        void addUserInput(std::string userInput) {
+            this->userInput = userInput;
         }
 
         //prints arguments on newline 
@@ -150,9 +149,6 @@ class ls : public baseExec {
 
     public:
         ls() {}
-	    ls(std::string input) {
-            this->input = input;
-        }
 
 	    void execute() {
             return;
@@ -162,13 +158,9 @@ class ls : public baseExec {
 // tag: filename/directory name
 class cd : public baseExec {
     protected:
-        std::string input;
         std::vector<std::string> a;
     public:
         cd() {}
-	    cd(std::string input) {
-            this->input = input;
-        }
 
         void execute() {
             return;
@@ -179,13 +171,9 @@ class cd : public baseExec {
 // tag: directory name
 class mkdir : public baseExec {
     protected:
-        std::string input;
         std::vector<std::string> a;
     public:
         mkdir() {}
-	    mkdir(std::string input) {
-            this->input = input;
-        }
 
         void execute() {
             return;
@@ -195,13 +183,9 @@ class mkdir : public baseExec {
 // created when user input does not match a function
 class error : public baseExec { 
     protected:
-        std::string input;
         std::vector<std::string> a;
     public:
         error() {}
-	    error(std::string input) {
-            this->input = input;
-        }
 
         void execute() {
             std::cout << "error" << std::endl;
