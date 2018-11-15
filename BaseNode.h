@@ -2,6 +2,7 @@
 #define ___BASEEXEC_H___
 
 #include <vector>
+#include <iostream>
 #include "Arg.h"
 
 class Arg;
@@ -64,6 +65,7 @@ class SemiColon : public Connector {
 class baseExec : public baseNode {
     protected:
         baseExec() { }
+        std::string comment;
 
         std::vector<Arg*> a;
     public:

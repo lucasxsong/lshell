@@ -22,6 +22,7 @@ void Input::clearInput() {
     userInput = "";
     parsedStrings.clear();
     connectors.clear();
+    parsedNoSpace.clear();
     parsedExec.clear();
 }
 
@@ -111,17 +112,23 @@ void Input::parseInput() {
     // This for loop removes the spaces from the parsed substrings so that the exec object creation is easier
     for (int i = 0; i < parsedStrings.size(); ++i) {
         std::vector<std::string> toPush = parseSpaces(parsedStrings.at(i));
-        parsedExec.push_back(toPush);
+        parsedNoSpace.push_back(toPush);
+    }
+
+    // This for loop takes in the no space vector and makes a vector pointers to exec objects
+    for (int i = 0; i < parsedNoSpace.size(); ++i) {
+        baseExec* b = makeExec(parsedNoSpace.at(i));
+        parsedExec.push_back(b);
     }
 
     //*** TESTER ***//
     // Following 3 lines of code can be removed later, the purpose of this is to print contents
     // of parsedInput vector
     // Each line printed should be the executable + any/all arguments for said executable
-    for (int i = 0; i < parsedExec.size(); i++) {
+    for (int i = 0; i < parsedNoSpace.size(); i++) {
         std::cout << "vector " << i << ":";
-        for (int j = 0; j < parsedExec.at(i).size(); ++j) {
-            std::cout << parsedExec.at(i).at(j);
+        for (int j = 0; j < parsedNoSpace.at(i).size(); ++j) {
+            std::cout << parsedNoSpace.at(i).at(j);
         }
         std::cout << std::endl;
     }
@@ -157,6 +164,14 @@ std::vector<std::string> Input::parseSpaces(std::string withSpaces) {
     }
 
     return noSpaces;
+}
+
+/*****
+// This is a helper function that returns a baseExec object based on the zero index of
+// the vector passed in and takes the rest of the vector as the argument list
+*****/
+baseExec* Input::makeExec(std::vector<std::string> exec) {
+
 }
 
 /*****
