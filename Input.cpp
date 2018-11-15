@@ -220,12 +220,12 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
 *****/
 void Input::parseConnectors() {
     std::string tempInput = userInput;
-    std::string connectors("&&" "||" ";"); //checks for these connectors
+    std::string connector("&&" "||" ";"); //checks for these connectors
     std::vector<std::string> temp; //initial vector used to store found connectors
     int pos = 0; //starting postion for find()
 
-    pos = tempInput.find(strConnectors);
-    if (tempInput.find(strConnectors) == std::string::npos) {
+    pos = tempInput.find(connector);
+    if (tempInput.find(connector) == std::string::npos) {
 	return;
     }
     else {
@@ -242,8 +242,8 @@ void Input::parseConnectors() {
 		temp.push_back(";");
 		pos ++; //should now be at whitespace after ";"
 	    }
-	    tempInput = tempInput.substr(pos) //new string: everything after connector
-	    pos = tempInput.find(strConnectors);
+	    tempInput = tempInput.substr(pos); //new string: everything after connector
+	    pos = tempInput.find(connector);
 	}
     }
 
@@ -270,7 +270,27 @@ void Input::parseConnectors() {
 // head node of  this tree. head-> eval should execute the tree with respect to the connectors
 *****/
 void Input::makeExecutableTree() {
-    // ** TO DO ** // 
+    // Case for no connectors
+    if (connectors.size() == 0) {
+        head = parsedExec.at(0); 
+    }
+
+    // Case for connectors
+    else {
+        int i = 0;
+        head = connectors.at(0);
+        baseNode* temp = head;
+        head->setLeft(parsedExec.at(0));
+        // If there is no more than one connector, 
+        for (i = 1; i < connectors.size(); ++i) {
+            temp->setRight(connectors.at(i));
+            temp = temp->getRight();
+            temp->setLeft(parsedExec.at(i));
+        }
+        temp->setRight(parsedExec.at(i + 1));
+    }
+
+    return;
 }
 
 /*****
