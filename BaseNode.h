@@ -15,6 +15,9 @@ class baseNode {
         baseNode();
     public:
         virtual void execute() = 0; 
+        virtual void setLeft(baseNode* leftChild) = 0;
+        virtual void setRight(baseNode* rightChild) = 0;
+        virtual baseNode* getRight() = 0;
 };
 
 /*****
@@ -26,7 +29,10 @@ class Connector : public baseNode {
         baseNode* leftChild;
         baseNode* rightChild;
     public:
+        virtual void setLeft(baseNode* leftChild) = 0;
+        virtual void setRight(baseNode* rightChild) = 0;
         virtual void execute() = 0;
+        virtual baseNode* getRight() = 0;
 };
 
 //*** DERIVED "CONNECTOR" CLASSES ***//
@@ -37,7 +43,10 @@ class And : public Connector {
         baseNode* leftChild;
         baseNode* rightChild;
     public: 
+        void setLeft(baseNode* leftChild);
+        void setRight(baseNode* rightChild);
         void execute();
+        baseNode* getRight();
 };
 
 class Or : public Connector {
@@ -46,7 +55,10 @@ class Or : public Connector {
         baseNode* leftChild;
         baseNode* rightChild;
     public: 
+        void setLeft(baseNode* leftChild);
+        void setRight(baseNode* rightChild);
         void execute();
+        baseNode* getRight();
 };
 
 class SemiColon : public Connector {
@@ -55,7 +67,10 @@ class SemiColon : public Connector {
         baseNode* leftChild;
         baseNode* rightChild;
     public: 
+        void setLeft(baseNode* leftChild);
+        void setRight(baseNode* rightChild);
         void execute();
+        baseNode* getRight();
 };
 
 /*****

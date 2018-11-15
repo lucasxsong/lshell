@@ -21,7 +21,7 @@ class Input {
         std::vector<baseExec*> parsedExec; // this vector holds the parsed baseExec objects
         std::vector<std::vector<std::string> > parsedNoSpace; // this vector holds the parsed string w/o spaces
         std::vector<std::string> parsedStrings; // these two vectors are just to help in storing 
-        std::vector<std::string> connectors;    // the data to create the executable tree
+        std::vector<Connector* > connectors;    // the data to create the executable tree
         baseNode* head; // pointer to top of executable tree
 		bool exit; // true if exit
     public:
