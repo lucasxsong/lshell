@@ -213,49 +213,50 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
 // This function parses the user string for connectors to add to the connectors vector
 *****/
 void Input::parseConnectors() {
-    std::string tempInput = userInput;
-    std::string connector("&&" "||" ";"); //checks for these connectors
     std::vector<std::string> temp; //initial vector used to store found connectors
-    int pos = 0; //starting postion for find()
 
-    pos = tempInput.find(connector);
-    if (tempInput.find(connector) == std::string::npos) {
-	return;
+    for (int pos = 0; pos < userInput.size(); pos++) {
+        if (userInput.at(pos) == '&') {
+            if (userInput.at(pos + 1) == '&') {
+                temp.push_back("&&");
+                pos += 2; //should now be at whitespace after "&&"
+            }
+        }
+        if (userInput.at(pos) == '|') {
+            if (userInput.at(pos + 1) == '|') {
+                temp.push_back("||");
+                pos += 2; //should now be at whitespace after "||"
+            }
+        }
+        if (userInput.at(pos) == ';') {
+            temp.push_back(";");
+            pos++; //should now be at whitespace after ";"
+        }
     }
-    else {
-	while (pos != std::string::npos) {
-	    if (tempInput.at(pos) == '&') {
-		temp.push_back("&&");
-		pos += 2; //should now be at whitespace after "&&"
-	    }
-	    if (tempInput.at(pos) == '|') {
-		temp.push_back("||");
-		pos += 2; //should now be at whitespace after "||"
-	    }
-	    if (tempInput.at(pos) == ';') {
-		temp.push_back(";");
-		pos ++; //should now be at whitespace after ";"
-	    }
-	    tempInput = tempInput.substr(pos); //new string: everything after connector
-	    pos = tempInput.find(connector);
-	}
+
+    /*
+    //testing first part
+    for (int j = 0; j < temp.size(); j++) {
+        cout << temp.at(j) << " ";
     }
+    cout << endl;
+    */
 
 //Iterate through vector of connector strings ("temp") and creates connector objects and pushes into vector of connectors ("connectors")
 //Child pointers not set yet
     for (int i = 0; i < temp.size(); i++) {
-	if (temp.at(i) == "&&") {
-	    And* c = new And();
-	    connectors.push_back(c);
-	}
-	if (temp.at(i) == "||") {
-	    Or* c = new Or();
-	    connectors.push_back(c);
-	}
-	if (temp.at(i) == ";") {
-	    SemiColon* c = new SemiColon();
-	    connectors.push_back(c);
-	}
+	    if (temp.at(i) == "&&") {
+	        And* c = new And();
+	        connectors.push_back(c);
+	    }
+	    if (temp.at(i) == "||") {
+	        Or* c = new Or();
+	        connectors.push_back(c);
+	    }
+	    if (temp.at(i) == ";") {
+	        SemiColon* c = new SemiColon();
+	        connectors.push_back(c);
+	    }
     }
 }
 
