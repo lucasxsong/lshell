@@ -108,6 +108,7 @@ class baseExec : public baseNode {
 
 //*** DERIVED "BASEEXEC" CLASSES ***//
 
+// tag: string variable to be returned back to user
 class echo : public baseExec {
     protected:
         std::vector<Arg*> a;
@@ -118,6 +119,7 @@ class echo : public baseExec {
         echo(std::string input);
 };
 
+// tag: -a just to print all files (hidden too)
 class ls : public baseExec {
     protected:
         std::vector<Arg*> a;
@@ -128,6 +130,7 @@ class ls : public baseExec {
 	ls(std::string input);
 };
 
+// tag: filename/directory name
 class cd : public baseExec {
     protected:
         std::vector<Arg*> a;
@@ -138,6 +141,7 @@ class cd : public baseExec {
 	void execute(); //change directory based on argument passed in
 };
 
+// tag: directory name
 class mkdir : public baseExec {
     protected:
         std::vector<Arg*> a;

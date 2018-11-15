@@ -41,7 +41,7 @@ std::vector<std::string> Input::returnStrings() {
     return parsedStrings;
 }
 
-std::vector<std::string> Input::returnConnectors() {
+std::vector<Connector* > Input::returnConnectors() {
     return connectors;
 }
 

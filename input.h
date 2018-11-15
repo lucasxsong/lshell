@@ -33,7 +33,7 @@ class Input {
         std::vector<baseExec* > returnParsedExec();
         std::vector<std::vector <std::string> > returnParsedNoSpace();
         std::vector<std::string> returnStrings();
-        std::vector<std::string> returnConnectors();
+        std::vector<Connector* > returnConnectors();
 
         void callExit();
 		bool checkExit(); // returns true if needs to exit
