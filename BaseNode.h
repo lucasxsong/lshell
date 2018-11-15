@@ -33,7 +33,10 @@ class Connector : public baseNode {
 
 class And : public Connector {
     protected: 
-        And();
+        And() {
+	    leftChild = NULL;
+	    rightChild = NULL;
+	}
         baseNode* leftChild;
         baseNode* rightChild;
     public: 
@@ -42,7 +45,10 @@ class And : public Connector {
 
 class Or : public Connector {
     protected: 
-        Or();
+        Or() {
+	    leftChild = NULL;
+	    rightChild = NULL;
+	}
         baseNode* leftChild;
         baseNode* rightChild;
     public: 
@@ -51,11 +57,17 @@ class Or : public Connector {
 
 class SemiColon : public Connector {
     protected: 
-        SemiColon();
+        SemiColon() {
+	    leftChild = NULL;
+	    rightChild = NULL;
+	}
         baseNode* leftChild;
         baseNode* rightChild;
     public: 
-        void execute();
+        void execute() {
+	    leftChild->execute();
+	    rightChild->execute();
+	}
 };
 
 /*****
@@ -96,9 +108,9 @@ class ls : public baseExec {
         std::vector<Arg*> a;
     public:
         void addArg(std::vector<std::string> arg);
-	    void execute(); //print files in directory
+	void execute(); //print files in directory
         ls() {};
-	    ls(std::string input);
+	ls(std::string input);
 };
 
 class cd : public baseExec {
@@ -107,8 +119,8 @@ class cd : public baseExec {
     public:
         void addArg(std::vector<std::string> arg);
         cd() {};
-	    cd(std::string input);
-	    void execute(); //change directory based on argument passed in
+	cd(std::string input);
+	void execute(); //change directory based on argument passed in
 };
 
 class mkdir : public baseExec {
@@ -117,8 +129,8 @@ class mkdir : public baseExec {
     public:
         void addArg(std::vector<std::string> arg);
         mkdir() {};
-	    mkdir(std::string input);
-	    void execute();
+	mkdir(std::string input);
+	void execute();
 };
 
 // created when user input does not match a function
@@ -128,8 +140,8 @@ class error : public baseExec {
     public:
         void addArg(std::vector<std::string> arg);
         error() {};
-	    error(std::string input);
-	    void execute() {
+	error(std::string input);
+	void execute() {
             std::cout << "error" << std::endl;
         }
 };
