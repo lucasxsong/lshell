@@ -25,7 +25,7 @@ class Arg {
 
 class fileName : public Arg { // class for filename string
     protected:
-
+        
     public:
 };
 

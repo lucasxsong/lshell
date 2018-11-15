@@ -129,13 +129,14 @@ void Input::parseInput() {
     // Following 3 lines of code can be removed later, the purpose of this is to print contents
     // of parsedInput vector
     // Each line printed should be the executable + any/all arguments for said executable
+    /*
     for (int i = 0; i < parsedNoSpace.size(); i++) {
         std::cout << "vector " << i << ":";
         for (int j = 0; j < parsedNoSpace.at(i).size(); ++j) {
             std::cout << parsedNoSpace.at(i).at(j);
         }
         std::cout << std::endl;
-    }
+    }*/
 
     return;
 }
@@ -251,7 +252,7 @@ void Input::parseConnectors() {
 //Child pointers not set yet
     for (int i = 0; i < temp.size(); i++) {
 	if (temp.at(i) == "&&") {
-	    And* c = new Add();
+	    And* c = new And();
 	    connectors.push_back(c);
 	}
 	if (temp.at(i) == "||") {
@@ -280,7 +281,7 @@ void Input::makeExecutableTree() {
         int i = 0;
         head = connectors.at(0);
         baseNode* temp = head;
-        head->setLeft(parsedExec.at(0));
+        temp->setLeft(parsedExec.at(0));
         // If there is no more than one connector, 
         for (i = 1; i < connectors.size(); ++i) {
             temp->setRight(connectors.at(i));

@@ -2,7 +2,10 @@
 #define ___BASEEXEC_H___
 
 #include <vector>
+#include <string>
+#include <cstring>
 #include <iostream>
+#include <unistd.h>
 #include "Arg.h"
 
 class Arg;
@@ -11,13 +14,22 @@ class Arg;
 // This is the base class for the nodes that make up the "execution" tree.
 *****/
 class baseNode {
-    protected:
-        baseNode();
     public:
-        virtual void execute() = 0; 
-        virtual void setLeft(baseNode* leftChild) = 0;
-        virtual void setRight(baseNode* rightChild) = 0;
-        virtual baseNode* getRight() = 0;
+        baseNode() {}
+        ~baseNode() {}
+        virtual void execute() {
+            return;
+        }
+        virtual void setLeft(baseNode* leftChild) {
+            return;
+        }
+        virtual void setRight(baseNode* rightChild) {
+            return;
+        }
+        virtual baseNode* getRight() {
+            baseNode* b = new baseNode();
+            return b;
+        }
 };
 
 /*****
@@ -25,64 +37,62 @@ class baseNode {
 *****/
 class Connector : public baseNode {
     protected:
-        Connector();
         baseNode* leftChild;
         baseNode* rightChild;
     public:
-        virtual void setLeft(baseNode* leftChild) = 0;
-        virtual void setRight(baseNode* rightChild) = 0;
-        virtual void execute() = 0;
-        virtual baseNode* getRight() = 0;
+        Connector() {}
+        void setLeft(baseNode* leftChild) {
+            this->leftChild = leftChild;
+            return;
+        }
+        void setRight(baseNode* rightChild) {
+            this->rightChild = rightChild;
+            return;
+        }
+        baseNode* getRight() {
+            return rightChild;
+        }
 };
 
 //*** DERIVED "CONNECTOR" CLASSES ***//
 
 class And : public Connector {
-    protected: 
-        And() {
-	    leftChild = NULL;
-	    rightChild = NULL;
-	}
-        baseNode* leftChild;
-        baseNode* rightChild;
     public: 
-        void setLeft(baseNode* leftChild);
-        void setRight(baseNode* rightChild);
-        void execute();
-        baseNode* getRight();
+        And() {
+	        leftChild = NULL;
+	        rightChild = NULL;
+	    }
+        void execute() {
+            leftChild->execute();
+            rightChild->execute();
+            return;
+        }
 };
 
 class Or : public Connector {
-    protected: 
-        Or() {
-	    leftChild = NULL;
-	    rightChild = NULL;
-	}
-        baseNode* leftChild;
-        baseNode* rightChild;
     public: 
-        void setLeft(baseNode* leftChild);
-        void setRight(baseNode* rightChild);
-        void execute();
-        baseNode* getRight();
+        Or() {
+	        leftChild = NULL;
+	        rightChild = NULL;
+	    }
+        void execute() {
+            leftChild->execute();
+            rightChild->execute();
+            return;
+        }
 };
 
 class SemiColon : public Connector {
-    protected: 
-        SemiColon() {
-	    leftChild = NULL;
-	    rightChild = NULL;
-	}
-        baseNode* leftChild;
-        baseNode* rightChild;
     public: 
+        SemiColon() {
+	        leftChild = NULL;
+	        rightChild = NULL;
+	    }
         void execute() {
-	    leftChild->execute();
-	    rightChild->execute();
-	}
-        void setLeft(baseNode* leftChild);
-        void setRight(baseNode* rightChild);
-        baseNode* getRight();
+	        leftChild->execute();
+	        rightChild->execute();
+            return;
+	    }
 };
 
 /*****
@@ -92,13 +102,15 @@ class SemiColon : public Connector {
 class baseExec : public baseNode {
     protected:
         std::string comment;
-        std::vector<Arg*> a;
+        std::vector<std::string> a;
+        std::string input;
     public:
         // Function for adding arguments to vector a with a string passed in
-        virtual void addArg(std::vector<std::string> arg) = 0;
+        void addArg(std::vector<std::string> arg) {
+            a = arg;
+            return;
+        }
         baseExec() { }
-        virtual void execute() = 0;
-
 };
 
 /*****
@@ -111,57 +123,90 @@ class baseExec : public baseNode {
 // tag: string variable to be returned back to user
 class echo : public baseExec {
     protected:
-        std::vector<Arg*> a;
+        char* fileName;
     public: 
-        void addArg(std::vector<std::string> arg);
-        void execute(); //prints arguments on newline
-        echo() {};
-        echo(std::string input);
+        echo() {}
+        echo(std::string input) {
+            this->input = input;
+        }
+        void addArg(std::vector<std::string> arg) {
+            a = arg;
+        }
+
+        //prints arguments on newline 
+        void execute() {
+                for (int i = 0; i < a.size(); ++i) {
+                    std::cout << a.at(i) << " ";
+                }
+                std::cout << std::endl;
+                return;
+        }
+        
 };
 
 // tag: -a just to print all files (hidden too)
 class ls : public baseExec {
     protected:
-        std::vector<Arg*> a;
+
     public:
-        void addArg(std::vector<std::string> arg);
-	void execute(); //print files in directory
-        ls() {};
-	ls(std::string input);
+        ls() {}
+	    ls(std::string input) {
+            this->input = input;
+        }
+
+	    void execute() {
+            return;
+        } //print files in directory
 };
 
 // tag: filename/directory name
 class cd : public baseExec {
     protected:
-        std::vector<Arg*> a;
+        std::string input;
+        std::vector<std::string> a;
     public:
-        void addArg(std::vector<std::string> arg);
-        cd() {};
-	cd(std::string input);
-	void execute(); //change directory based on argument passed in
+        cd() {}
+	    cd(std::string input) {
+            this->input = input;
+        }
+
+        void execute() {
+            return;
+        } //change directory based on argument passed in
+
 };
 
 // tag: directory name
 class mkdir : public baseExec {
     protected:
-        std::vector<Arg*> a;
+        std::string input;
+        std::vector<std::string> a;
     public:
-        void addArg(std::vector<std::string> arg);
-        mkdir() {};
-	mkdir(std::string input);
-	void execute();
+        mkdir() {}
+	    mkdir(std::string input) {
+            this->input = input;
+        }
+
+        void execute() {
+            return;
+        }    
 };
 
 // created when user input does not match a function
 class error : public baseExec { 
     protected:
-        std::vector<Arg*> a;
+        std::string input;
+        std::vector<std::string> a;
     public:
-        void addArg(std::vector<std::string> arg);
-        error() {};
-	error(std::string input);
-	void execute() {
-            std::cout << "error" << std::endl;
+        error() {}
+	    error(std::string input) {
+            this->input = input;
         }
+
+        void execute() {
+            std::cout << "error" << std::endl;
+            return;
+        }
+        
 };
 #endif
