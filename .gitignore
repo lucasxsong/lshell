@@ -10,3 +10,6 @@ input
 baseExec.h.gch
 input.h.gch
 input.o
+BaseNode.h.gch
+a.out.dSYM/
+baseNode
