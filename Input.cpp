@@ -45,10 +45,6 @@ std::vector<std::string> Input::returnConnectors() {
     return connectors;
 }
 
-
-
-
-
 /*****
 // Takes in user input and passes it onto parseInput, to eventually create an Argument object 
 // that will make it easier to link together arguments with connectors
@@ -125,8 +121,8 @@ void Input::parseInput() {
 
     // parsedExec vector creation
     for (int i = 0; i < parsedNoSpace.size(); ++i) {
-        baseExec* b = makeExec(parsedNoSpace.at(i));
-        parsedExec.push_back(b);
+        baseExec* toPush = makeExec(parsedNoSpace.at(i));
+        parsedExec.push_back(toPush);
     }
 
     //*** TESTER ***//
