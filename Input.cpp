@@ -270,14 +270,18 @@ void Input::parseConnectors() {
 // head node of  this tree. head-> eval should execute the tree with respect to the connectors
 *****/
 void Input::makeExecutableTree() {
+    // Case for no connectors
     if (connectors.size() == 0) {
         head = parsedExec.at(0); 
     }
+
+    // Case for connectors
     else {
-        int i;
+        int i = 0;
         head = connectors.at(0);
         baseNode* temp = head;
         head->setLeft(parsedExec.at(0));
+        // If there is no more than one connector, 
         for (i = 1; i < connectors.size(); ++i) {
             temp->setRight(connectors.at(i));
             temp = temp->getRight();
