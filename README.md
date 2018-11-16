@@ -42,7 +42,6 @@ This structure allows for the ability to easily add custom executables to your c
 
 
 ## Known Bugs:
-//follow this structure for now:
 #"Out of order"
 - Known bug that when flags might be entered out of order, rshell will not be able to compile the command successfully as the flags intended.
 - Ex: rm dirName -r != rm -r dirName
