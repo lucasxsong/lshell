@@ -14,11 +14,17 @@ class Arg;
 // This is the base class for the nodes that make up the "execution" tree.
 *****/
 class baseNode {
+    protected:
+        baseNode* leftChild;
+        baseNode* rightChild;
     public:
-        baseNode() {}
+        baseNode() {
+            leftChild = NULL;
+            rightChild = NULL;
+        }
         ~baseNode() {}
-        virtual void execute() {
-            return;
+        virtual bool execute() { // returns true if function calls, false if not
+            return true;
         }
         virtual void setLeft(baseNode* leftChild) {
             return;
@@ -27,8 +33,7 @@ class baseNode {
             return;
         }
         virtual baseNode* getRight() {
-            baseNode* b = new baseNode();
-            return b;
+            return rightChild;
         }
 };
 
@@ -62,10 +67,11 @@ class And : public Connector {
 	        leftChild = NULL;
 	        rightChild = NULL;
 	    }
-        void execute() {
-            leftChild->execute();
-            rightChild->execute();
-            return;
+        bool execute() {
+            if (leftChild->execute()) {
+                return rightChild->execute();
+            }
+            return false;
         }
 };
 
@@ -75,10 +81,11 @@ class Or : public Connector {
 	        leftChild = NULL;
 	        rightChild = NULL;
 	    }
-        void execute() {
-            leftChild->execute();
-            rightChild->execute();
-            return;
+        bool execute() {
+            if (!leftChild->execute()) {
+                return rightChild->execute();
+            }
+            return true;
         }
 };
 
@@ -88,10 +95,10 @@ class SemiColon : public Connector {
 	        leftChild = NULL;
 	        rightChild = NULL;
 	    }
-        void execute() {
+        bool execute() {
 	        leftChild->execute();
-	        rightChild->execute();
-            return;
+            rightChild->execute();
+            return true;
 	    }
 };
 
@@ -111,6 +118,15 @@ class baseExec : public baseNode {
             }
             return;
         }
+        virtual bool execute() {
+            pid_t pid;
+            
+            if ((pid = fork()) < 0) {
+                perror("ERROR: forking child process failed");
+                return false;
+            }
+            return true;
+        }
         baseExec() { }
 };
 
@@ -124,7 +140,6 @@ class baseExec : public baseNode {
 // tag: string variable to be returned back to user
 class echo : public baseExec {
     protected:
-        char* fileName;
         std::string userInput;
     public: 
         echo() {}
@@ -133,12 +148,13 @@ class echo : public baseExec {
         }
 
         //prints arguments on newline 
-        void execute() {
-                for (int i = 0; i < a.size(); ++i) {
+        bool execute() {
+                for (int i = 0; i < a.size(); i++) {
                     std::cout << a.at(i) << " ";
                 }
+
                 std::cout << std::endl;
-                return;
+                return true;
         }
         
 };
@@ -150,8 +166,8 @@ class ls : public baseExec {
     public:
         ls() {}
 
-	    void execute() {
-            return;
+	    bool execute() {
+            return true; //if commands executed
         } //print files in directory
 };
 
@@ -162,8 +178,8 @@ class cd : public baseExec {
     public:
         cd() {}
 
-        void execute() {
-            return;
+        bool execute() {
+            return true;
         } //change directory based on argument passed in
 
 };
@@ -175,8 +191,8 @@ class mkdir : public baseExec {
     public:
         mkdir() {}
 
-        void execute() {
-            return;
+        bool execute() {
+            return true;
         }    
 };
 
@@ -187,9 +203,9 @@ class error : public baseExec {
     public:
         error() {}
 
-        void execute() {
-            std::cout << "error" << std::endl;
-            return;
+        bool execute() {
+            perror("function not found");
+            return false;
         }
         
 };

@@ -24,6 +24,9 @@ void Input::clearInput() {
     connectors.clear();
     parsedNoSpace.clear();
     parsedExec.clear();
+    head = NULL;
+    //head->setRight(NULL);
+    //head->setLeft(NULL);
 }
 
 /*****
@@ -67,10 +70,11 @@ void Input::runInput() {
         callExit();
 	return;
     }
+    parseInput();
 }
 
 void Input::callExit() {
-    std::cout << "See you soon" << std::endl;
+    std::cout << "Exiting..." << std::endl;
     exit = true;
     return;
 }
@@ -127,6 +131,7 @@ void Input::parseInput() {
 
     parseConnectors();
     makeExecutableTree();
+    head->execute();
 
 
     //*** TESTER ***//
@@ -269,30 +274,37 @@ void Input::makeExecutableTree() {
     if (connectors.size() == 0) {
         //std::cout << "case with no connectors" << std::endl;
         head = parsedExec.at(0); 
+        std::cout << parsedExec.size();
     }
 
     // Case for connectors
-    else {
+    if (connectors.size() > 0) {
         std::cout << "case with more than one connector" << std::endl;
-        int i = 0;
         head = connectors.at(0);
         baseNode* temp = head;
         temp->setLeft(parsedExec.at(0));
+        
         // If there is no more than one connector, 
-        for (i = 1; i < connectors.size(); ++i) {
+        for (int i = 0; i < connectors.size(); ++i) {
             temp->setRight(connectors.at(i));
             temp = temp->getRight();
-            temp->setLeft(parsedExec.at(i));
+            temp->setLeft(parsedExec.at(i)); 
         }
-        temp->setRight(parsedExec.at(i + 1));
+        temp->setRight(parsedExec.at(connectors.size()));
+
     }
 
     return;
 }
 
-void Input::callExecute() {
-    head->execute();
-}
+/*void Input::callExecute() {
+   while(head != NULL) {
+        bool execution = head->execute();
+        if (execution)
+   } 
+   
+   return;
+}*/
 
 /*****
 // These two functions call local user and local host to be printed in terminal
