@@ -42,20 +42,15 @@ This structure allows for the ability to easily add custom executables to your c
 
 
 ## Known Bugs:
-#"Out of order"
+"Out of order"
 - Known bug that when flags might be entered out of order, rshell will not be able to compile the command successfully as the flags intended.
 - Ex: rm dirName -r != rm -r dirName
 
-#"Comments"
+"Comments"
 - As of current release, rshell does not store comments as a specific data member. We are working a solution to have comments parsed separately and stored in a data member of the baseExec function.
 
-#"Calling Exit"
+"Calling Exit"
 - The current exit object, when executed, just modifies a global variable "extern bool exitBool" to stop the input loop. This is a little bit of a shortcut that will be changed to a more graceful call in following versions.
-
-
-
-
-**Solution:** (if there is one)
 
 
 ## Note from the author:
