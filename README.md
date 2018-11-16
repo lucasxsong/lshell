@@ -12,7 +12,7 @@ This program attempts to recreate a command shell with a handful of basic execut
 
 ## Known Bugs:
 - There have been issues with the exit call sometimes not ending program correctly
-  - This could be a machine issue
+  - This could be a machine/compile issue
 
 ## Note from the author:
 As of the current state of the Command Shell Program, it is limited in its functionality. **HOWEVER** we have planned and designed it in such a way that allows for additional functionality to be implemented as we are given feedback in the future.
