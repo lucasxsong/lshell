@@ -5,10 +5,12 @@
 int main() {
     Input* i = new Input();
 
-    while (!i->checkExit()){
+    while (!exitBool){
         i->runInput();
         i->clearInput();
     } 
+    
+    std::cout << "Exiting..." << std::endl;
 
     return 0;
 }

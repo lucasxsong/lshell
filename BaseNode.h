@@ -1,5 +1,6 @@
 #ifndef ___BASEEXEC_H___
 #define ___BASEEXEC_H___
+#include "Input.h"
 
 #include <vector>
 #include <string>
@@ -9,6 +10,7 @@
 #include "Arg.h"
 
 class Arg;
+extern bool exitBool;
 
 /*****
 // This is the base class for the nodes that make up the "execution" tree.
@@ -113,7 +115,7 @@ class baseExec : public baseNode {
     public:
         // Function for adding arguments to vector a with a string passed in
         void addArg(std::vector<std::string> arg) {
-            for (int i = 1; i < arg.size(); ++i) {
+            for (int i = 0; i < arg.size(); ++i) {
                 a.push_back(arg.at(i));
             }
             return;
@@ -149,7 +151,7 @@ class echo : public baseExec {
 
         //prints arguments on newline 
         bool execute() {
-                for (int i = 0; i < a.size(); i++) {
+                for (int i = 1; i < a.size(); i++) {
                     std::cout << a.at(i) << " ";
                 }
 
@@ -174,7 +176,7 @@ class ls : public baseExec {
 // tag: filename/directory name
 class cd : public baseExec {
     protected:
-        std::vector<std::string> a;
+        
     public:
         cd() {}
 
@@ -187,7 +189,7 @@ class cd : public baseExec {
 // tag: directory name
 class mkdir : public baseExec {
     protected:
-        std::vector<std::string> a;
+
     public:
         mkdir() {}
 
@@ -199,14 +201,25 @@ class mkdir : public baseExec {
 // created when user input does not match a function
 class error : public baseExec { 
     protected:
-        std::vector<std::string> a;
+       
     public:
         error() {}
 
         bool execute() {
-            perror("function not found");
+            std::cout << "Rshell: " << a.at(0) << ": command not found"  << std::endl;
             return false;
         }
         
+};
+
+class exitCall : public baseExec {
+    protected:
+
+    public: 
+        exitCall() {}
+        bool execute() {
+            exitBool = true;
+            return true;
+        }
 };
 #endif

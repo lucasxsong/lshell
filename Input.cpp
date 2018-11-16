@@ -1,18 +1,18 @@
 #include "Input.h"
 
+bool exitBool = false;
 /*****
 // Base constructors for input object creation, includes constructor with one parameter
 // to make gtest instantiation easier
 *****/
 Input::Input() { 
-    exit = false;
+
 }
 
 Input::~Input() { }
 
 Input::Input(std::string userString) {
     userInput = userString;
-    exit = false;
 }
 
 /*****
@@ -25,8 +25,6 @@ void Input::clearInput() {
     parsedNoSpace.clear();
     parsedExec.clear();
     head = NULL;
-    //head->setRight(NULL);
-    //head->setLeft(NULL);
 }
 
 /*****
@@ -66,25 +64,9 @@ void Input::runInput() {
     getline(std::cin, userLine);
     userInput = userLine;
 
-    if (userInput == "exit" ||userInput == "Exit") { 
-        callExit();
-	return;
-    }
     parseInput();
 }
 
-void Input::callExit() {
-    std::cout << "Exiting..." << std::endl;
-    exit = true;
-    return;
-}
-
-bool Input::checkExit() {
-    if (exit) {
-        return true;
-    }
-    return false;
-}
 
 /*****
 // Takes in user input and tokenizes string into substrings based on connectors, and then
@@ -206,8 +188,12 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
         b->addArg(exec);
         return b;
     }
+    if (exec.at(0) == "exit") {
+        exitCall* b = new exitCall();
+        b->addArg(exec);
+        return b;
+    }
     else { //error test case
-        std::cout << "Rshell: " << exec.at(0) << ": command not found"  << std::endl;
         error* b = new error();
         b->addArg(exec);
         return b;
@@ -239,13 +225,7 @@ void Input::parseConnectors() {
         }
     }
 
-    /*
-    //testing first part
-    for (int j = 0; j < temp.size(); j++) {
-        cout << temp.at(j) << " ";
-    }
-    cout << endl;
-    */
+
 
 //Iterate through vector of connector strings ("temp") and creates connector objects and pushes into vector of connectors ("connectors")
 //Child pointers not set yet
@@ -272,14 +252,11 @@ void Input::parseConnectors() {
 void Input::makeExecutableTree() {
     // Case for no connectors
     if (connectors.size() == 0) {
-        //std::cout << "case with no connectors" << std::endl;
         head = parsedExec.at(0); 
-        std::cout << parsedExec.size();
     }
 
     // Case for connectors
     if (connectors.size() > 0) {
-        std::cout << "case with more than one connector" << std::endl;
         head = connectors.at(0);
         baseNode* temp = head;
         temp->setLeft(parsedExec.at(0));
@@ -297,14 +274,6 @@ void Input::makeExecutableTree() {
     return;
 }
 
-/*void Input::callExecute() {
-   while(head != NULL) {
-        bool execution = head->execute();
-        if (execution)
-   } 
-   
-   return;
-}*/
 
 /*****
 // These two functions call local user and local host to be printed in terminal

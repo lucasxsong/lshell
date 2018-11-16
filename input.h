@@ -15,6 +15,7 @@
 #include "BaseNode.h"
 class baseNode;
 
+
 class Input {
     protected: 
         std::string userInput;
@@ -23,7 +24,7 @@ class Input {
         std::vector<std::string> parsedStrings; // these two vectors are just to help in storing 
         std::vector<Connector* > connectors;    // the data to create the executable tree
         baseNode* head; // pointer to top of executable tree
-		bool exit; // true if exit
+
     public:
 		Input();
         ~Input();
