@@ -115,20 +115,6 @@ void Input::parseInput() {
     makeExecutableTree();
     head->execute();
 
-
-    //*** TESTER ***//
-    // Following 3 lines of code can be removed later, the purpose of this is to print contents
-    // of parsedInput vector
-    // Each line printed should be the executable + any/all arguments for said executable
-    /*
-    for (int i = 0; i < parsedNoSpace.size(); i++) {
-        std::cout << "vector " << i << ":";
-        for (int j = 0; j < parsedNoSpace.at(i).size(); ++j) {
-            std::cout << parsedNoSpace.at(i).at(j);
-        }
-        std::cout << std::endl;
-    }*/
-
     return;
 }
 
@@ -169,6 +155,11 @@ std::vector<std::string> Input::parseSpaces(std::string withSpaces) {
 baseExec* Input::makeExec(std::vector<std::string> exec) {
     if (exec.at(0) == "echo") {
         echo* b = new echo();
+        b->addArg(exec);
+        return b;
+    }
+    if (exec.at(0) == "exit") {
+        exitCall* b = new exitCall();
         b->addArg(exec);
         return b;
     }
@@ -262,6 +253,7 @@ std::string Input::returnHost() {
         std::string s(name);
         return s;
     } 
+    perror("host()");
     return "Local";
 }
 

@@ -37,7 +37,7 @@ TEST(InputTest, ParseSpacesTest) {
     }
 }
 
-/*
+
 
 TEST(InputTest, ExecTest) {
     test1 = new echo();
@@ -74,7 +74,6 @@ TEST(InputTest, ConnectorsTest) {
     }
 }
 
-*/
 
 int main(int argc, char **argv) {
         ::testing::InitGoogleTest(&argc, argv);
