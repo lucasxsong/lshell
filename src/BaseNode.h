@@ -123,7 +123,7 @@ class baseExec : public baseNode {
                 }
                 a.push_back(arg.at(i));
             }
-            // This is a messy hack to remove comments from the arglist. NEEDS TO BE FIXED
+            // This is a hack to remove comments from the arglist. NEEDS TO BE FIXED
             if (comment) {
                 a.clear();
                 for (int i = 0; i < commentIndex; ++i) {
@@ -132,14 +132,39 @@ class baseExec : public baseNode {
             }
             return;
         }
+
         virtual bool execute() {
-            pid_t pid;
+            pid_t pid = fork();
+            int status;
+            bool run = true;
+            std::string exec = a.at(0);
+            std::vector<char *> arg(a.size() + 1);
+            for (std::size_t i = 0; i != a.size(); ++i) {
+                arg[i] = &a[i][0];
+            }
             
-            if ((pid = fork()) < 0) {
-                perror("ERROR: forking child process failed");
+            if (pid < 0) {
+                perror("fork() failed");
                 return false;
             }
-            return true;
+
+            else if (pid == 0) {
+                
+                if (execvp(arg[0], arg.data()) == -1) {
+                    perror("execvp() failed");
+                    run = false;
+                    exit(1);
+                }
+            }
+            else if (pid > 0) {
+                if (waitpid(pid, &status, 0) == -1) {
+                    perror("waitpid() failed");
+                }
+                if(WEXITSTATUS(status) != 0) {
+                    run = false;
+                }
+            }
+            return run;
         }
         baseExec() { }
 };
@@ -171,43 +196,6 @@ class echo : public baseExec {
                 return true;
         }
         
-};
-
-// tag: -a just to print all files (hidden too)
-class ls : public baseExec {
-    protected:
-
-    public:
-        ls() {}
-
-	    bool execute() {
-            return true; //if commands executed
-        } //print files in directory
-};
-
-// tag: filename/directory name
-class cd : public baseExec {
-    protected:
-        
-    public:
-        cd() {}
-
-        bool execute() {
-            return true;
-        } //change directory based on argument passed in
-
-};
-
-// tag: directory name
-class mkdir : public baseExec {
-    protected:
-
-    public:
-        mkdir() {}
-
-        bool execute() {
-            return true;
-        }    
 };
 
 // created when user input does not match a function

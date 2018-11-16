@@ -173,28 +173,8 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
         b->addArg(exec);
         return b;
     }
-    if (exec.at(0) == "ls") {
-        ls* b = new ls();
-        b->addArg(exec);
-        return b;
-    }
-    if (exec.at(0) == "cd") {
-        cd* b = new cd();
-        b->addArg(exec);
-        return b;
-    }
-    if (exec.at(0) == "mkdir") {
-        mkdir* b = new mkdir();
-        b->addArg(exec);
-        return b;
-    }
-    if (exec.at(0) == "exit") {
-        exitCall* b = new exitCall();
-        b->addArg(exec);
-        return b;
-    }
     else { //error test case
-        error* b = new error();
+        baseExec* b = new baseExec();
         b->addArg(exec);
         return b;
     }
@@ -224,8 +204,6 @@ void Input::parseConnectors() {
             pos++; //should now be at whitespace after ";"
         }
     }
-
-
 
 //Iterate through vector of connector strings ("temp") and creates connector objects and pushes into vector of connectors ("connectors")
 //Child pointers not set yet
