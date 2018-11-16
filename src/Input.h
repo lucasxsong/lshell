@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <sstream>
 #include <iostream>
+#include <sys/wait.h>
 
 #include "BaseNode.h"
 class baseNode;
