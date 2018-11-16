@@ -115,8 +115,20 @@ class baseExec : public baseNode {
     public:
         // Function for adding arguments to vector a with a string passed in
         void addArg(std::vector<std::string> arg) {
+            bool comment = false;
+            int commentIndex;
             for (int i = 0; i < arg.size(); ++i) {
+                if (arg.at(i).at(0) == '#') {
+                    comment = true;
+                    commentIndex = i;
+                }
                 a.push_back(arg.at(i));
+            }
+            if (comment) {
+                a.clear();
+                for (int i = 0; i < commentIndex; ++i) {
+                    a.push_back(arg.at(i));
+                }
             }
             return;
         }
