@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/******
+// This is an outdated test harness. Was used early on to test parsing based on
+// connectors, but no longer needed.
+/*
 TEST(InputTest, ParseInputTest) {
     vector<string> test;
     test.push_back("argument1 ");
@@ -10,37 +14,30 @@ TEST(InputTest, ParseInputTest) {
     test.push_back(" argument3 ");
     test.push_back(" argument4");
     Input i("argument1 && argument2 ; argument3 || argument4");
+    i->parseInput();
     vector<string> toTest = i.returnStrings();
     for (int i = 0; i < toTest.size(); ++i) {
         EXPECT_EQ(test.at(i), toTest.at(i));
     }
-}
+}*/ 
+
 
 TEST(InputTest, ParseSpacesTest) {
-    vector<string> test1;
-    vector<string> test2;
-    vector<string> test3;
-    vector<string> test4;
     vector< vector <string> > test;
-    test1.push_back("argument1");
-    test2.push_back("argument2");
-    test3.push_back("argument3");
-    test4.push_back("argument4");
-    test.push_back(test1);
-    test.push_back(test2);
-    test.push_back(test3);
-    test.push_back(test4);
-    Input i("argument1 && argument2 ; argument3 || argument4");
-    i.parseConnectors();
-    vector<string> toTestSpaces = i.returnStrings();
+    test.push_back("argument1");
+    test.push_back("argument2");
+    test.push_back("argument3");
+    test.push_back("argument4");
+    Input i("argument1 argument2 argument3 argument4)";
     i.parseSpaces();
-    vector< vector <string> > toTest = toTestSpaces.returnParsedNoSpace();
+    vector<string> toTest = i->returnParsedNoSpace;
     for (int i = 0; i < toTest.size(); ++i) {
-        for (int j = 0; j < toTest.at(i).size(); ++j) {
-                EXPECT_EQ(test.at(i).at(j), toTest.at(i).at(j);
+                EXPECT_EQ(test.at(i), toTest.at(i);
         } 
     }
 }
+
+/*
 
 TEST(InputTest, ExecTest) {
     test1 = new echo();
@@ -77,7 +74,7 @@ TEST(InputTest, ConnectorsTest) {
     }
 }
 
-
+*/
 
 int main(int argc, char **argv) {
         ::testing::InitGoogleTest(&argc, argv);

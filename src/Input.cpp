@@ -166,7 +166,6 @@ std::vector<std::string> Input::parseSpaces(std::string withSpaces) {
 // This is a helper function that returns a baseExec object based on the zero index of
 // the vector passed in and takes the rest of the vector as the argument list // exec = nospace
 *****/
-//** TO DO: tolower() all of the arguments at exec.at(0) so that ECHO = echo **//
 baseExec* Input::makeExec(std::vector<std::string> exec) {
     if (exec.at(0) == "echo") {
         echo* b = new echo();
