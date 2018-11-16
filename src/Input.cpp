@@ -1,5 +1,7 @@
 #include "Input.h"
 
+//Input Implementation
+
 bool exitBool = false;
 /*****
 // Base constructors for input object creation, includes constructor with one parameter
