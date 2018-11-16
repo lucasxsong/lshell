@@ -1,6 +1,6 @@
 #### Command Shell Program
 
-##Getting Started
+## Getting Started:
 
 To start using this simple bash clone, simply clone the repository into your desktop. Simply cd into the folder and run the precompiled executable through your machine's terminal/command prompt.
 
