@@ -40,7 +40,6 @@ For the instance where there are multiple arguments separated by multiple connec
 
 This structure allows for the ability to easily add custom executables to your custom preferences by creating new baseExec* objects in BaseNode.h and adding a section in Input.cpp to match userInput with your new function.
 
-
 ## Known Bugs:
 "Out of order"
 - Known bug that when flags might be entered out of order, rshell will not be able to compile the command successfully as the flags intended.
