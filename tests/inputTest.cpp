@@ -31,13 +31,13 @@ TEST(InputTest, ParseSpacesTest) {
     Input i("argument1 argument2 argument3 argument4)";
     i.parseSpaces();
     vector<string> toTest = i->returnParsedNoSpace;
-    for (int i = 0; i < toTest.size(); ++i) {
-                EXPECT_EQ(test.at(i), toTest.at(i);
+    for (int i = 0; i < test.size(); ++i) {
+                EXPECT_EQ(test.at(i), test.at(i);
         } 
     }
 }
 
-
+/*
 
 TEST(InputTest, ExecTest) {
     test1 = new echo();
@@ -75,7 +75,4 @@ TEST(InputTest, ConnectorsTest) {
 }
 
 
-int main(int argc, char **argv) {
-        ::testing::InitGoogleTest(&argc, argv);
-        return RUN_ALL_TESTS();
-}
+*/
