@@ -8,15 +8,19 @@ project(rshell)
 
 include_directories(include)
 
-file(GLOB SOURCES "src/*.cpp")
+set(COMMON_SOURCES src/Input.cpp src/BaseNode.h)
+set(TARGET_SOURCES src/Shell.cpp)
+set(TEST_SOURCES tests/*.cpp)
 
 
 ADD_EXECUTABLE(rshell 
-    ${SOURCES}
+    ${COMMON_SOURCES}
+    ${TARGET_SOURCES}
 )
 
 ADD_EXECUTABLE(test
-	src/main.cpp
+	${COMMON_SOURCES}
+    ${TEST_SOURCES}
 )
 
 TARGET_LINK_LIBRARIES(test gtest)
