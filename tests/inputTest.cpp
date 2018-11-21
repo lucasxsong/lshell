@@ -40,9 +40,7 @@ TEST(InputTest, ParseSpacesTest) {
 TEST(test, test) {
 	EXPECT_EQ(5, 5);
 }
-
 /*
-
 TEST(InputTest, ExecTest) {
     test1 = new echo();
     test2 = new ls();

@@ -10,7 +10,7 @@ include_directories(include)
 
 set(COMMON_SOURCES src/Input.cpp src/BaseNode.h)
 set(TARGET_SOURCES src/Shell.cpp)
-set(TEST_SOURCES tests/*.cpp)
+set(TEST_SOURCES src/main.cpp tests/inputTest.cpp)
 
 
 ADD_EXECUTABLE(rshell 
@@ -18,7 +18,7 @@ ADD_EXECUTABLE(rshell
     ${TARGET_SOURCES}
 )
 
-ADD_EXECUTABLE(tests
+ADD_EXECUTABLE(test
     ${COMMON_SOURCES}
     ${TEST_SOURCES}
 )
