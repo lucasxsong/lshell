@@ -35,6 +35,33 @@ TEST(InputTest, ParseSpacesTest) {
     } 
 }
 
+TEST(InputTest, ParseConnectors) {
+    vector<string> test;
+    test.push_back("&&");
+    test.push_back("||";
+    test.push_back(";");
+    Input i("echo hi && ls -a || echo foo ; git status");
+    i.parseConnectors();
+    vector<string> toTest;
+    vector<Connector* > c = i.returnConnectors();
+    toTest.push_back("&&");
+    toTest.push_back("||");
+    toTest.push_back(";");
+
+    for (int i = 0; i < toTest.size(); ++i) {
+        EXPECT_EQ(test.at(i), toTest.at(i));
+    }
+}
+
+TEST(InputTest, clearInput) {
+    Input i("echo hi && ls -a || echo foo ; git status");
+    i.parseInput();
+    i.clearInput();
+    EXPECT_EQ("", i.returnStrings());
+}
+
+
+
 
 /*
 TEST(InputTest, ExecTest) {
@@ -56,19 +83,6 @@ TEST(InputTest, ExecTest) {
         for (int j = 0; j < toTest.at(i).size(); ++j) {
                 EXPECT_EQ(test.at(i).at(j), toTest.at(i).at(j);
         } 
-    }
-}
-
-TEST(InputTest, ConnectorsTest) {
-    vector<string> test;
-    test.push_back("&&");
-    test.push_back(";");
-    test.push_back("||");
-    Input i("argument1 && argument2 ; argument3 || argument4");
-    i.parseConnectors();
-    vector<string> toTest = Input.returnConnectors();
-    for (int i = 0; i < toTest.size(); ++i) {
-        EXPECT_EQ(test.at(i), toTest.at(i));
     }
 }
 
