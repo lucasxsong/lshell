@@ -195,6 +195,9 @@ class echo : public baseExec {
                 std::cout << std::endl;
                 return true;
         }
+        std::string returnType() {
+            return "echo";
+        }
         
 };
 
@@ -209,7 +212,9 @@ class error : public baseExec {
             std::cout << "Rshell: " << a.at(0) << ": command not found"  << std::endl;
             return false;
         }
-        
+        std::string returnType() {
+            return "error"
+        }
 };
 
 class exitCall : public baseExec {
@@ -220,6 +225,9 @@ class exitCall : public baseExec {
         bool execute() {
             exitBool = true;
             return true;
+        }
+        std::string returnType() {
+            return "exit";
         }
 };
 #endif
