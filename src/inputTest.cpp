@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
 #include "Input.h"
+#include <vector>
 
 using namespace std;
 
-/******
+
 // This is an outdated test harness. Was used early on to test parsing based on
 // connectors, but no longer needed.
 /*
@@ -20,25 +21,21 @@ TEST(InputTest, ParseInputTest) {
         EXPECT_EQ(test.at(i), toTest.at(i));
     }
 }*/ 
-/*
+
 TEST(InputTest, ParseSpacesTest) {
-    vector< vector <string> > test;
+    vector<string> test;
     test.push_back("argument1");
     test.push_back("argument2");
     test.push_back("argument3");
     test.push_back("argument4");
-    Input i("argument1 argument2 argument3 argument4)";
-    i.parseSpaces();
-    vector<string> toTest = i->returnParsedNoSpace;
+    Input i;
+    vector<string> toTest = i.parseSpaces("argument1 argument2 argument3 argument4");
     for (int i = 0; i < test.size(); ++i) {
-                EXPECT_EQ(test.at(i), test.at(i);
-        } 
-    }
+        EXPECT_EQ(test.at(i), toTest.at(i));
+    } 
 }
-*/
-TEST(test, test) {
-	EXPECT_EQ(5, 5);
-}
+
+
 /*
 TEST(InputTest, ExecTest) {
     test1 = new echo();
@@ -74,6 +71,5 @@ TEST(InputTest, ConnectorsTest) {
         EXPECT_EQ(test.at(i), toTest.at(i));
     }
 }
-
 
 */

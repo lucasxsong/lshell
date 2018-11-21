@@ -10,7 +10,10 @@ project(rshell)
 
 ADD_EXECUTABLE(test
     src/test.cpp
-    tests/inputTest.cpp
+    src/inputTest.cpp
+    src/Input.cpp
+    src/Input.h
+    src/BaseNode.h
 )
 
 ADD_EXECUTABLE(rshell 
