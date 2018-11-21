@@ -4,13 +4,20 @@ ADD_SUBDIRECTORY(googletest)
 
 SET(CMAKE_CXX_STANDARD 11)
 
-ADD_EXECUTABLE(input
-  	Input.cpp
+project(rshell)
+
+include_directories(include)
+
+file(GLOB SOURCES "src/*.cpp")
+
+
+ADD_EXECUTABLE(rshell 
+    ${SOURCES}
 )
 
-ADD_EXECUTABLE(inputTest
-	inputTest.cpp
-)
+#ADD_EXECUTABLE(test
+#	/tests/main.cpp
+#)
 
-TARGET_LINK_LIBRARIES(test gtest)
-TARGET_COMPILE_DEFINITIONS (test PRIVATE gtest_disable_pthreads=ON)
+#TARGET_LINK_LIBRARIES(test gtest)
+#TARGET_COMPILE_DEFINITIONS (test PRIVATE gtest_disable_pthreads=ON)
