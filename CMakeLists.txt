@@ -16,7 +16,7 @@ ADD_EXECUTABLE(rshell
 )
 
 ADD_EXECUTABLE(test
-	tests/main.cpp
+	src/main.cpp
 )
 
 TARGET_LINK_LIBRARIES(test gtest)
