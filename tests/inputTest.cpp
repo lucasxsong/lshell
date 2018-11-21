@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-//#include "Input.h"
+#include "Input.h"
 
 using namespace std;
 
@@ -20,7 +20,6 @@ TEST(InputTest, ParseInputTest) {
         EXPECT_EQ(test.at(i), toTest.at(i));
     }
 }*/ 
-
 /*
 TEST(InputTest, ParseSpacesTest) {
     vector< vector <string> > test;
@@ -35,8 +34,8 @@ TEST(InputTest, ParseSpacesTest) {
                 EXPECT_EQ(test.at(i), test.at(i);
         } 
     }
-}*/
-
+}
+*/
 TEST(test, test) {
 	EXPECT_EQ(5, 5);
 }

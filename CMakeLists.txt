@@ -6,21 +6,18 @@ SET(CMAKE_CXX_STANDARD 11)
 
 project(rshell)
 
-include_directories(include)
-
-set(COMMON_SOURCES src/Input.cpp src/BaseNode.h)
-set(TARGET_SOURCES src/Shell.cpp)
-set(TEST_SOURCES src/main.cpp tests/inputTest.cpp)
-
-
-ADD_EXECUTABLE(rshell 
-    ${COMMON_SOURCES}
-    ${TARGET_SOURCES}
-)
+#include_directories(include)
 
 ADD_EXECUTABLE(test
-    ${COMMON_SOURCES}
-    ${TEST_SOURCES}
+    src/test.cpp
+    tests/inputTest.cpp
+)
+
+ADD_EXECUTABLE(rshell 
+    src/Shell.cpp
+    src/Input.h
+    src/Input.cpp
+    src/BaseNode.h
 )
 
 TARGET_LINK_LIBRARIES(test gtest)
