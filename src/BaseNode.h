@@ -36,6 +36,9 @@ class baseNode {
         virtual baseNode* getRight() {
             return rightChild;
         }
+        virtual std::string returnType() {
+            return "";
+        }
 };
 
 /*****
@@ -58,6 +61,9 @@ class Connector : public baseNode {
         baseNode* getRight() {
             return rightChild;
         }
+        virtual std::string returnType() {
+            return "";
+        };
 };
 
 //*** DERIVED "CONNECTOR" CLASSES ***//
@@ -74,6 +80,9 @@ class And : public Connector {
             }
             return false;
         }
+        std::string returnType() {
+            return "&&";
+        }
 };
 
 class Or : public Connector {
@@ -88,6 +97,9 @@ class Or : public Connector {
             }
             return true;
         }
+        std::string returnType() {
+            return "||";
+        }
 };
 
 class SemiColon : public Connector {
@@ -101,6 +113,9 @@ class SemiColon : public Connector {
             rightChild->execute();
             return true;
 	    }
+        std::string returnType() {
+            return ";";
+        }
 };
 
 /*****
@@ -166,6 +181,9 @@ class baseExec : public baseNode {
             }
             return run;
         }
+        virtual std::string returnType() {
+            return "";
+        }
         baseExec() { }
 };
 
@@ -213,7 +231,7 @@ class error : public baseExec {
             return false;
         }
         std::string returnType() {
-            return "error"
+            return "error";
         }
 };
 

@@ -36,6 +36,7 @@ class Input {
         std::vector<std::vector <std::string> > returnParsedNoSpace();
         std::vector<std::string> returnStrings();
         std::vector<Connector* > returnConnectors();
+        baseNode* returnHead();
 
         void callExit();
 		bool checkExit(); // returns true if needs to exit

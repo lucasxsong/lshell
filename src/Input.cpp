@@ -30,7 +30,7 @@ void Input::clearInput() {
 }
 
 /*****
-// Helper functions to return vectors for gtest
+// Helper functions to return data members for gtest
 *****/
 std::vector<baseExec* > Input::returnParsedExec() {
     return parsedExec;
@@ -46,6 +46,10 @@ std::vector<std::string> Input::returnStrings() {
 
 std::vector<Connector* > Input::returnConnectors() {
     return connectors;
+}
+
+baseNode* Input::returnHead() {
+    return head;
 }
 
 /*****

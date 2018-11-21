@@ -22,6 +22,7 @@ TEST(InputTest, ParseInputTest) {
     }
 }*/ 
 
+// Checks to make sure that the parse spaces function properly removes spaces
 TEST(InputTest, ParseSpacesTest) {
     vector<string> test;
     test.push_back("argument1");
@@ -35,7 +36,36 @@ TEST(InputTest, ParseSpacesTest) {
     } 
 }
 
-TEST(InputTest, ParseConnectors) {
+// Checks to make sure that the exec object instantiated is corresponding to the one passed in
+TEST(InputTest, ParseExecTest) {
+    echo* e = new echo();
+    test.push_back(e);
+    vector<string> preExec;
+    preExec.push_back("echo");
+    preExec.push_back("hello");
+    baseExec* b = makeExec(preExec);
+    EXPECT_EQ("echo", e->returnType());
+}
+
+// Checks to make sure that the argument list passed on with the executable is properly constructed
+TEST(InputTest, ParseArgTest) {
+    vector<string> preExec;
+    preExec.push_back("echo");
+    preExec.push_back("hello");
+    baseExec* b = makeExec(preExec);
+    EXPECT_EQ("hello", preExec.at(1));
+}
+
+// Checks to make sure that clear input is properly flushing memory
+TEST(InputTest, ClearInputTest) {
+    Input i("echo hi && ls -a || echo foo ; git status");
+    i.parseInput();
+    i.clearInput();
+    EXPECT_EQ("", i.returnStrings());
+}
+
+// Checks to make sure that the connectors are properly pushed back to the connector vector
+TEST(InputTest, ParseConnectorsTest) {
     vector<string> test;
     test.push_back("&&");
     test.push_back("||";
@@ -53,37 +83,9 @@ TEST(InputTest, ParseConnectors) {
     }
 }
 
-TEST(InputTest, clearInput) {
+TEST(InputTest, ExecutableTreeTest) {
     Input i("echo hi && ls -a || echo foo ; git status");
     i.parseInput();
-    i.clearInput();
-    EXPECT_EQ("", i.returnStrings());
+    baseNode* b = i.returnHead();
+    EXPECT_EQ("echo", )
 }
-
-
-
-
-/*
-TEST(InputTest, ExecTest) {
-    test1 = new echo();
-    test2 = new ls();
-    test3 = new cd();
-    vector<vector <baseExec*> test;
-    test.push_back(test1);
-    test.push_back(test2);
-    test.push_back(test3);
-    Input i("echo hi && ls file ; cd file");
-    i.parseConnectors();
-    vector<string> toTestSpaces = i.returnStrings();
-    i.parseSpaces();
-    vector<vector <string> > toTest = toTestSpaces.returnParsedNoSpace();
-    i.makeExec();
-    vector<baseExec* > testExec = toTest.returnParsedExec();
-    for (int i = 0; i < toTest.size(); ++i) {
-        for (int j = 0; j < toTest.at(i).size(); ++j) {
-                EXPECT_EQ(test.at(i).at(j), toTest.at(i).at(j);
-        } 
-    }
-}
-
-*/
