@@ -18,6 +18,9 @@ TEST(ExecTest, errorTest) {
     EXPECT_EQ("Rshell: wrong: command not found\n", b->returnCheck());
 }
 
-// TEST(ExecTest, exitTest) {
-
-// }
+TEST(ExecTest, exitTest) {
+    Input i("exit")
+    i.parseInput();
+    baseNode* b = i.returnHead();
+    EXPECT_EQ("working", b->returnCheck());
+}

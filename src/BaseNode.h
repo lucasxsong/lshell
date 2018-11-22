@@ -288,7 +288,7 @@ class exitCall : public baseExec {
             return "exit";
         }
         std::string returnCheck() {
-            return "";
+            return "working";
         }
 };
 #endif
