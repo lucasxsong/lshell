@@ -255,7 +255,10 @@ class error : public baseExec {
     protected:
        std::string errorReturn;
     public:
-        error() {}
+        error() {
+            leftChild = NULL;
+            rightChild = NULL;
+        }
 
         bool execute() {
             std::cout << "Rshell: " << a.at(0) << ": command not found"  << std::endl;

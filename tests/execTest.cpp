@@ -18,7 +18,6 @@ TEST(ExecTest, errorTest) {
     baseNode* b = i.returnHead();
     cout << "part c" << endl;
     EXPECT_EQ("Rshell: wrong: command not found\n", b->returnCheck());
-    cout << "part d" << endl;
 }
 
 // TEST(ExecTest, exitTest) {
