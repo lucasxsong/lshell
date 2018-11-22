@@ -87,5 +87,5 @@ TEST(InputTest, ExecutableTreeTest) {
     Input i("echo hi && ls -a || echo foo ; git status");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("echo", )
+    EXPECT_EQ("echo", b.returnType());
 }
