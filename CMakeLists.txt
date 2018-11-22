@@ -12,6 +12,7 @@ include_directories(src)
 ADD_EXECUTABLE(test
     src/test.cpp
     tests/inputTest.cpp
+    tests/execTest.cpp
     src/Input.cpp
     src/Input.h
     src/BaseNode.h
