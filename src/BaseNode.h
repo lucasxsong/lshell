@@ -39,7 +39,7 @@ class baseNode {
         virtual std::string returnType() {
             return "";
         }
-        virtual std::string returnArgs() {
+        virtual std::string returnCheck() { //helper function for test cases
             return "";
         }
 };
@@ -67,7 +67,7 @@ class Connector : public baseNode {
         virtual std::string returnType() {
             return "";
         };
-        virtual std::string returnArgs() {
+        virtual std::string returnCheck() {
             return "";
         }
 };
@@ -89,7 +89,7 @@ class And : public Connector {
         std::string returnType() {
             return "&&";
         }
-        std::string returnArgs() {
+        std::string returnCheck() {
             return "";
         }
 };
@@ -109,7 +109,7 @@ class Or : public Connector {
         std::string returnType() {
             return "||";
         }
-        std::string returnArgs() {
+        std::string returnCheck() {
             return "";
         }
 };
@@ -128,7 +128,7 @@ class SemiColon : public Connector {
         std::string returnType() {
             return ";";
         }
-        std::string returnArgs() {
+        std::string returnCheck() {
             return "";
         }
 };
@@ -201,7 +201,7 @@ class baseExec : public baseNode {
         }
         baseExec() { }
 
-        virtual std::string returnArgs() {
+        virtual std::string returnCheck() {
             return "";
         }
 };
@@ -237,7 +237,7 @@ class echo : public baseExec {
             return "echo";
         }
         //used for test case
-        std::string returnArgs() {
+        std::string returnCheck() {
             std::string str = "";
             for (int i = 1; i < a.size(); i++) {
                 str = a.at(i);
@@ -253,7 +253,7 @@ class echo : public baseExec {
 // created when user input does not match a function
 class error : public baseExec { 
     protected:
-       
+       std::string errorReturn;
     public:
         error() {}
 
@@ -264,8 +264,11 @@ class error : public baseExec {
         std::string returnType() {
             return "error";
         }
-        std::string returnArgs() {
-            return "";
+        std::string returnCheck() {
+            errorReturn = "Rshell: ";
+            errorReturn += a.at(0);
+            errorReturn += ": command not found\n"
+            return errorReturn;
         }
 };
 
@@ -281,7 +284,7 @@ class exitCall : public baseExec {
         std::string returnType() {
             return "exit";
         }
-        std::string returnArgs() {
+        std::string returnCheck() {
             return "";
         }
 };
