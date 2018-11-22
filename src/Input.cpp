@@ -169,23 +169,8 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
         b->addArg(exec);
         return b;
     }
-    if (exec.at(0) == "ls") {
-        baseExec* b = new baseExec();
-        b->addArg(exec);
-        return b;
-    }
-    if (exec.at(0) == "mkdir") {
-        baseExec* b = new baseExec();
-        b->addArg(exec);
-        return b;
-    }
-        if (exec.at(0) == "cd") {
-        baseExec* b = new baseExec();
-        b->addArg(exec);
-        return b;
-    }
     else { //error test case
-        error* b = new error();
+        baseExec* b = new baseExec();
         b->addArg(exec);
         return b;
     }
