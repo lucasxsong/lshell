@@ -12,13 +12,9 @@ TEST(ExecTest, echoTest) {
 }
 
 TEST(ExecTest, errorTest) {
-    cout << "part a" << endl;
     Input i("wrong input");
-    cout << "part b" << endl;
-    baseNode* b = i.returnHead();
-    cout << "part c" << endl;
-    cout << b->returnCheck() << endl;
-    cout << "part d" << endl;
+    i.parseInput();
+    baseNode* b = i.returnHead(); //seg fault
     EXPECT_EQ("Rshell: wrong: command not found\n", b->returnCheck());
 }
 
