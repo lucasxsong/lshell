@@ -8,5 +8,5 @@ TEST(ExecTest, echoTest) {
     Input i("echo hi");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("echo", b->returnType());
+    EXPECT_EQ("hi ", b->returnArgs());
 }

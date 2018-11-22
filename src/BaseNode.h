@@ -198,6 +198,7 @@ class baseExec : public baseNode {
 class echo : public baseExec {
     protected:
         std::string userInput;
+        std::string echoReturn; //stores a string of what echo returns
     public: 
         echo() {}
         void addUserInput(std::string userInput) {
@@ -215,6 +216,17 @@ class echo : public baseExec {
         }
         std::string returnType() {
             return "echo";
+        }
+        //used for test case
+        std::string returnArgs() {
+            std::string str = "";
+            for (int i = 1; i < a.size(); i++) {
+                str = a.at(i);
+                echoReturn += str;
+                echoReturn += " ";
+            }
+
+            return echoReturn;
         }
         
 };
