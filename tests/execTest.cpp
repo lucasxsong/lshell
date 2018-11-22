@@ -5,8 +5,8 @@
 using namespace std;
 
 TEST(ExecTest, echoTest) {
-    Input i("echo hi");
+    Input i("echo hi hello");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("hi ", b->returnArgs());
+    EXPECT_EQ("hi hello ", b->returnArgs());
 }
