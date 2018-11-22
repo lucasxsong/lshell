@@ -12,7 +12,7 @@ TEST(ExecTest, echoTest) {
 }
 
 TEST(ExecTest, errorTest) {
-    Input i("wrong input")
+    Input i("wrong input");
     baseNode* b = i.returnHead();
     EXPECT_EQ("Rshell: wrong: command not found\n", b->returnCheck());
 }

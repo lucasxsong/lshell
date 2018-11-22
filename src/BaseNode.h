@@ -267,7 +267,7 @@ class error : public baseExec {
         std::string returnCheck() {
             errorReturn = "Rshell: ";
             errorReturn += a.at(0);
-            errorReturn += ": command not found\n"
+            errorReturn += ": command not found\n";
             return errorReturn;
         }
 };
