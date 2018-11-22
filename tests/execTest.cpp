@@ -19,7 +19,7 @@ TEST(ExecTest, errorTest) {
 }
 
 TEST(ExecTest, exitTest) {
-    Input i("exit")
+    Input i("exit");
     i.parseInput();
     baseNode* b = i.returnHead();
     EXPECT_EQ("working", b->returnCheck());
