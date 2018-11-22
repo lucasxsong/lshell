@@ -34,7 +34,7 @@ class Input {
 
         std::vector<baseExec* > returnParsedExec();
         std::vector<std::vector <std::string> > returnParsedNoSpace();
-        std::vector<std::string> returnStrings();
+        std::string returnStrings();
         std::vector<Connector* > returnConnectors();
         baseNode* returnHead();
 

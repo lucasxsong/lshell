@@ -1,6 +1,8 @@
 #include <gtest/gtest.h>
 #include "Input.h"
+#include "BaseNode.h"
 #include <vector>
+
 
 using namespace std;
 
@@ -39,36 +41,34 @@ TEST(InputTest, ParseSpacesTest) {
 // Checks to make sure that the exec object instantiated is corresponding to the one passed in
 TEST(InputTest, ParseExecTest) {
     echo* e = new echo();
-    test.push_back(e);
     vector<string> preExec;
     preExec.push_back("echo");
     preExec.push_back("hello");
-    baseExec* b = makeExec(preExec);
-    EXPECT_EQ("echo", e->returnType());
+    echo* b = new echo();
+    EXPECT_EQ("echo", b->returnType());
 }
-/*
+
 // Checks to make sure that the argument list passed on with the executable is properly constructed
 TEST(InputTest, ParseArgTest) {
     vector<string> preExec;
     preExec.push_back("echo");
     preExec.push_back("hello");
-    baseExec* b = makeExec(preExec);
     EXPECT_EQ("hello", preExec.at(1));
 }
 
 // Checks to make sure that clear input is properly flushing memory
 TEST(InputTest, ClearInputTest) {
     Input i("echo hi && ls -a || echo foo ; git status");
-    i.parseInput();
     i.clearInput();
-    EXPECT_EQ("", i.returnStrings());
+    string s  = i.returnStrings();
+    EXPECT_EQ("", s);
 }
 
 // Checks to make sure that the connectors are properly pushed back to the connector vector
 TEST(InputTest, ParseConnectorsTest) {
     vector<string> test;
     test.push_back("&&");
-    test.push_back("||";
+    test.push_back("||");
     test.push_back(";");
     Input i("echo hi && ls -a || echo foo ; git status");
     i.parseConnectors();
@@ -87,6 +87,6 @@ TEST(InputTest, ExecutableTreeTest) {
     Input i("echo hi && ls -a || echo foo ; git status");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("echo", b.returnType());
+    EXPECT_EQ("&&", b->returnType());
 }
-*/
+

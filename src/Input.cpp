@@ -40,8 +40,8 @@ std::vector<std::vector <std::string> > Input::returnParsedNoSpace() {
     return parsedNoSpace;
 }
 
-std::vector<std::string> Input::returnStrings() {
-    return parsedStrings;
+std::string Input::returnStrings() {
+    return userInput;
 }
 
 std::vector<Connector* > Input::returnConnectors() {
