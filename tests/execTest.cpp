@@ -14,8 +14,8 @@ TEST(ExecTest, echoTest) {
 TEST(ExecTest, errorTest) {
     Input i("wrong input");
     i.parseInput();
-    baseNode* b = i.returnHead(); //seg fault
-    EXPECT_EQ("", b->returnCheck());
+    baseNode* b = i.returnHead();
+    EXPECT_EQ("Rshell: wrong: command not found\n", b->returnCheck());
 }
 
 // TEST(ExecTest, exitTest) {
