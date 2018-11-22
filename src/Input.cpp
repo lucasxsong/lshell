@@ -170,7 +170,7 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
         return b;
     }
     else { //error test case
-        error* b = new baseExec(); //if things dont work right change "error" back to "baseExec"
+        error* b = new error();
         b->addArg(exec);
         return b;
     }
