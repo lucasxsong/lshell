@@ -82,7 +82,7 @@ TEST(InputTest, ParseConnectorsTest) {
         EXPECT_EQ(test.at(i), toTest.at(i));
     }
 }
-
+// Tests the head node of the executable tree to make sure its been constructed properly
 TEST(InputTest, ExecutableTreeTest) {
     Input i("echo hi && ls -a || echo foo ; git status");
     i.parseInput();
