@@ -39,6 +39,9 @@ class baseNode {
         virtual std::string returnType() {
             return "";
         }
+        virtual std::string returnArgs() {
+            return "";
+        }
 };
 
 /*****
@@ -64,6 +67,9 @@ class Connector : public baseNode {
         virtual std::string returnType() {
             return "";
         };
+        virtual std::string returnArgs() {
+            return "";
+        }
 };
 
 //*** DERIVED "CONNECTOR" CLASSES ***//
@@ -83,6 +89,9 @@ class And : public Connector {
         std::string returnType() {
             return "&&";
         }
+        std::string returnArgs() {
+            return "";
+        }
 };
 
 class Or : public Connector {
@@ -100,6 +109,9 @@ class Or : public Connector {
         std::string returnType() {
             return "||";
         }
+        std::string returnArgs() {
+            return "";
+        }
 };
 
 class SemiColon : public Connector {
@@ -115,6 +127,9 @@ class SemiColon : public Connector {
 	    }
         std::string returnType() {
             return ";";
+        }
+        std::string returnArgs() {
+            return "";
         }
 };
 
@@ -185,6 +200,10 @@ class baseExec : public baseNode {
             return "";
         }
         baseExec() { }
+
+        virtual std::string returnArgs() {
+            return "";
+        }
 };
 
 /*****
@@ -245,6 +264,9 @@ class error : public baseExec {
         std::string returnType() {
             return "error";
         }
+        std::string returnArgs() {
+            return "";
+        }
 };
 
 class exitCall : public baseExec {
@@ -258,6 +280,9 @@ class exitCall : public baseExec {
         }
         std::string returnType() {
             return "exit";
+        }
+        std::string returnArgs() {
+            return "";
         }
 };
 #endif
