@@ -291,4 +291,16 @@ class exitCall : public baseExec {
             return "working";
         }
 };
+
+/*****
+// Adding implementation for the test executable, for assignment 3
+*****/
+
+class test : public baseExec {
+    protected:
+    
+    public: 
+        test() {}
+
+};
 #endif
