@@ -29,5 +29,5 @@ TEST(ExecTest, testTest) {
     Input i ("test doesnotexist");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("(False)", b->returnCheck());
+    EXPECT_EQ("false", b->returnCheck());
 }

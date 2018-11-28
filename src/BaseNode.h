@@ -334,7 +334,7 @@ class test : public baseExec {
                         dashE = false;
                     }
                     else {
-                        perror ("tag not found");
+                        printf ("tag not found, please use -e (check if path exists), -f (check if file exists), or -d (check if directory existZZs") << endl;
                     }
                 }
                 else {
@@ -347,11 +347,11 @@ class test : public baseExec {
             if (dashE) {
                 struct stat buffer;
                 if (stat (filePath.c_str(), &buffer) == 0) {
-                    std::cout << "(true)" << std::endl;
+                    std::cout << "(True)" << std::endl;
                     return true;
                 }
                 else {
-                    std::cout << "(false)" << std::endl;
+                    std::cout << "(False)" << std::endl;
                     return false;
                 }
                 
@@ -359,45 +359,45 @@ class test : public baseExec {
             }
             
             else if (dashF) {
+                // executes stat based on -f tag
                 struct stat buffer;
                 if (stat (filePath.c_str(), &buffer) == 0) {
                     if (S_ISREG(buffer.st_mode)) {
-                        std::cout << "(true)" << std::endl;
+                        std::cout << "(True)" << std::endl;
                         return true;
                     }
                     else {
-                        std::cout << "(false)" << std::endl;
+                        std::cout << "(False)" << std::endl;
                         return false;
                     }
                 }
                 else {
-                    std::cout << "(false)" << std::endl;
+                    std::cout << "(False)" << std::endl;
                     return false;
                 }
-                
-                // executes stat based on -f tag
             }
             
             else if (dashD) {
+                // executes stat based on -d tag
                 struct stat buffer;
                 if (stat (filePath.c_str(), &buffer) == 0) {
                     if (S_ISDIR(buffer.st_mode)) {
-                        std::cout << "(true)" << std::endl;
+                        std::cout << "(True)" << std::endl;
                         return true;
                     }
                     else {
-                        std::cout << "(false)" << std::endl;
+                        std::cout << "(False)" << std::endl;
                         return false;
                     }
                 }
                 else {
-                    std::cout << "(false)" << std::endl;
+                    std::cout << "(False)" << std::endl;
                     return false;
                 }
             }
 
             return false;    
-                // executes stat based on -d tag
+                
         }
 
         std::string returnCheck() {
