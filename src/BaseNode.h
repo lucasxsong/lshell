@@ -334,7 +334,8 @@ class test : public baseExec {
                         dashE = false;
                     }
                     else {
-                        printf ("tag not found, please use -e (check if path exists), -f (check if file exists), or -d (check if directory existZZs") << endl;
+                        printf ("tag not found, please use -e (check if path exists), -f (check if file exists), or -d (check if directory exists");
+                        std::cout << std::endl;
                     }
                 }
                 else {

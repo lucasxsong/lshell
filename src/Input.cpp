@@ -80,30 +80,7 @@ void Input::runInput() {
 // be then used to generate argument objects. 
 *****/
 void Input::parseInput() {
-    std::string delimiters("&&" "||" ";");
-
-    std::stringstream ss(this->userInput);
-    std::string argument;
-
-    // This while loop separates the user input into substrings based on the connectors 
-    //"&& || ; ". White space still need to be removed.
-    while (getline(ss, argument)) {
-        size_t prev = 0;
-        size_t pos;
-        while ((pos = argument.find_first_of(delimiters, prev)) != std::string::npos) {
-            if (pos > prev) {
-                int connector = pos - prev + 1;
-                parsedStrings.push_back(userInput.substr(prev, pos-prev));
-                //connectors.push_back(userInput.substr(connector, 1));
-            }
-            prev = pos + 1;
-        }
-        if (prev < argument.length()) {
-            int connector = pos - prev + 1;
-            parsedStrings.push_back(userInput.substr(prev, std::string::npos));
-        }
-    }
-    
+    parsedStrings = parseOutConnectors(userInput);
 
     // parsedNoSpace vector creation
     for (int i = 0; i < parsedStrings.size(); ++i) {
@@ -122,6 +99,40 @@ void Input::parseInput() {
     head->execute();
 
     return;
+}
+
+/*****
+// This is a helper function adapted out of the original parseInput function that takes 
+// in a string and parses out the substrings that are separated by the connectors.
+// This is useful as two steps of this parsing need to be completed, once for the paranthesis
+// and once again for the substrings inside each paranthesis
+******/
+std::vector<std::string> Input::parseOutConnectors(std::string withConnectors) {
+    std::string delimiters("&&" "||" ";");
+    std::vector<std::string> parsedSubStrings;
+
+    std::stringstream ss(withConnectors);
+    std::string argument;
+
+    // This while loop separates the user input into substrings based on the connectors 
+    //"&& || ; ". White space still need to be removed.
+    while (getline(ss, argument)) {
+        size_t prev = 0;
+        size_t pos;
+        while ((pos = argument.find_first_of(delimiters, prev)) != std::string::npos) {
+            if (pos > prev) {
+                int connector = pos - prev + 1;
+                parsedSubStrings.push_back(withConnectors.substr(prev, pos-prev));
+            }
+            prev = pos + 1;
+        }
+        if (prev < argument.length()) {
+            int connector = pos - prev + 1;
+            parsedSubStrings.push_back(withConnectors.substr(prev, std::string::npos));
+        }
+    }
+
+    return parsedSubStrings;
 }
 
 /*****

@@ -43,6 +43,7 @@ class Input {
 
         void runInput();
         void parseInput();
+        std::vector<std::string>parseOutConnectors(std::string withConnectors);
         std::vector<std::string> parseSpaces(std::string withSpaces); // helper function to remove spaces from withSpaces input
         void parseConnectors();
         baseExec* makeExec(std::vector<std::string> exec); // instantiates baseExec objects and arglist pointer
