@@ -1,4 +1,4 @@
-#### Command Shell Program
+# Command Shell Program
 
 ## Getting Started:
 
