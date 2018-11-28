@@ -7,6 +7,8 @@
 #include <cstring>
 #include <iostream>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 class Arg;
 extern bool exitBool;
@@ -340,19 +342,68 @@ class test : public baseExec {
                 }
             }
             // use stat to see if the file paths exist and use flags accordingly (no flags is e)
+        
 
             if (dashE) {
+                struct stat buffer;
+                if (stat (filePath.c_str(), &buffer) == 0) {
+                    std::cout << "(true)" << std::endl;
+                    return true;
+                }
+                else {
+                    std::cout << "(false)" << std::endl;
+                    return false;
+                }
+                
                 // executes stat based on -e tag
             }
             
             else if (dashF) {
+                struct stat buffer;
+                if (stat (filePath.c_str(), &buffer) == 0) {
+                    if (S_ISREG(buffer.st_mode)) {
+                        std::cout << "(true)" << std::endl;
+                        return true;
+                    }
+                    else {
+                        std::cout << "(false)" << std::endl;
+                        return false;
+                    }
+                }
+                else {
+                    std::cout << "(false)" << std::endl;
+                    return false;
+                }
+                
                 // executes stat based on -f tag
             }
             
             else if (dashD) {
-                // executes stat based on -d tag
+                struct stat buffer;
+                if (stat (filePath.c_str(), &buffer) == 0) {
+                    if (S_ISDIR(buffer.st_mode)) {
+                        std::cout << "(true)" << std::endl;
+                        return true;
+                    }
+                    else {
+                        std::cout << "(false)" << std::endl;
+                        return false;
+                    }
+                }
+                else {
+                    std::cout << "(false)" << std::endl;
+                    return false;
+                }
             }
+
+            return false;    
+                // executes stat based on -d tag
+        }
+
+        std::string returnCheck() {
+            return "false";
         }
 
 };
+
 #endif

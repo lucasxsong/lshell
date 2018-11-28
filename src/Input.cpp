@@ -175,7 +175,7 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
    
     if (exec.at(0) == "test") {
         test* b = new test();
-        t->addArg(exec);
+        b->addArg(exec);
         return b;
     }
 
