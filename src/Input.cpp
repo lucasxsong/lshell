@@ -66,7 +66,7 @@ void Input::runInput() {
     std::string host = returnHost();
     std::string userLine;
 
-    std::cout << host << "@" << name << "$ ";
+    std::cout << name << "@" << host << "$ ";
     getline(std::cin, userLine);
     userInput = userLine;
 
@@ -169,6 +169,7 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
         b->addArg(exec);
         return b;
     }
+    /*
     if (exec.at(0) == "mkdir") {
         baseExec* b = new baseExec();
         b->addArg(exec);
@@ -184,8 +185,9 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
         b->addArg(exec);
         return b;
     }
+    */
     else { //error test case
-        error* b = new error();
+        baseExec* b = new baseExec();
         b->addArg(exec);
         return b;
     }
