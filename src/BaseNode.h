@@ -294,13 +294,65 @@ class exitCall : public baseExec {
 
 /*****
 // Adding implementation for the test executable, for assignment 3
+// This function, as per assignment 3 guidelines will return TRUE if the 
+// test succeeds and false if it fails (checking file paths)
+// TO DO: still need to factor in how [] can call test exec instantiation
 *****/
 
 class test : public baseExec {
     protected:
-    
+        bool dashE;
+        bool dashF;
+        bool dashD;
+        std::string filePath;
     public: 
-        test() {}
+        test() {
+            dashE = true; // checks if the file/directory exists (used by default)
+            dashF = false; // checks if the file/directory exists and is a regular file
+            dashD = false; // checks if the file/directory exists and is a regular file
+        }
+        bool execute() {
+            // execute function should check if there are any flags in the arglist
+            // if there are not, move on to check to see if the file path exists using stat()
+            
+            // first iterate through the a list and check for flags and filename
+            // throw errors accordingly
+
+            for (int i = 0; i < a.size(); ++i) {
+                if (a.at(i).at(0) == '-') {
+                    if (a.at(i) == "-e") {
+                        dashE = true;
+                    }
+                    else if (a.at(i) == "-f") {
+                        dashF = true;
+                        dashE = false;
+                    }
+                    else if (a.at(i) == "-d") {
+                        dashD = true;
+                        dashE = false;
+                    }
+                    else {
+                        perror ("tag not found");
+                    }
+                }
+                else {
+                    filePath = a.at(i);
+                }
+            }
+            // use stat to see if the file paths exist and use flags accordingly (no flags is e)
+
+            if (dashE) {
+                // executes stat based on -e tag
+            }
+            
+            else if (dashF) {
+                // executes stat based on -f tag
+            }
+            
+            else if (dashD) {
+                // executes stat based on -d tag
+            }
+        }
 
 };
 #endif
