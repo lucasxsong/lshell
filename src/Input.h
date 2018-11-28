@@ -19,7 +19,7 @@ class baseNode;
 
 class Input {
     protected: 
-        std::string userInput;
+        std::string userInput; 
         std::vector<baseExec*> parsedExec; // this vector holds the parsed baseExec objects with arg
         std::vector<std::vector<std::string> > parsedNoSpace; // this vector holds the parsed string w/o spaces
         std::vector<std::string> parsedStrings; // these two vectors are just to help in storing 
@@ -42,6 +42,7 @@ class Input {
 		bool checkExit(); // returns true if needs to exit
 
         void runInput();
+        void parsePar();
         void parseInput();
         std::vector<std::string>parseOutConnectors(std::string withConnectors);
         std::vector<std::string> parseSpaces(std::string withSpaces); // helper function to remove spaces from withSpaces input

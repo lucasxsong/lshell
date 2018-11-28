@@ -73,11 +73,25 @@ void Input::runInput() {
     parseInput();
 }
 
+/*****
+// This function takes the initial userString and parses it based on parenthesis and 
+// connectors. It works directly with the baseNode objects to construct a tree of baseNodes, 
+// including Par objects and connectors. It modifies the head. 
+*****/
+void Input::parsePar() {
+
+}
+
+// After this function, the individual par objects will need to be parsed to created individual trees, 
+// and will replace the par object with a connector pointing to  two or more arguments in the executable tree
+
 
 /*****
 // Takes in user input and tokenizes string into substrings based on connectors, and then
 // tokenizes yet again to remove spaces in the substrings. Returns a vector of strings to
 // be then used to generate argument objects. 
+// ***EDITED NOV28***
+// Editing function to add support for parenthesis
 *****/
 void Input::parseInput() {
     parsedStrings = parseOutConnectors(userInput);
@@ -105,7 +119,7 @@ void Input::parseInput() {
 // This is a helper function adapted out of the original parseInput function that takes 
 // in a string and parses out the substrings that are separated by the connectors.
 // This is useful as two steps of this parsing need to be completed, once for the paranthesis
-// and once again for the substrings inside each paranthesis
+// and once again for the substrings inside each parenthesis
 ******/
 std::vector<std::string> Input::parseOutConnectors(std::string withConnectors) {
     std::string delimiters("&&" "||" ";");
