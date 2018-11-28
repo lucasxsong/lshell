@@ -40,9 +40,10 @@ class Input {
 
         void callExit();
 		bool checkExit(); // returns true if needs to exit
-
+        // The program will first call runInput to get the full userString
+        // Then, the program will call parsePar to divide out the 
         void runInput();
-        void parsePar();
+        std::vector<std::string> parsePar(std::string userString);
         void parseInput();
         std::vector<std::string>parseOutConnectors(std::string withConnectors);
         std::vector<std::string> parseSpaces(std::string withSpaces); // helper function to remove spaces from withSpaces input

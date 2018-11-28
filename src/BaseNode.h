@@ -135,6 +135,12 @@ class SemiColon : public Connector {
         }
 };
 
+/*****
+// This is the parenthesis baseClass, which is technically not a connector at the end of the program
+// but functions in a similar way that it has left and right children.
+// The function or potentially the program as a whole eventually needs a solution to switch out the
+// Par node with the connector so that the execute function can properly iterate through the tree
+*****/
 class Par : public Connector {
     protected:
         std::string subString;
@@ -149,13 +155,23 @@ class Par : public Connector {
             return true;
         }
         std::string returnType() {
-            "par";
+            return "()";
         }
         std::string returnCheck() {
             return "";
         }
+        /*****
+        // This function parses the substring that is concatenated by parsePar in the initial step of
+        // taking in input until there are no more parenthesis to parse. Then, it works to parse the substrings
+        // and create baseExec and Connector objects.
+        *****/
 
-}
+       // in short this is basically a clone of the parsePar function in Input.cpp combined with the parseExec function
+        void parseString() {
+            
+            return;
+        }
+};
 
 /*****
 // This is the base class for the executable objects that will be 
