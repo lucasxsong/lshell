@@ -24,3 +24,10 @@ TEST(ExecTest, exitTest) {
     baseNode* b = i.returnHead();
     EXPECT_EQ("working", b->returnCheck());
 }
+
+TEST(ExecTest, testTest) {
+    Input i ("test doesnotexist");
+    i.parseInput();
+    baseNode* b = i.returnHead();
+    EXPECT_EQ("(False)", b->returnCheck());
+}
