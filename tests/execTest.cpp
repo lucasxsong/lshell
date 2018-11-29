@@ -15,15 +15,15 @@ TEST(ExecTest, errorTest) {
     Input i("wrong input");
     i.parseInput();
     baseNode* b = i.returnHead();
+    EXPECT_EQ("Rshell: wrong: command not found\n", b->returnCheck());
     /*****
-    //EXPECT_EQ("Rshell: wrong: command not found\n", b->returnCheck());
     //Originally output^ but after changes made to makeExec() now output is
     //as shown V.
     //I think the top output is what should be output when "wrong input"
     //is called. Issue may lie in else condition: change baseExec to error
     //object
     *****/
-   EXPECT_EQ("execvp() failed: No such file or directory\n", b->returnCheck());
+//    EXPECT_EQ("execvp() failed: No such file or directory\n", b->returnCheck());
 }
 
 TEST(ExecTest, exitTest) {

@@ -330,7 +330,7 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
     // ****** NEW ADDITIONS FOR ASSN3 ******//
 
     else { //error test case
-        baseExec* b = new baseExec();
+        error* b = new error();
         b->addArg(exec);
         return b;
     }
