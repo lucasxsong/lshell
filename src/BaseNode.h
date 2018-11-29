@@ -429,4 +429,50 @@ class test : public baseExec {
 
 };
 
+/*****
+// This is the parenthesis baseClass, which inherits from the baseExec class, but also has 2 children
+// ***MARKED AS RESOLVED*** 
+// The function or potentially the program as a whole eventually needs a solution to switch out the
+// Par node with the connector so that the execute function can properly iterate through the tree
+// ***MARKED AS RESOLVED***
+*****/
+class Par : public baseExec {
+    protected:
+        std::string subString;
+
+    public:
+        Par() {
+            leftChild = NULL;
+            rightChild = NULL;
+        }
+
+        void setSubString(std::string s) {
+            subString = s;
+        }
+        bool execute() {
+            std::cout << "par successfully executed" << std::endl;
+            return true;
+            // The execute function of par will look through the substring and see if there are any parenthesis, if not
+            // it will just simply create the two baseExec objects based on makeExecutableTree and execute them
+            
+        }
+        std::string returnType() {
+            return "()";
+        }
+        std::string returnCheck() {
+            return "working";
+        }
+        /*****
+        // This function parses the substring that is concatenated by parsePar in the initial step of
+        // taking in input until there are no more parenthesis to parse. Then, it works to parse the substrings
+        // and create baseExec and Connector objects.
+        *****/
+
+       // in short this is basically a clone of the parsePar function in Input.cpp combined with the parseExec function
+        void parseString() {
+            
+            return;
+        }
+};
+
 #endif

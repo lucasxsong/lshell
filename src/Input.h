@@ -26,6 +26,9 @@ class Input {
         std::vector<Connector* > connectors;    // the data to create the executable tree
         baseNode* head; // pointer to top of executable tree
 
+        // ADDITION FOR ASSIGNMENT 3
+        std::vector<std::string> parenthesis;
+    
     public:
 		Input();
         ~Input();
@@ -41,9 +44,15 @@ class Input {
 
         void callExit();
 		bool checkExit(); // returns true if needs to exit
-
+        // The program will first call runInput to get the full userString
+        // Then, the program will call parsePar to construct the first tree
+        // will need to add a helper function just to concatenate based on paranthesis and connectors -> will be used for second pass
+        // ***TO DO*** need to adjust makeExecutableTree to work with paranthesis
         void runInput();
-        void parsePar();
+        // ****** NEW ADDITIONS FOR ASSN3 ******//
+        std::vector<std::string> parsePar(std::string &userString);
+        void parseTest(std::string &userString);
+        // ****** NEW ADDITIONS FOR ASSN3 ******//
         void parseInput();
         std::vector<std::string>parseOutConnectors(std::string withConnectors);
         std::vector<std::string> parseSpaces(std::string withSpaces); // helper function to remove spaces from withSpaces input
