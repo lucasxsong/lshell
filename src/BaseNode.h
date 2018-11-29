@@ -155,7 +155,7 @@ class Par : public Connector {
             return "";
         }
 
-}
+};
 
 /*****
 // This is the base class for the executable objects that will be 
