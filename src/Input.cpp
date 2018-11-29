@@ -93,23 +93,24 @@ std::vector<std::string> Input::parsePar(std::string &userString) {
         if (foundEnd == true) {
             i = parEnd;
             foundEnd = false;
+            //std::cout << i << std::endl;
         }
         if (userString.at(i) == '(') {
             parStart = i;
             // For loop to find the index of the ending par
             for (int j = i; j < userString.size(); ++j) {
+                //std::cout << parCounter << std::endl;
                 if (userString.at(j) == '(') {
                     ++parCounter;
                     // Found a starting nested par
                 }
-                if (parCounter > 0 && userString.at(i) == ')') {
+                if (parCounter > 0 && userString.at(j) == ')') {
                     --parCounter;
                     //  Found an ending nested par
                 }
-                if (parCounter == 0 && userString.at(i) == ')') {
+                if (parCounter == 0 && userString.at(j) == ')') {
                     parEnd = j;
                     foundEnd = true;
-                    std::cout << userString << std::endl;
                     break;
                     // Successfully found the end par
 
@@ -125,7 +126,9 @@ std::vector<std::string> Input::parsePar(std::string &userString) {
                 std::string subString = userString.substr(parStart, parEnd);
                 parSubStrings.push_back(subString);
                 // Replaces original substring with unique parID xD
-                userString.replace(parStart, parEnd - parStart, "par482309812");
+                std::cout << parEnd << std::endl;
+                userString.replace(parStart, parEnd - parStart + 1, "par482309812");
+                std::cout << userString << std::endl;
             }  
         }
     }
