@@ -74,12 +74,106 @@ void Input::runInput() {
 }
 
 /*****
-// This function takes the initial userString and parses it based on parenthesis and 
-// connectors. It works directly with the baseNode objects to construct a tree of baseNodes, 
-// including Par objects and connectors. It modifies the head. 
+// This function traverses through the substring and tries to find parenthesis. If one is found,
+// it will continue until the matching end parenthesis is found and remove that portion from the string,
+// pushing the removed substring into parenthesis for par object creation during makeExecutableTree and 
+// replacing the removed portion with a string replacement
 *****/
-void Input::parsePar() {
+std::vector<std::string> Input::parsePar(std::string &userString) {
+    int parCounter = 0;
+    int parStart;
+    int parEnd;
+    bool foundEnd = false;
+    std::vector<std::string> parSubStrings;
+    // This vector holds the substrings so that makeExecutable tree can match the location of 
+    // par with the substrings later for par object creation
+    
+    // For loop to find the beginning par
+    for (int i = 0; i < userString.size(); ++i) {
+        if (foundEnd == true) {
+            i = parEnd;
+            foundEnd = false;
+        }
+        if (userString.at(i) == '(') {
+            parStart = i;
+            // For loop to find the index of the ending par
+            for (int j = i; j < userString.size(); ++j) {
+                if (userString.at(j) == '(') {
+                    ++parCounter;
+                    // Found a starting nested par
+                }
+                if (parCounter > 0 && userString.at(i) == ')') {
+                    --parCounter;
+                    //  Found an ending nested par
+                }
+                if (parCounter == 0 && userString.at(i) == ')') {
+                    parEnd = j;
+                    foundEnd = true;
+                    std::cout << userString << std::endl;
+                    break;
+                    // Successfully found the end par
 
+                }
+            }
+            if (foundEnd == false) {
+                // Throw error if ending parenthesis could not be found
+                std::cout << "Could not find ending parenthesis" << std::endl;
+                return parSubStrings;
+            }
+            else {
+                // Remove the substring from the original string
+                std::string subString = userString.substr(parStart, parEnd);
+                parSubStrings.push_back(subString);
+                // Replaces original substring with unique parID xD
+                userString.replace(parStart, parEnd - parStart, "par482309812");
+            }  
+        }
+    }
+    return parSubStrings;
+}
+
+/*****
+// This function takes in the userInput as a parameter and updates it to add "test" as a 
+// string instead of of
+*****/
+void Input::parseTest(std::string &userString) {
+    int testStart;
+    int testEnd;
+    bool foundEnd = false;
+    // This vector holds the substrings so that makeExecutable tree can match the location of 
+    // par with the substrings later for par object creation
+    
+    // For loop to find the beginning bracket
+    for (int i = 0; i < userString.size(); ++i) {
+        if (foundEnd == true) {
+            i = testEnd;
+            foundEnd = false;
+            std::cout << i << std::endl;
+        }
+        if (userString.at(i) == '[') {
+            testStart = i;
+            // For loop to find the index of the ending bracket
+            // The problem is that this forloop iterates through the end of the string and doesn't stop when the end is found
+            for (int j = i; j < userString.size(); ++j) {
+                if (userString.at(j) == ']') {
+                    testEnd = j;
+                    userString.erase(testStart, 1);
+                    userString.erase(testEnd - 1, 1);
+                    userString.insert(testStart, "test ");
+                    std::cout << userString << std::endl;
+                    foundEnd = true;
+                    break;
+                    // Successfully found the end bracket
+                }
+            }
+            if (foundEnd == false) {
+                // Throw error if ending parenthesis could not be found
+                std::cout << "Could not find ending bracket" << std::endl;
+                return;
+            }
+        }
+    }
+    return;
 }
 
 // After this function, the individual par objects will need to be parsed to created individual trees, 
@@ -94,6 +188,13 @@ void Input::parsePar() {
 // Editing function to add support for parenthesis
 *****/
 void Input::parseInput() {
+    // If there are any parenthesis in userInput, call parsePar to remove those sections
+    if (userInput.find('(') != std::string::npos) {
+        parsePar(this->userInput);     
+    }
+    if (userInput.find('[') != std::string::npos) {
+        parseTest(this->userInput);
+    }
     parsedStrings = parseOutConnectors(userInput);
 
     // parsedNoSpace vector creation
@@ -194,15 +295,24 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
         b->addArg(exec);
         return b;
     }
-    /*****
-    // Added for assignment 3
-    *****/
-   
+    // ****** NEW ADDITIONS FOR ASSN3 ******//
     if (exec.at(0) == "test") {
         test* b = new test();
         b->addArg(exec);
         return b;
     }
+
+    if (exec.at(0) == "par482309812") {
+        // Instantiates a new par object with the first parenthesis entry being the substring data member
+        // Then, removes the first entry so that if there are more par objects they will be able to be properly created
+        Par* b = new Par();
+        std::string subString = parenthesis.at(0);
+        b->setSubString(subString);
+        parenthesis.erase(parenthesis.begin());
+        return b;
+    }
+
+    // ****** NEW ADDITIONS FOR ASSN3 ******//
 
     else { //error test case
         baseExec* b = new baseExec();
@@ -257,6 +367,11 @@ void Input::parseConnectors() {
 /*****
 // Constructs executable tree based on 2d vector and connector vector, sets baseExec* head to the 
 // head node of  this tree. head-> eval should execute the tree with respect to the connectors
+*****/
+
+/****
+// FOR ASSIGNMENT 3
+// Need to adapt the 
 *****/
 void Input::makeExecutableTree() {
     // Case for no connectors
