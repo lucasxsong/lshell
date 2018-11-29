@@ -24,6 +24,7 @@ TEST(ExecTest, errorTest) {
     //object
     *****/
 //    EXPECT_EQ("execvp() failed: No such file or directory\n", b->returnCheck());
+// FIXED *****
 }
 
 TEST(ExecTest, exitTest) {
