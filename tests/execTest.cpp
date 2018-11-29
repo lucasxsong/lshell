@@ -20,11 +20,10 @@ TEST(ExecTest, errorTest) {
     //Originally output^ but after changes made to makeExec() now output is
     //as shown V.
     //I think the top output is what should be output when "wrong input"
-    //is called. Issue may lie in else condition: change baseExec to error
-    //object
+    //is called. Issue may lie in execute function of baseExec class
     *****/
 //    EXPECT_EQ("execvp() failed: No such file or directory\n", b->returnCheck());
-// FIXED *****
+
 }
 
 TEST(ExecTest, exitTest) {

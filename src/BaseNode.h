@@ -187,9 +187,10 @@ class baseExec : public baseNode {
                     perror("execvp() failed");
                     run = false;
                     //***
-                    error* e = new baseExec();
-                    e->addArg(exec);
-                    e->execute();
+                    std::cout << "Rshell: " << a.at(0) << ": command not found"  << std::endl;
+                    // error* e = new baseExec();
+                    // e->addArg(exec);
+                    // e->execute();
                     //***
                     exit(1);
                 }
