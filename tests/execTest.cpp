@@ -15,7 +15,7 @@ TEST(ExecTest, errorTest) {
     Input i("wrong input");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("Rshell: wrong: command not found\n", b->returnCheck());
+    EXPECT_EQ("execvp() failed: No such file or directory\nRshell: wrong: command not found\n", b->returnCheck());
     /*****
     //Originally output^ but after changes made to makeExec() now output is
     //as shown V.
