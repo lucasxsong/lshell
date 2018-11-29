@@ -36,7 +36,7 @@ void Input::removeComment() {
     int pos;
     int begin = 0;
     if ((pos = userInput.find("#")) != std::string::npos) {
-        userInput = userInput.substr(begin, pos - begin);
+        userInput = userInput.substr(begin, pos - (begin + 1));
     }
 }
 
@@ -330,7 +330,7 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
     // ****** NEW ADDITIONS FOR ASSN3 ******//
 
     else { //error test case
-        error* b = new error();
+        baseExec* b = new baseExec();
         b->addArg(exec);
         return b;
     }

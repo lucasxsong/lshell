@@ -186,6 +186,11 @@ class baseExec : public baseNode {
                 if (execvp(arg[0], arg.data()) == -1) {
                     perror("execvp() failed");
                     run = false;
+                    //***
+                    error* e = new error();
+                    e->addArg(exec);
+                    e->execute();
+                    //***
                     exit(1);
                 }
             }
