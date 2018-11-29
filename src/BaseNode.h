@@ -135,27 +135,6 @@ class SemiColon : public Connector {
         }
 };
 
-class Par : public Connector {
-    protected:
-        std::string subString;
-    public:
-        Par() {
-            leftChild = NULL;
-            rightChild = NULL;
-        }
-        bool execute() {
-            leftChild->execute();
-            rightChild->execute();
-            return true;
-        }
-        std::string returnType() {
-            return "par";
-        }
-        std::string returnCheck() {
-            return "";
-        }
-
-};
 
 /*****
 // This is the base class for the executable objects that will be 
