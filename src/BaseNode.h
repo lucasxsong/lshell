@@ -149,7 +149,7 @@ class Par : public Connector {
             return true;
         }
         std::string returnType() {
-            "par";
+            return "par";
         }
         std::string returnCheck() {
             return "";

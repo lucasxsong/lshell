@@ -31,6 +31,7 @@ class Input {
         ~Input();
         Input(std::string userString);
         void clearInput();
+        void removeComment();
 
         std::vector<baseExec* > returnParsedExec();
         std::vector<std::vector <std::string> > returnParsedNoSpace();
