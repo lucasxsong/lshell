@@ -23,7 +23,7 @@ TEST(ExecTest, errorTest) {
     //is called. Issue may lie in else condition: change baseExec to error
     //object
     *****/
-   EXPECT_EQ("execvp() failed: No such file or directory", b->returnCheck());
+   EXPECT_EQ("execvp() failed: No such file or directory\n", b->returnCheck());
 }
 
 TEST(ExecTest, exitTest) {
