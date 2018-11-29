@@ -187,7 +187,7 @@ class baseExec : public baseNode {
                     perror("execvp() failed");
                     run = false;
                     //***
-                    baseExec* e = new error();
+                    error* e = new baseExec();
                     e->addArg(exec);
                     e->execute();
                     //***
