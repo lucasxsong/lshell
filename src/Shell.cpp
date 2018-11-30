@@ -7,6 +7,7 @@ int main() {
 
     while (!exitBool){
         i->runInput();
+        i->callExecute();
         i->clearInput();
     } 
     

@@ -20,7 +20,7 @@ class baseNode;
 class Input {
     protected: 
         std::string userInput; 
-        std::vector<baseExec*> parsedExec; // this vector holds the parsed baseExec objects with arg
+        std::vector<baseNode*> parsedNode; // this vector holds the parsed baseExec objects with arg
         std::vector<std::vector<std::string> > parsedNoSpace; // this vector holds the parsed string w/o spaces
         std::vector<std::string> parsedStrings; // these two vectors are just to help in storing 
         std::vector<Connector* > connectors;    // the data to create the executable tree
@@ -35,7 +35,7 @@ class Input {
         Input(std::string userString);
         void clearInput();
 
-        std::vector<baseExec* > returnParsedExec();
+        std::vector<baseNode* > returnParsedNode();
         std::vector<std::vector <std::string> > returnParsedNoSpace();
         std::string returnStrings();
         std::vector<Connector* > returnConnectors();
@@ -56,7 +56,7 @@ class Input {
         std::vector<std::string>parseOutConnectors(std::string withConnectors);
         std::vector<std::string> parseSpaces(std::string withSpaces); // helper function to remove spaces from withSpaces input
         void parseConnectors();
-        baseExec* makeExec(std::vector<std::string> exec); // instantiates baseExec objects and arglist pointer
+        baseNode* makeNode(std::vector<std::string> exec); // instantiates baseExec objects and arglist pointer
 
         void makeExecutableTree(); // instantiates baseExec tree with connectors
         void callExecute(); //executes on top head node of the tree, execute function should go down tree 

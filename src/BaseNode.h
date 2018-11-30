@@ -428,7 +428,7 @@ class Par : public baseExec {
             subString = s;
         }
         bool execute() {
-            std::cout << "par successfully executed" << std::endl;
+            
             return true;
             // The execute function of par will look through the substring and see if there are any parenthesis, if not
             // it will just simply create the two baseExec objects based on makeExecutableTree and execute them

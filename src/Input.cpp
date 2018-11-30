@@ -25,15 +25,15 @@ void Input::clearInput() {
     parsedStrings.clear();
     connectors.clear();
     parsedNoSpace.clear();
-    parsedExec.clear();
+    parsedNode.clear();
     head = NULL;
 }
 
 /*****
 // Helper functions to return data members for gtest
 *****/
-std::vector<baseExec* > Input::returnParsedExec() {
-    return parsedExec;
+std::vector<baseNode* > Input::returnParsedNode() {
+    return parsedNode;
 }
 
 std::vector<std::vector <std::string> > Input::returnParsedNoSpace() {
@@ -90,16 +90,18 @@ std::vector<std::string> Input::parsePar(std::string &userString) {
     
     // For loop to find the beginning par
     for (int i = 0; i < userString.size(); ++i) {
+        
         if (foundEnd == true) {
             i = parEnd;
             foundEnd = false;
-            //std::cout << i << std::endl;
+            if (parEnd >= userString.size()) {
+                break;
+            }
         }
         if (userString.at(i) == '(') {
             parStart = i;
             // For loop to find the index of the ending par
             for (int j = i; j < userString.size(); ++j) {
-                //std::cout << parCounter << std::endl;
                 if (userString.at(j) == '(') {
                     ++parCounter;
                     // Found a starting nested par
@@ -123,12 +125,11 @@ std::vector<std::string> Input::parsePar(std::string &userString) {
             }
             else {
                 // Remove the substring from the original string
-                std::string subString = userString.substr(parStart, parEnd);
+                std::string subString = userString.substr(parStart + 1, parEnd - parStart - 1);
                 parSubStrings.push_back(subString);
                 // Replaces original substring with unique parID xD
-                std::cout << parEnd << std::endl;
+                
                 userString.replace(parStart, parEnd - parStart + 1, "par482309812");
-                std::cout << userString << std::endl;
             }  
         }
     }
@@ -151,7 +152,6 @@ void Input::parseTest(std::string &userString) {
         if (foundEnd == true) {
             i = testEnd;
             foundEnd = false;
-            std::cout << i << std::endl;
         }
         if (userString.at(i) == '[') {
             testStart = i;
@@ -163,7 +163,6 @@ void Input::parseTest(std::string &userString) {
                     userString.erase(testStart, 1);
                     userString.erase(testEnd - 1, 1);
                     userString.insert(testStart, "test ");
-                    std::cout << userString << std::endl;
                     foundEnd = true;
                     break;
                     // Successfully found the end bracket
@@ -193,7 +192,7 @@ void Input::parseTest(std::string &userString) {
 void Input::parseInput() {
     // If there are any parenthesis in userInput, call parsePar to remove those sections
     if (userInput.find('(') != std::string::npos) {
-        parsePar(this->userInput);     
+        parenthesis = parsePar(this->userInput);     
     }
     if (userInput.find('[') != std::string::npos) {
         parseTest(this->userInput);
@@ -206,15 +205,15 @@ void Input::parseInput() {
         parsedNoSpace.push_back(toPush);
     }
 
-    // parsedExec vector creation
+    // parsedNode vector creation
     for (int i = 0; i < parsedNoSpace.size(); ++i) {
-        baseExec* toPush = makeExec(parsedNoSpace.at(i));
-        parsedExec.push_back(toPush);
+        baseNode* toPush = makeNode(parsedNoSpace.at(i));
+        parsedNode.push_back(toPush);
     }
 
     parseConnectors();
     makeExecutableTree();
-    head->execute();
+    //head->execute();
 
     return;
 }
@@ -287,7 +286,7 @@ std::vector<std::string> Input::parseSpaces(std::string withSpaces) {
 // This is a helper function that returns a baseExec object based on the zero index of
 // the vector passed in and takes the rest of the vector as the argument list // exec = nospace
 *****/
-baseExec* Input::makeExec(std::vector<std::string> exec) {
+baseNode* Input::makeNode(std::vector<std::string> exec) {
     if (exec.at(0) == "echo") {
         echo* b = new echo();
         b->addArg(exec);
@@ -308,10 +307,13 @@ baseExec* Input::makeExec(std::vector<std::string> exec) {
     if (exec.at(0) == "par482309812") {
         // Instantiates a new par object with the first parenthesis entry being the substring data member
         // Then, removes the first entry so that if there are more par objects they will be able to be properly created
-        Par* b = new Par();
+        Par* a = new Par();
         std::string subString = parenthesis.at(0);
-        b->setSubString(subString);
         parenthesis.erase(parenthesis.begin());
+        a->setSubString(subString);
+        Input* i = new Input(subString);
+        i->parseInput();
+        baseNode* b = i->returnHead();
         return b;
     }
 
@@ -379,28 +381,32 @@ void Input::parseConnectors() {
 void Input::makeExecutableTree() {
     // Case for no connectors
     if (connectors.size() == 0) {
-        head = parsedExec.at(0); 
+        head = parsedNode.at(0); 
     }
 
     // Case for connectors
     if (connectors.size() > 0) {
         head = connectors.at(0);
         baseNode* temp = head;
-        temp->setLeft(parsedExec.at(0));
+        temp->setLeft(parsedNode.at(0));
         
         // If there is no more than one connector, 
         for (int i = 0; i < connectors.size(); ++i) {
             temp->setRight(connectors.at(i));
             temp = temp->getRight();
-            temp->setLeft(parsedExec.at(i)); 
+            temp->setLeft(parsedNode.at(i)); 
         }
-        temp->setRight(parsedExec.at(connectors.size()));
+        temp->setRight(parsedNode.at(connectors.size()));
 
     }
 
     return;
 }
 
+void Input::callExecute() {
+    head->execute();
+    return;
+}
 
 /*****
 // These two functions call local user and local host to be printed in terminal
