@@ -48,7 +48,7 @@ This structure allows for the ability to easily add custom executables to your c
 ### Test
 This command allows you to test if a particular path or file exists in the repository that is it called in.
 
-##### Usage
+**Usage**
 Call the function by typing `test` followed by any flags you wish to call and the file/path you wish to test.
 
 `-e` checks if the file/directory exists
