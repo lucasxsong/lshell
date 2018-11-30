@@ -13,6 +13,7 @@ ADD_EXECUTABLE(test
     src/test.cpp
     tests/inputTest.cpp
     tests/execTest.cpp
+    tests/runtimeTest.cpp
     src/Input.cpp
     src/Input.h
     src/BaseNode.h
