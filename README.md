@@ -63,11 +63,12 @@ The function returns `(True)` if the file/path exists and `(False)` if the file/
 - Known bug that when flags might be entered out of order, rshell will not be able to compile the command successfully as the flags intended.
 - Ex: rm dirName -r != rm -r dirName
 
-"Comments"
-- As of current release, rshell does not store comments as a specific data member. We are working a solution to have comments parsed separately and stored in a data member of the baseExec function.
-
 "Calling Exit"
 - The current exit object, when executed, just modifies a global variable "extern bool exitBool" to stop the input loop. This is a little bit of a shortcut that will be changed to a more graceful call in following versions.
+
+~~"Comments"~~
+- ~~As of current release, rshell does not store comments as a specific data member. We are working a solution to have comments parsed separately and stored in a data member of the baseExec function.~~
+- Bug has been fixed as of release assn3
 
 
 ## Note from the author:
