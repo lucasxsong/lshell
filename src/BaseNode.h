@@ -215,7 +215,7 @@ class baseExec : public baseNode {
             //mimicked error class's returnCheck()
             comment = "Rshell: ";
             comment += a.at(0);
-            comment += ": command not found\n"
+            comment += ": command not found\n";
             return comment;
         }
 };
