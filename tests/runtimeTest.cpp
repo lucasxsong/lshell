@@ -13,8 +13,8 @@ TEST(RuntimeTest, parTestA) {
 }
 
 TEST(RuntimeTest, parTestB) {
-    Input i("(echo A)");
+    Input i("echo A && (echo B && echo C) || echo D");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("working", b->returnCheck());
+    EXPECT_EQ("", b->returnCheck());
 }
