@@ -67,10 +67,10 @@ class Connector : public baseNode {
             return rightChild;
         }
         virtual std::string returnType() {
-            return "";
+            return "Connector";
         };
         virtual std::string returnCheck() {
-            return "";
+            return "con";
         }
 };
 
@@ -92,7 +92,7 @@ class And : public Connector {
             return "&&";
         }
         std::string returnCheck() {
-            return "";
+            return "and";
         }
 };
 
@@ -112,7 +112,7 @@ class Or : public Connector {
             return "||";
         }
         std::string returnCheck() {
-            return "";
+            return "or";
         }
 };
 
@@ -131,7 +131,7 @@ class SemiColon : public Connector {
             return ";";
         }
         std::string returnCheck() {
-            return "";
+            return "semi";
         }
 };
 

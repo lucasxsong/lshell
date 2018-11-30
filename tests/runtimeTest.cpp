@@ -6,8 +6,8 @@
 using namespace std;
 
 TEST(RuntimeTest, parTestA) {
-    Input i("(echo A && echo B) && (echo C && echo D)");
+    Input i("(echo A && echo B) || (echo C && echo D)");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("A B ", b->returnCheck());
+    EXPECT_EQ("", b->returnCheck());
 }
