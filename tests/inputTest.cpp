@@ -101,7 +101,8 @@ TEST(InputTest, NoParTest) {
     vector<string> test;
     test.push_back("");
     Input i;
-    vector<string> toTest = i.parsePar("echo A && echo B");
+    string userInput = "echo A && echo B"
+    vector<string> toTest = i.parsePar(userInput);
     EXPECT_EQ(test.at(0), toTest.at(0));
 }
 
