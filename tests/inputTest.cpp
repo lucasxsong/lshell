@@ -106,13 +106,14 @@ TEST(InputTest, SimpleParTest) {
     EXPECT_EQ(test.at(0), toTest.at(0));
 }
 
-// TEST(InputTest, SimpleParTest) {
-//     string userInput = "echo A && (echo B && echo C) && echo D";
-//     vector<string> testResult = parsePar(userInput);
-//     EXPECT_EQ("echo B && echo C", testResult);
-// }
-
-// TEST(InputTest, NestedParTest) {
-//     string userInput = "(echo A && (echo B && echo C) && echo D) && echo E";
-//     string testResult = parsePar(userInput)
-// }
+TEST(InputTest, NestedParTest) {
+    vector<string> test;
+    test.push_back("echo A && (echo B && echo C) && echo D");
+    test.push_back("echo B && echo C");
+    string userInput = "(echo A && (echo B && echo C) && echo D) && echo E";
+    Input i;
+    vector<string> toTest = i.parsePar(userInput);
+    for (int i = 0; i < toTest.size(); ++i) {
+        EXPECT_EQ(test.at(i), toTest.at(i));
+    }
+}
