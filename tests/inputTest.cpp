@@ -97,3 +97,19 @@ TEST(InputTest, ExecutableTreeTest) {
     EXPECT_EQ("&&", b->returnType());
 }
 
+TEST(InputTest, NoParTest) {
+    userInput = "echo A && echo B";
+    string testResult = parsePar(userInput);
+    EXPECT_EQ("", output)
+}
+
+TEST(InputTest, SimpleParTest) {
+    userInput = "echo A && (echo B && echo C) && echo D";
+    string testResult = parsePar(userInput);
+    EXPECT_EQ("echo B && echo C", testResult);
+}
+
+// TEST(InputTest, NestedParTest) {
+//     userInput = "(echo A && (echo B && echo C) && echo D) && echo E";
+//     string testResult = parsePar(userInput)
+// }
