@@ -97,6 +97,7 @@ TEST(InputTest, ExecutableTreeTest) {
     EXPECT_EQ("&&", b->returnType());
 }
 
+// Tests parsePar function for simple commands with a single set of parenthesis
 TEST(InputTest, SimpleParTest) {
     vector<string> test;
     test.push_back("echo B && echo C");
@@ -106,6 +107,7 @@ TEST(InputTest, SimpleParTest) {
     EXPECT_EQ(test.at(0), toTest.at(0));
 }
 
+// Tests parsePar function for commands with nested parentheses
 TEST(InputTest, NestedParTest) {
     vector<string> test;
     test.push_back("echo A && (echo B && echo C) && echo D");
@@ -117,3 +119,4 @@ TEST(InputTest, NestedParTest) {
         EXPECT_EQ(test.at(i), toTest.at(i));
     }
 }
+
