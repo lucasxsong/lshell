@@ -39,3 +39,10 @@ TEST(ExecTest, testTest) {
     baseNode* b = i.returnHead();
     EXPECT_EQ("false", b->returnCheck());
 }
+
+TEST(ExecTest, bracketTest) {
+    Input i("[ doesnotexist ]");
+    i.parseInput();
+    baseNode* b = i.returnHead();
+    EXPECT_EQ("false", b->returnCheck());
+}

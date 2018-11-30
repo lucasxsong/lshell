@@ -5,6 +5,7 @@
 
 using namespace std;
 
+//will be changed
 TEST(RuntimeTest, parTestA) {
     Input i("(echo A && echo B) || (echo C && echo D)");
     i.parseInput();
@@ -12,9 +13,10 @@ TEST(RuntimeTest, parTestA) {
     EXPECT_EQ("or", b->returnCheck());
 }
 
+//will be changed
 TEST(RuntimeTest, parTestB) {
     Input i("echo A && (echo B && echo C) || echo D");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("", b->returnCheck());
+    EXPECT_EQ("and", b->returnCheck());
 }
