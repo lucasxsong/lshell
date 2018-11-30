@@ -444,24 +444,16 @@ class Par : public baseExec {
             return true;
             // The execute function of par will look through the substring and see if there are any parenthesis, if not
             // it will just simply create the two baseExec objects based on makeExecutableTree and execute them
-            
+            // ***FIXED***
+            // The execute function will not be called, the par object is simply a step in recursively calling parseInput on
+            // the substring data member
+            // ***FIXED***
         }
         std::string returnType() {
             return "()";
         }
         std::string returnCheck() {
             return "working";
-        }
-        /*****
-        // This function parses the substring that is concatenated by parsePar in the initial step of
-        // taking in input until there are no more parenthesis to parse. Then, it works to parse the substrings
-        // and create baseExec and Connector objects.
-        *****/
-
-       // in short this is basically a clone of the parsePar function in Input.cpp combined with the parseExec function
-        void parseString() {
-            
-            return;
         }
 };
 
