@@ -211,7 +211,12 @@ class baseExec : public baseNode {
         baseExec() { }
 
         virtual std::string returnCheck() {
-            return "";
+            //using string comment as temporary fix for errorTest
+            //mimicked error class's returnCheck()
+            comment = "Rshell: ";
+            comment += a.at(0);
+            comment += ": command not found\n"
+            return comment;
         }
 };
 
