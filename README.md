@@ -17,7 +17,7 @@ cd src
 g++ Shell.cpp Input.cpp -o rshell
 ```
 
-This will cd into the src directory to recompile the program with files Input.cpp and Shell.cpp into executable rshell, which can be run by the command below (same as above)
+This will `cd` into the `src` directory to recompile the program with files Input.cpp and Shell.cpp into executable rshell, which can be run by the command below (same as above)
 
 ```
 ./rshell
@@ -42,7 +42,7 @@ The user is capable of inputting a command along with an argument, and the progr
 
 For the instance where there are multiple arguments separated by multiple connectors, the program constructs an argument tree with the executables acting as the leaf nodes and the connectors acting as nodes with two children. These children either point to other connectors or executables. The tree is constructed as a right oriented binary tree, and calling execute on the head of the tree will call execution of the child nodes based upon the connectors binding them.
 
-This structure allows for the ability to easily add custom executables to your custom preferences by creating new baseExec* objects in BaseNode.h and adding a section in Input.cpp to match userInput with your new function.
+This structure allows for the ability to easily add custom executables to your custom preferences by creating new `baseExec*` objects in `BaseNode.h` and adding a section in `Input.cpp` to match userInput with your new function.
 
 ## User's Manual: 
 
@@ -60,15 +60,15 @@ If a user does not specify a flag, the `-e` flag will be used by default.
 
 The function returns `(True)` if the file/path exists and `(False)` if the file/path does not exist.
 
-*Note:* You can also call the test function by encapsulating the flag and file/path you wish to test as follows [ -e file/path]
+*Note:* You can also call the test function by encapsulating the flag and file/path you wish to test as follows `[ -e file/path]`
 
 ## Known Bugs:
 "Out of order"
 - Known bug that when flags might be entered out of order, rshell will not be able to compile the command successfully as the flags intended.
-- Ex: rm dirName -r != rm -r dirName
+- Ex: `rm dirName -r != rm -r dirName`
 
 "Calling Exit"
-- The current exit object, when executed, just modifies a global variable "extern bool exitBool" to stop the input loop. This is a little bit of a shortcut that will be changed to a more graceful call in following versions.
+- The current exit object, when executed, just modifies a global variable `extern bool exitBool` to stop the input loop. This is a little bit of a shortcut that will be changed to a more graceful call in following versions.
 
 ~~"Comments"~~
 - ~~As of current release, rshell does not store comments as a specific data member. We are working a solution to have comments parsed separately and stored in a data member of the baseExec function.~~
