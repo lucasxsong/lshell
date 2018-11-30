@@ -11,3 +11,10 @@ TEST(RuntimeTest, parTestA) {
     baseNode* b = i.returnHead();
     EXPECT_EQ("or", b->returnCheck());
 }
+
+TEST(RuntimeTest, parTestB) {
+    Input i("(echo A)");
+    i.parseInput();
+    baseNode* b = i.returnHead();
+    EXPECT_EQ("working", b->returnCheck());
+}
