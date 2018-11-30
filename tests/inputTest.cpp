@@ -97,11 +97,11 @@ TEST(InputTest, ExecutableTreeTest) {
     EXPECT_EQ("&&", b->returnType());
 }
 
-TEST(InputTest, NoParTest) {
+TEST(InputTest, SimpleParTest) {
     vector<string> test;
-    test.push_back("");
+    test.push_back("echo B && echo C");
     Input i;
-    string userInput = "echo A && echo B";
+    string userInput = "echo A && (echo B && echo C) && echo D";
     vector<string> toTest = i.parsePar(userInput);
     EXPECT_EQ(test.at(0), toTest.at(0));
 }
