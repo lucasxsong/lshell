@@ -22,7 +22,7 @@ TEST(ExecTest, errorTest) {
     //I think the top output is what should be output when "wrong input"
     //is called. Issue may lie in execute function of baseExec class
     *****/
-   EXPECT_EQ("execvp() failed: No such file or directory\n", b->returnCheck());
+   EXPECT_EQ("execvp() failed: No such file or directory\n", b->execute());
 
 }
 
