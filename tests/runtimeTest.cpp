@@ -9,5 +9,5 @@ TEST(RuntimeTest, parTestA) {
     Input i("(echo A && echo B) || (echo C && echo D)");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("", b->returnCheck());
+    EXPECT_EQ("or", b->returnCheck());
 }
