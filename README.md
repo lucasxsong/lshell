@@ -31,7 +31,7 @@ However, if the program does not successfully compile, check the repo to make su
 
 This program attempts to recreate a command shell with a handful of basic executable commands. These commands include: `echo`, `cd`, `ls`, `mkdir`. as well as any other commands that are located in bin. In addition, our R'shell has added implementation for `test`, a function to check if the path to a file or directory exists. 
 
-The user is capable of inputting a command along with an argument, and the program should output a proper response. Not only this, commands can be linked together with a number of symbols (`&&`, `||`, `;`, `()`) each with their own functionality.
+The user is capable of inputting a command along with an argument, and the program should output a proper response. Not only this, commands can be linked together with a number of symbols each with their own functionality.
 
 
 - `&&` - executes the following command if the previous command succeeds
