@@ -20,3 +20,10 @@ TEST(RuntimeTest, parTestB) {
     baseNode* b = i.returnHead();
     EXPECT_EQ("and", b->returnCheck());
 }
+
+TEST(RuntimeTest, parTestC) {
+    Input i("()");
+    i.parseInput();
+    baseNode* b = i.returnHead();
+    EXPECT_EQ("working", b->returnCheck());
+}
