@@ -100,9 +100,9 @@ TEST(InputTest, ExecutableTreeTest) {
 TEST(InputTest, NoParTest) {
     vector<string> test;
     test.push_back("");
-    Input i("echo A && echo B");
-    vector<string> toTest = i.parsePar();
-    EXPECT_EQ(test.at(0),toTest.at(i));
+    Input i;
+    vector<string> toTest = i.parsePar("echo A && echo B");
+    EXPECT_EQ(test.at(0), toTest.at(0));
 }
 
 // TEST(InputTest, SimpleParTest) {
