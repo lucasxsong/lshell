@@ -99,13 +99,13 @@ TEST(InputTest, ExecutableTreeTest) {
 
 TEST(InputTest, NoParTest) {
     string userInput = "echo A && echo B";
-    string testResult = parsePar(userInput);
+    vector<string> testResult = parsePar(userInput);
     EXPECT_EQ("", testResult);
 }
 
 TEST(InputTest, SimpleParTest) {
     string userInput = "echo A && (echo B && echo C) && echo D";
-    string testResult = parsePar(userInput);
+    vector<string> testResult = parsePar(userInput);
     EXPECT_EQ("echo B && echo C", testResult);
 }
 
