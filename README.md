@@ -43,7 +43,7 @@ For the instance where there are multiple arguments separated by multiple connec
 
 This structure allows for the ability to easily add custom executables to your custom preferences by creating new baseExec* objects in BaseNode.h and adding a section in Input.cpp to match userInput with your new function.
 
-## User's Manual
+## User's Manual: 
 
 ### Test
 This command allows you to test if a particular path or file exists in the repository that is it called in.
