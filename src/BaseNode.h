@@ -135,6 +135,7 @@ class SemiColon : public Connector {
         }
 };
 
+
 /*****
 // This is the base class for the executable objects that will be 
 // instantiated by different user input. (LEAF NODE/ONE CHILD NODES)
@@ -185,6 +186,12 @@ class baseExec : public baseNode {
                 if (execvp(arg[0], arg.data()) == -1) {
                     perror("execvp() failed");
                     run = false;
+                    //***
+                    // std::cout << "Rshell: " << a.at(0) << ": command not found"  << std::endl;
+                    // error* e = new baseExec();
+                    // e->addArg(exec);
+                    // e->execute();
+                    //***
                     exit(1);
                 }
             }
@@ -204,7 +211,12 @@ class baseExec : public baseNode {
         baseExec() { }
 
         virtual std::string returnCheck() {
-            return "";
+            //using string comment as temporary fix for errorTest
+            //mimicked error class's returnCheck()
+            comment = "Rshell: ";
+            comment += a.at(0);
+            comment += ": command not found\n";
+            return comment;
         }
 };
 

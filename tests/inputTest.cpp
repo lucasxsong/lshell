@@ -64,6 +64,13 @@ TEST(InputTest, ClearInputTest) {
     EXPECT_EQ("", s);
 }
 
+TEST(InputTest, RemoveCommentTest) {
+    Input i("echo hi #&& echo hello");
+    i.removeComment();
+    string s = i.returnStrings();
+    EXPECT_EQ("echo hi", s);
+}
+
 // Checks to make sure that the connectors are properly pushed back to the connector vector
 TEST(InputTest, ParseConnectorsTest) {
     vector<string> test;

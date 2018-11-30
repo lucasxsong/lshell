@@ -34,6 +34,7 @@ class Input {
         ~Input();
         Input(std::string userString);
         void clearInput();
+        void removeComment();
 
         std::vector<baseNode* > returnParsedNode();
         std::vector<std::vector <std::string> > returnParsedNoSpace();

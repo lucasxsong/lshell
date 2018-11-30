@@ -30,6 +30,17 @@ void Input::clearInput() {
 }
 
 /*****
+// Removes comments from userInput
+*****/
+void Input::removeComment() {
+    int pos;
+    int begin = 0;
+    if ((pos = userInput.find("#")) != std::string::npos) {
+        userInput = userInput.substr(begin, pos - (begin + 1));
+    }
+}
+
+/*****
 // Helper functions to return data members for gtest
 *****/
 std::vector<baseNode* > Input::returnParsedNode() {
@@ -70,6 +81,7 @@ void Input::runInput() {
     getline(std::cin, userLine);
     userInput = userLine;
 
+    removeComment();
     parseInput();
 }
 
