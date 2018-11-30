@@ -46,3 +46,10 @@ TEST(ExecTest, bracketTest) {
     baseNode* b = i.returnHead();
     EXPECT_EQ("false", b->returnCheck());
 }
+
+TEST(ExecTest, parTest) {
+    Input i ("( test hi)");
+    i.parseInpuit();
+    baseNode* b = i.returnHead();
+    EXPECT_EQ("false", b->returnCheck)
+}
