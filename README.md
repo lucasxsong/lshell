@@ -2,9 +2,10 @@
 
 ## Getting Started:
 
-To start using this simple bash clone, simply clone the repository into your desktop. Simply cd into the folder and run the precompiled executable through your machine's terminal/command prompt.
+To start using R'shell, simply `git clone` the repository into your desktop. `cd` into the folder and run the precompiled executable through your machine's terminal/command prompt.
 
 ```
+git clone https://github.com/cs100/assignment-1-raya-playa.git
 cd assignment-1-raya-playa
 ./rshell
 ```
@@ -24,7 +25,7 @@ This will cd into the src directory to recompile the program with files Input.cp
 
 Once the program has successfully compiled, you should see an updated command prompt with your local system and current user logged in. This means that you have successfully compiled and run the rshell program. Feel free to experiment with basic bin commands that will be covered in the next section.
 
-However, if the program does not successfully compile, check the repo to make sure that all files have been properly cloned and that you 
+However, if the program does not successfully compile, check the repo to make sure that all files have been properly cloned and that you have installed cmake. 
 
 ## Summary:
 
