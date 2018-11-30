@@ -50,9 +50,11 @@ This command allows you to test if a particular path or file exists in the repos
 
 ### Usage
 Call the function by typing `test` followed by any flags you wish to call and the file/path you wish to test.
+
 `-e` checks if the file/directory exists
 `-f` checks if the file/directory exists and is a regular file
 `-d` checks if the file/directory exists and is a directory
+If a user does not specify a flag, the `-e` flag will be used by default.
 
 The function returns `(True)` if the file/path exists and `(False)` if the file/path does not exist.
 
