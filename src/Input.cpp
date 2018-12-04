@@ -207,6 +207,15 @@ void Input::parsePipe(std::string &userString) {
     return;
 }
 
+void Input::parseOCon(std::string &userString) {
+    for (int i = 1; i + 1 < userString.size(); ++i) {
+        if (userString.at(i) == '>' && userString.at(i + 1) == '>') {
+            userString.erase(i, 2); 
+            userString.insert(i, "`");
+        }
+    }
+}
+
 /*** ADDITION FOR ASSN4 ***/
 
 /*****
@@ -226,6 +235,9 @@ void Input::parseInput() {
     }
     if (userInput.find('|') != std::string::npos) {
         parsePipe(this->userInput);
+    }
+    if (userInput.find('>') != std::string::npos) {
+        parseOCon(this->userInput);
         std::cout << userInput << std::endl;
     }
     parsedStrings = parseOutConnectors(userInput);
@@ -259,7 +271,7 @@ void Input::parseInput() {
 // Adding pipe and redirect to delimiters
 // ***EDIT FOR ASSN$***
 std::vector<std::string> Input::parseOutConnectors(std::string withConnectors) {
-    std::string delimiters("&&" "||" ";" "~");
+    std::string delimiters("&&" "||" ";" "~" "<" ">" "`");
     std::vector<std::string> parsedSubStrings;
 
     std::stringstream ss(withConnectors);
@@ -384,8 +396,20 @@ void Input::parseConnectors() {
             pos++; //should now be at whitespace after ";"
         }
         if (userInput.at(pos) == '~') {
-                temp.push_back("~");
-                pos++;
+            temp.push_back("~");
+            pos++;
+        }
+        if (userInput.at(pos) == '<') {
+            temp.push_back("<");
+            pos++;
+        }
+        if (userInput.at(pos) == '>') {
+            temp.push_back(">");
+            pos++;
+        }
+        if (userInput.at(pos) == '`') {
+            temp.push_back("`");
+            pos++;
         }
         // Need to think how to add pipe 
     }
@@ -409,6 +433,19 @@ void Input::parseConnectors() {
             Pipe* c = new Pipe();
             connectors.push_back(c);
         }
+        if (temp.at(i) == "<") {
+            IOverwrite* c = new IOverwrite();
+            connectors.push_back(c);
+        }
+        if (temp.at(i) == ">") {
+            OOverwrite* c = new OOverwrite();
+            connectors.push_back(c);
+        }
+        if (temp.at(i) == "`") {
+            OConcatenate* c = new OConcatenate();
+            connectors.push_back(c);
+        }
+        
     }
 }
 

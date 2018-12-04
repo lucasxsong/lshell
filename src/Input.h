@@ -56,6 +56,7 @@ class Input {
         
         // ****** NEW ADDITIONS FOR ASSN4 ******//
         void parsePipe(std::string &userString);
+        void parseOCon(std::string & userString);
         // ****** NEW ADDITIONS FOR ASSN4 ******//
         void parseInput();
         std::vector<std::string>parseOutConnectors(std::string withConnectors);

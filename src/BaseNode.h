@@ -145,7 +145,7 @@ class Pipe : public Connector {
         leftChild = NULL;
         rightChild = NULL;
         }
-
+         // These are just filler executes, need to be redone for redirection
         bool execute() {
             /*int fds[2];
             if (pipe(fds) == -1) {
@@ -173,9 +173,11 @@ class OOverwrite : public Connector { // SYMBOL : >
             rightChild = NULL;
             leftChild = NULL;
         }
+        // These are just filler executes, need to be redone for redirection
         bool execute() {
             leftChild->execute();
             rightChild->execute();
+            return true;
         }
         std::string returnType () {
             return ">";
@@ -193,11 +195,13 @@ class OConcatenate : public Connector { // SYMBOL : >>
             rightChild = NULL;
             leftChild = NULL;
         }
+        // These are just filler executes, need to be redone for redirection
         bool execute() {
             leftChild->execute();
             rightChild->execute();
+            return true;
         }
-        std::string returnType() {
+        std::string returnType(){
             return ">>";
         }
         std::string returnCheck() {
@@ -211,9 +215,11 @@ class IOverwrite : public Connector { // SYMBOL : <
             rightChild = NULL;
             leftChild = NULL;
         }
+        // These are just filler executes, need to be redone for redirection
         bool execute() {
             leftChild->execute();
             rightChild->execute();
+            return true;
         }
         std::string returnType() {
             return "<";
