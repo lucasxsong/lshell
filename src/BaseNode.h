@@ -146,7 +146,7 @@ class Pipe : public Connector {
         rightChild = NULL;
     }
 
-    bool execute(int in, int out) {
+    bool execute() {
         /*int fds[2];
         if (pipe(fds) == -1) {
             perror("pipe");

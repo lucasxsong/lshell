@@ -196,11 +196,12 @@ void Input::parseTest(std::string &userString) {
 
 /*** ADDITION FOR ASSN 4 ***/
 // Function removes the piping symbol from userstring so that there are no confusions with the or operator
+// Function replaces the piping symbol with a tilde so that it can be parsed and instantiated later
 void Input::parsePipe(std::string &userString) {
     for (int i = 1; i + 1 < userString.size(); ++i) {
         if (userString.at(i) == '|' && userString.at(i + 1) != '|' && userString.at(i - 1) != '|') {
             userString.erase(i, 1);
-            userString.insert(i, "pipe5908234");
+            userString.insert(i, "~");
         }
     }
     return;
@@ -225,6 +226,7 @@ void Input::parseInput() {
     }
     if (userInput.find('|') != std::string::npos) {
         parsePipe(this->userInput);
+        std::cout << userInput << std::endl;
     }
     parsedStrings = parseOutConnectors(userInput);
 
@@ -257,7 +259,7 @@ void Input::parseInput() {
 // Adding pipe and redirect to delimiters
 // ***EDIT FOR ASSN$***
 std::vector<std::string> Input::parseOutConnectors(std::string withConnectors) {
-    std::string delimiters("&&" "||" ";");
+    std::string delimiters("&&" "||" ";" "~");
     std::vector<std::string> parsedSubStrings;
 
     std::stringstream ss(withConnectors);
@@ -381,16 +383,11 @@ void Input::parseConnectors() {
             temp.push_back(";");
             pos++; //should now be at whitespace after ";"
         }
-        /*
-        if (userInput.at(pos) == 'p') {
-            //std::string isPipe = userInput.substr(pos, 11);
-            //if (isPipe == "pipe5908234") {
-                temp.push_back("|");
+        if (userInput.at(pos) == '~') {
+                temp.push_back("~");
                 pos++;
-            //}
         }
         // Need to think how to add pipe 
-        */
     }
 
 //Iterate through vector of connector strings ("temp") and creates connector objects and pushes into vector of connectors ("connectors")
@@ -408,7 +405,7 @@ void Input::parseConnectors() {
 	        SemiColon* c = new SemiColon();
 	        connectors.push_back(c);
 	    }
-        if (temp.at(i) == "|") {
+        if (temp.at(i) == "~") {
             Pipe* c = new Pipe();
             connectors.push_back(c);
         }
