@@ -26,6 +26,7 @@ void Input::clearInput() {
     connectors.clear();
     parsedNoSpace.clear();
     parsedNode.clear();
+    parenthesis.clear();
     head = NULL;
 }
 
@@ -205,9 +206,7 @@ void Input::parsePipe(std::string &userString) {
     return;
 }
 
-/*** ADDITION FOR ASSN$ ***/
-
-
+/*** ADDITION FOR ASSN4 ***/
 
 /*****
 // Takes in user input and tokenizes string into substrings based on connectors, and then
@@ -226,7 +225,6 @@ void Input::parseInput() {
     }
     if (userInput.find('|') != std::string::npos) {
         parsePipe(this->userInput);
-        std::cout << userInput;
     }
     parsedStrings = parseOutConnectors(userInput);
 
@@ -383,6 +381,16 @@ void Input::parseConnectors() {
             temp.push_back(";");
             pos++; //should now be at whitespace after ";"
         }
+        /*
+        if (userInput.at(pos) == 'p') {
+            //std::string isPipe = userInput.substr(pos, 11);
+            //if (isPipe == "pipe5908234") {
+                temp.push_back("|");
+                pos++;
+            //}
+        }
+        // Need to think how to add pipe 
+        */
     }
 
 //Iterate through vector of connector strings ("temp") and creates connector objects and pushes into vector of connectors ("connectors")
@@ -400,6 +408,10 @@ void Input::parseConnectors() {
 	        SemiColon* c = new SemiColon();
 	        connectors.push_back(c);
 	    }
+        if (temp.at(i) == "|") {
+            Pipe* c = new Pipe();
+            connectors.push_back(c);
+        }
     }
 }
 
