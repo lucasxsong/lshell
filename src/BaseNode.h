@@ -135,6 +135,31 @@ class SemiColon : public Connector {
         }
 };
 
+/*****
+// ADDITIONS FOR ASSN 4
+*****/
+
+class Pipe : public Connector {
+    public:
+    Pipe() {
+        leftChild = NULL;
+        rightChild = NULL;
+    }
+
+    bool execute(int in, int out) {
+
+    }
+    std::string returnType() {
+        return "|";
+    }
+    std::string returnCheck() {
+        return "pipe";
+    }
+};
+
+/*****
+// ADDITIONS FOR ASSN 4
+*****/
 
 /*****
 // This is the base class for the executable objects that will be 

@@ -236,6 +236,9 @@ void Input::parseInput() {
 // This is useful as two steps of this parsing need to be completed, once for the paranthesis
 // and once again for the substrings inside each parenthesis
 ******/
+// ***EDIT FOR ASSN4*** 
+// Adding pipe and redirect to delimiters
+// ***EDIT FOR ASSN$***
 std::vector<std::string> Input::parseOutConnectors(std::string withConnectors) {
     std::string delimiters("&&" "||" ";");
     std::vector<std::string> parsedSubStrings;
