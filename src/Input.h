@@ -53,6 +53,10 @@ class Input {
         std::vector<std::string> parsePar(std::string &userString);
         void parseTest(std::string &userString);
         // ****** NEW ADDITIONS FOR ASSN3 ******//
+        
+        // ****** NEW ADDITIONS FOR ASSN4 ******//
+        void parsePipe(std::string &userString);
+        // ****** NEW ADDITIONS FOR ASSN4 ******//
         void parseInput();
         std::vector<std::string>parseOutConnectors(std::string withConnectors);
         std::vector<std::string> parseSpaces(std::string withSpaces); // helper function to remove spaces from withSpaces input

@@ -193,6 +193,21 @@ void Input::parseTest(std::string &userString) {
 // After this function, the individual par objects will need to be parsed to created individual trees, 
 // and will replace the par object with a connector pointing to  two or more arguments in the executable tree
 
+/*** ADDITION FOR ASSN 4 ***/
+// Function removes the piping symbol from userstring so that there are no confusions with the or operator
+void Input::parsePipe(std::string &userString) {
+    for (int i = 1; i + 1 < userString.size(); ++i) {
+        if (userString.at(i) == '|' && userString.at(i + 1) != '|' && userString.at(i - 1) != '|') {
+            userString.erase(i, 1);
+            userString.insert(i, "pipe5908234");
+        }
+    }
+    return;
+}
+
+/*** ADDITION FOR ASSN$ ***/
+
+
 
 /*****
 // Takes in user input and tokenizes string into substrings based on connectors, and then
@@ -208,6 +223,10 @@ void Input::parseInput() {
     }
     if (userInput.find('[') != std::string::npos) {
         parseTest(this->userInput);
+    }
+    if (userInput.find('|') != std::string::npos) {
+        parsePipe(this->userInput);
+        std::cout << userInput;
     }
     parsedStrings = parseOutConnectors(userInput);
 

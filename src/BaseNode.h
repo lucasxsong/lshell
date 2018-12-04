@@ -147,7 +147,14 @@ class Pipe : public Connector {
     }
 
     bool execute(int in, int out) {
+        int fds[2];
+        if (pipe(fds) == -1) {
+            perror("pipe");
+            return false;
+        }
 
+        //if (!lhs->execute(in )
+        return false;
     }
     std::string returnType() {
         return "|";
