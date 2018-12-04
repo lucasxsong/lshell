@@ -141,31 +141,88 @@ class SemiColon : public Connector {
 
 class Pipe : public Connector {
     public:
-    Pipe() {
+        Pipe() {
         leftChild = NULL;
         rightChild = NULL;
-    }
-
-    bool execute() {
-        /*int fds[2];
-        if (pipe(fds) == -1) {
-            perror("pipe");
-            return false;
         }
 
-        //if (!lhs->execute(in )
-        return false; */
-        leftChild->execute();
-        rightChild->execute();
-        return true;
-    }
-    std::string returnType() {
-        return "|";
-    }
-    std::string returnCheck() {
-        return "pipe";
-    }
+        bool execute() {
+            /*int fds[2];
+            if (pipe(fds) == -1) {
+                perror("pipe");
+                return false;
+            }
+
+            //if (!lhs->execute(in )
+            return false; */
+            leftChild->execute();
+            rightChild->execute();
+            return true;
+        }
+        std::string returnType() {
+            return "|";
+        }
+        std::string returnCheck() {
+            return "pipe";
+        }
 };
+
+class OOverwrite : public Connector { // SYMBOL : >
+    public: 
+        OOverwrite() {
+            rightChild = NULL;
+            leftChild = NULL;
+        }
+        bool execute() {
+            leftChild->execute();
+            rightChild->execute();
+        }
+        std::string returnType () {
+            return ">";
+        }
+        std::string returnCheck() {
+            return "OOverWrite";
+        }
+};
+
+
+
+class OConcatenate : public Connector { // SYMBOL : >>
+    public: 
+        OConcatenate() {
+            rightChild = NULL;
+            leftChild = NULL;
+        }
+        bool execute() {
+            leftChild->execute();
+            rightChild->execute();
+        }
+        std::string returnType() {
+            return ">>";
+        }
+        std::string returnCheck() {
+            return "OConcatenate";
+        }
+};
+
+class IOverwrite : public Connector { // SYMBOL : <
+    public: 
+        IOverwrite() {
+            rightChild = NULL;
+            leftChild = NULL;
+        }
+        bool execute() {
+            leftChild->execute();
+            rightChild->execute();
+        }
+        std::string returnType() {
+            return "<";
+        }
+        std::string returnCheck() {
+            return "IOverwrite";
+        }
+};
+
 
 /*****
 // ADDITIONS FOR ASSN 4
