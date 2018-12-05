@@ -484,7 +484,7 @@ void Input::makeExecutableTree() {
 }
 
 void Input::callExecute() {
-    head->execute();
+    head->execute(0,0);
     return;
 }
 

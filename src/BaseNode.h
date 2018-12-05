@@ -26,7 +26,7 @@ class baseNode {
             rightChild = NULL;
         }
         ~baseNode() {}
-        virtual bool execute() { // returns true if function calls, false if not
+        virtual bool execute(int in, int out) { // returns true if function calls, false if not
             return true;
         }
         virtual void setLeft(baseNode* leftChild) {
@@ -82,9 +82,9 @@ class And : public Connector {
 	        leftChild = NULL;
 	        rightChild = NULL;
 	    }
-        bool execute() {
-            if (leftChild->execute()) {
-                return rightChild->execute();
+        bool execute(int in, int out) {
+            if (leftChild->execute(0, 0)) {
+                return rightChild->execute(0, 0);
             }
             return false;
         }
@@ -102,9 +102,9 @@ class Or : public Connector {
 	        leftChild = NULL;
 	        rightChild = NULL;
 	    }
-        bool execute() {
-            if (!leftChild->execute()) {
-                return rightChild->execute();
+        bool execute(int in, int out) {
+            if (!leftChild->execute(0, 0)) {
+                return rightChild->execute(0, 0);
             }
             return true;
         }
@@ -122,9 +122,9 @@ class SemiColon : public Connector {
 	        leftChild = NULL;
 	        rightChild = NULL;
 	    }
-        bool execute() {
-	        leftChild->execute();
-            rightChild->execute();
+        bool execute(int in, int out) {
+	        leftChild->execute(0, 0);
+            rightChild->execute(0, 0);
             return true;
 	    }
         std::string returnType() {
@@ -146,7 +146,7 @@ class Pipe : public Connector {
         rightChild = NULL;
         }
          // These are just filler executes, need to be redone for redirection
-        bool execute() {
+        bool execute(int in, int out) {
             /*int fds[2];
             if (pipe(fds) == -1) {
                 perror("pipe");
@@ -155,8 +155,8 @@ class Pipe : public Connector {
 
             //if (!lhs->execute(in )
             return false; */
-            leftChild->execute();
-            rightChild->execute();
+            leftChild->execute(0, 0);
+            rightChild->execute(0, 0);
             return true;
         }
         std::string returnType() {
@@ -174,9 +174,9 @@ class OOverwrite : public Connector { // SYMBOL : >
             leftChild = NULL;
         }
         // These are just filler executes, need to be redone for redirection
-        bool execute() {
-            leftChild->execute();
-            rightChild->execute();
+        bool execute(int in, int out) {
+            leftChild->execute(0, 0);
+            rightChild->execute(0, 0);
             return true;
         }
         std::string returnType () {
@@ -196,12 +196,12 @@ class OConcatenate : public Connector { // SYMBOL : >>
             leftChild = NULL;
         }
         // These are just filler executes, need to be redone for redirection
-        bool execute() {
-            leftChild->execute();
-            rightChild->execute();
+        bool execute(int in, int out) {
+            leftChild->execute(0, 0);
+            rightChild->execute(0, 0);
             return true;
         }
-        std::string returnType(){
+        std::string returnType() {
             return ">>";
         }
         std::string returnCheck() {
@@ -216,9 +216,9 @@ class IOverwrite : public Connector { // SYMBOL : <
             leftChild = NULL;
         }
         // These are just filler executes, need to be redone for redirection
-        bool execute() {
-            leftChild->execute();
-            rightChild->execute();
+        bool execute(int in, int out) {
+            leftChild->execute(0, 0);
+            rightChild->execute(0, 0);
             return true;
         }
         std::string returnType() {
@@ -264,7 +264,7 @@ class baseExec : public baseNode {
             return;
         }
 
-        virtual bool execute() {
+        virtual bool execute(int in, int out) {
             pid_t pid = fork();
             int status;
             bool run = true;
@@ -288,7 +288,7 @@ class baseExec : public baseNode {
                     // std::cout << "Rshell: " << a.at(0) << ": command not found"  << std::endl;
                     // error* e = new baseExec();
                     // e->addArg(exec);
-                    // e->execute();
+                    // e->execute(0, 0);
                     //***
                     exit(1);
                 }
@@ -337,7 +337,7 @@ class echo : public baseExec {
         }
 
         //prints arguments on newline 
-        bool execute() {
+        bool execute(int in, int out) {
                 for (int i = 1; i < a.size(); i++) {
                     std::cout << a.at(i) << " ";
                 }
@@ -372,7 +372,7 @@ class error : public baseExec {
             rightChild = NULL;
         }
 
-        bool execute() {
+        bool execute(int in, int out) {
             std::cout << "Rshell: " << a.at(0) << ": command not found"  << std::endl;
             return false;
         }
@@ -392,7 +392,7 @@ class exitCall : public baseExec {
 
     public: 
         exitCall() {}
-        bool execute() {
+        bool execute(int in, int out) {
             exitBool = true;
             return true;
         }
@@ -423,7 +423,7 @@ class test : public baseExec {
             dashF = false; // checks if the file/directory exists and is a regular file
             dashD = false; // checks if the file/directory exists and is a regular file
         }
-        bool execute() {
+        bool execute(int in, int out) {
             // execute function should check if there are any flags in the arglist
             // if there are not, move on to check to see if the file path exists using stat()
             
@@ -537,7 +537,7 @@ class Par : public baseExec {
         void setSubString(std::string s) {
             subString = s;
         }
-        bool execute() {
+        bool execute(int in, int out) {
             
             return true;
             // The execute function of par will look through the substring and see if there are any parenthesis, if not
