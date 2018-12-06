@@ -271,6 +271,7 @@ void Input::makeIOTree(std::string containsRedirect) {
     Pipe* p = new Pipe();
     p->setLeft(exec.at(0));
     p->setRight(exec.at(1));
+    std::cout << exec.at(1)->get_cmd() << std::endl;
     IORedirect.push_back(p);
 }
 
