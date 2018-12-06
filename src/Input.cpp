@@ -412,11 +412,12 @@ std::vector<std::string> Input::parseSpaces(std::string withSpaces) {
 // the vector passed in and takes the rest of the vector as the argument list // exec = nospace
 *****/
 baseNode* Input::makeNode(std::vector<std::string> exec) {
+    /*
     if (exec.at(0) == "echo") {
         echo* b = new echo();
         b->addArg(exec);
         return b;
-    }
+    }*/
     if (exec.at(0) == "exit") {
         exitCall* b = new exitCall();
         b->addArg(exec);

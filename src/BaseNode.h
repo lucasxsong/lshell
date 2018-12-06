@@ -302,7 +302,7 @@ class baseExec : public baseNode {
                     perror("dup2");
                     return false;
                 }
-                if (dup2(out,1 == -1)) {
+                if (dup2(out,1) == -1) {
                     perror("dup2");
                     return false;
                 }
