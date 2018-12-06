@@ -224,7 +224,7 @@ void Input::makeIOTree(std::string containsRedirect) {
     
     p->setLeft(exec.at(0));
     p->setRight(exec.at(1));
-    
+    IORedirect.push_back(p);
 }
 
 // This function takes in the userString as a parameter, and parses out the sections of the
