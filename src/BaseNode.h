@@ -181,9 +181,7 @@ class OOverwrite : public Connector { // SYMBOL : >
         }
         // These are just filler executes, need to be redone for redirection
         bool execute(int in, int out) {
-            leftChild->execute(0, 0);
-            rightChild->execute(0, 0);
-            return true;
+            std::string ofile = rightChild->get_cmd();
         }
         std::string returnType () {
             return ">";
@@ -268,6 +266,10 @@ class baseExec : public baseNode {
                 }
             }
             return;
+        }
+
+        void get_cmd() {
+            return a.at(0);
         }
 
         virtual bool execute(int in, int out) {
