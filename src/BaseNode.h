@@ -230,9 +230,11 @@ class IOverwrite : public Connector { // SYMBOL : <
         }
         // These are just filler executes, need to be redone for redirection
         bool execute(int in, int out) {
-            leftChild->execute(0, 0);
-            rightChild->execute(0, 0);
-            return true;
+            std::string file;
+            file = rightChild->get_cmd();
+            in = open(file.c_str(), O_RDONLY);
+
+            return leftChild->execute(in,1);
         }
         std::string returnType() {
             return "<";
