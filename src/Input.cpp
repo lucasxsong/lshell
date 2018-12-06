@@ -214,7 +214,7 @@ void Input::makeIOTree(std::string containsRedirect) {
     v.push_back("testing");
     e->addArg(v);
     o->setLeft(e);
-    echo* f = new Eeho();
+    echo* f = new echo();
     o->setRight(f);
     IORedirect.push_back(o);
     return;

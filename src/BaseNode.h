@@ -287,6 +287,14 @@ class baseExec : public baseNode {
 
             else if (pid == 0) {
                 
+                if (dup2(in, 0) == -1) {
+                    perror("dup2");
+                    return false;
+                }
+                if (dup2(out,1 == -1)) {
+                    perror("dup2");
+                    return false;
+                }
                 if (execvp(arg[0], arg.data()) == -1) {
                     perror("execvp() failed");
                     run = false;
