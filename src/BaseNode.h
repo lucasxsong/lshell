@@ -85,8 +85,8 @@ class And : public Connector {
 	        rightChild = NULL;
 	    }
         bool execute(int in, int out) {
-            if (leftChild->execute(0, 0)) {
-                return rightChild->execute(0, 0);
+            if (leftChild->execute(in, out)) {
+                return rightChild->execute(in, out);
             }
             return false;
         }
@@ -105,8 +105,8 @@ class Or : public Connector {
 	        rightChild = NULL;
 	    }
         bool execute(int in, int out) {
-            if (!leftChild->execute(0, 0)) {
-                return rightChild->execute(0, 0);
+            if (!leftChild->execute(in, out)) {
+                return rightChild->execute(in, out);
             }
             return true;
         }
@@ -125,8 +125,8 @@ class SemiColon : public Connector {
 	        rightChild = NULL;
 	    }
         bool execute(int in, int out) {
-	        leftChild->execute(0, 0);
-            rightChild->execute(0, 0);
+	        leftChild->execute(in, out);
+            rightChild->execute(in, out);
             return true;
 	    }
         std::string returnType() {
