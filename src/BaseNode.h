@@ -149,16 +149,20 @@ class Pipe : public Connector {
         }
          // These are just filler executes, need to be redone for redirection
         bool execute(int in, int out) {
-            /*int fds[2];
+            int fds[2];
             if (pipe(fds) == -1) {
                 perror("pipe");
                 return false;
             }
+            if (!leftChild->execute(in, fds[1])) {
+                return false;
+            }
+            close(fds[1]);
 
-            //if (!lhs->execute(in )
-            return false; */
-            leftChild->execute(0, 0);
-            rightChild->execute(0, 0);
+            if(!rightChild->execute(fds[0], out)) {
+                return false;
+            }
+            close(fds[0]);
             return true;
         }
         std::string returnType() {

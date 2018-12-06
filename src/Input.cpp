@@ -208,14 +208,16 @@ void Input::parseTest(std::string &userString) {
 // Calling execute(in, out) on the head node pushed back should execute any of the redirect commands enclosed
 // by the tree
 void Input::makeIOTree(std::string containsRedirect) {
-    OOverwrite* o = new OOverwrite();
+    Pipe* o = new Pipe();
     echo* e = new Echo();
     std::vector<std::string> v;
     v.push_back("testing");
     e->addArg(v);
     o->setLeft(e);
-    
-    o->setRight()
+    echo* f = new Echo();
+    o->setRight(f);
+    IORedirect.push_back(o);
+    return;
 }
 
 // This function takes in the userString as a parameter, and parses out the sections of the
