@@ -268,7 +268,7 @@ void Input::makeIOTree(std::string containsRedirect) {
         exec.push_back(toPush); 
     }
     // test harness for initial pipe function
-    OOverwrite* p = new OOverwrite();
+    OConcatenate* p = new OConcatenate();
     p->setLeft(exec.at(0));
     p->setRight(exec.at(1));
     IORedirect.push_back(p);
