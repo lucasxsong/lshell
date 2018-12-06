@@ -203,29 +203,6 @@ void Input::parseTest(std::string &userString) {
 // as parenthesis, and have a vector of IORedirect heads that execute as executables, so that
 // they can be properly processed by the connectors
 
-// Takes in the implicit vector PreIORedirect and uses the substrings to create a tree, pushing back the
-// head node of the tree to IORedirect for later reference to create the main executable tree
-// Calling execute(in, out) on the head node pushed back should execute any of the redirect commands enclosed
-// by the tree
-void Input::makeIOTree(std::string containsRedirect) {
-    std::vector<std::string> v = parseOutConnectors(containsRedirect);
-    std::vector< std::vector <std::string> > preExec;
-    std::vector<baseNode* > exec;
-    for (int i = 0; i < v.size(); ++i) {
-        std::vector<std::string> toPush = parseSpaces(v.at(i));
-        preExec.push_back(toPush);
-    }
-    for (int i = 0; i < v.size(); ++i) {
-        baseNode* toPush = makeNode(preExec.at(i));
-        exec.push_back(toPush); 
-    }
-    // test harness for initial pipe function
-    Pipe* p = new Pipe();
-    
-    p->setLeft(exec.at(0));
-    p->setRight(exec.at(1));
-    IORedirect.push_back(p);
-}
 
 // This function takes in the userString as a parameter, and parses out the sections of the
 // input that have any input redirection, replacing that section of text with a filler "ioredirect0875"
@@ -274,6 +251,28 @@ void Input::parseIO(std::string &userString) {
     }
 }
 
+// Takes in the string containsRedirect and uses the substrings to create a tree, pushing back the
+// head node of the tree to IORedirect for later reference to create the main executable tree
+// Calling execute(in, out) on the head node pushed back should execute any of the redirect commands enclosed
+// by the tree
+void Input::makeIOTree(std::string containsRedirect) {
+    std::vector<std::string> v = parseOutConnectors(containsRedirect);
+    std::vector< std::vector <std::string> > preExec;
+    std::vector<baseNode* > exec;
+    for (int i = 0; i < v.size(); ++i) {
+        std::vector<std::string> toPush = parseSpaces(v.at(i));
+        preExec.push_back(toPush);
+    }
+    for (int i = 0; i < v.size(); ++i) {
+        baseNode* toPush = makeNode(preExec.at(i));
+        exec.push_back(toPush); 
+    }
+    // test harness for initial pipe function
+    Pipe* p = new Pipe();
+    p->setLeft(exec.at(0));
+    p->setRight(exec.at(1));
+    IORedirect.push_back(p);
+}
 
 
 // replaces "|"with "~""
@@ -351,7 +350,7 @@ void Input::parseInput() {
 // Adding pipe and redirect to delimiters
 // ***EDIT FOR ASSN$***
 std::vector<std::string> Input::parseOutConnectors(std::string withConnectors) {
-    std::string delimiters("&&" "||" ";" "<" "`" "<" "~");
+    std::string delimiters("&&" "||" ";" "<" "`" ">" "~");
     std::vector<std::string> parsedSubStrings;
 
     std::stringstream ss(withConnectors);

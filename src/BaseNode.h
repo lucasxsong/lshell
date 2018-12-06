@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <fcntl.h>
 
 class Arg;
 extern bool exitBool;
@@ -44,6 +45,10 @@ class baseNode {
             return "";
         }
         virtual std::string returnCheck() { //helper function for test cases
+            return "";
+        }
+
+        virtual std::string get_cmd() {
             return "";
         }
 };
@@ -182,6 +187,9 @@ class OOverwrite : public Connector { // SYMBOL : >
         // These are just filler executes, need to be redone for redirection
         bool execute(int in, int out) {
             std::string ofile = rightChild->get_cmd();
+            out = open(ofile.c_str(), O_WRONLY| O_TRUNC | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
+
+            return leftChild->execute(0,out);
         }
         std::string returnType () {
             return ">";
@@ -201,9 +209,10 @@ class OConcatenate : public Connector { // SYMBOL : >>
         }
         // These are just filler executes, need to be redone for redirection
         bool execute(int in, int out) {
-            leftChild->execute(0, 0);
-            rightChild->execute(0, 0);
-            return true;
+            std::string ofile = rightChild->get_cmd();
+            out = open(ofile.c_str(), O_WRONLY| O_APPEND | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
+
+            return leftChild->execute(0,out);
         }
         std::string returnType() {
             return ">>";
@@ -268,7 +277,7 @@ class baseExec : public baseNode {
             return;
         }
 
-        void get_cmd() {
+        std::string get_cmd() {
             return a.at(0);
         }
 
