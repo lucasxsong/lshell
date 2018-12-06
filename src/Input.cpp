@@ -209,12 +209,12 @@ void Input::parseTest(std::string &userString) {
 // by the tree
 void Input::makeIOTree(std::string containsRedirect) {
     Pipe* o = new Pipe();
-    echo* e = new Echo();
+    echo* e = new echo();
     std::vector<std::string> v;
     v.push_back("testing");
     e->addArg(v);
     o->setLeft(e);
-    echo* f = new Echo();
+    echo* f = new Eeho();
     o->setRight(f);
     IORedirect.push_back(o);
     return;
