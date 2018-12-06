@@ -26,6 +26,8 @@ class baseNode {
             rightChild = NULL;
         }
         ~baseNode() {}
+        // The base execute function has been changed to allow for the input/output redirection to utilize the 
+        // same interface as the baseNode
         virtual bool execute(int in, int out) { // returns true if function calls, false if not
             return true;
         }

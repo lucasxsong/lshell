@@ -197,6 +197,77 @@ void Input::parseTest(std::string &userString) {
 /*** ADDITION FOR ASSN 4 ***/
 // Function removes the piping symbol from userstring so that there are no confusions with the or operator
 // Function replaces the piping symbol with a tilde so that it can be parsed and instantiated later
+
+// The below functions have been commented out because the initial step must not be to replace them as connectors
+// but to instead find instances of IO redirect and parse them out based on connectors to replace them with holder values
+// as parenthesis, and have a vector of IORedirect heads that execute as executables, so that
+// they can be properly processed by the connectors
+
+// Takes in the implicit vector PreIORedirect and uses the substrings to create a tree, pushing back the
+// head node of the tree to IORedirect for later reference to create the main executable tree
+// Calling execute(in, out) on the head node pushed back should execute any of the redirect commands enclosed
+// by the tree
+void Input::makeIOTree(std::string containsRedirect) {
+    OOverwrite* o = new OOverwrite();
+    echo* e = new Echo();
+    std::vector<std::string> v;
+    v.push_back("testing");
+    e->addArg(v);
+    o->setLeft(e);
+    
+    o->setRight()
+}
+
+// This function takes in the userString as a parameter, and parses out the sections of the
+// input that have any input redirection, replacing that section of text with a filler "ioredirect0875"
+void Input::parseIO(std::string &userString) {
+    int startConnector = 0;
+    int endConnector;
+    bool foundEnd = false;
+    
+    for (int i = 0; i < userString.size(); ++i) {
+        // case if a connector is found first before a <<
+        if (userString.at(i) == '&' || userString.at(i) == '|' || userString.at(i) == ';') {
+            startConnector = i;
+        } 
+        if (userString.at(i) == '<' || userString.at(i) == '>' || userString.at(i) == '~' || userString.at(i) == '`') {
+            // Time to find the endConnector to create a substring
+            for (int j = i; j < userString.size(); ++j) {
+                if (foundEnd) {
+                    break;
+                }
+                else {
+                    if (userString.at(j) == '&' || userString.at(j) == '|' || userString.at(j) == ';') {
+                        endConnector = j;
+                        foundEnd = true;
+                    }
+                }
+            }
+            std::string containsRedirect;
+            if (startConnector != 0) {
+                containsRedirect = userString.substr(startConnector + 1, endConnector - startConnector - 1);
+                userString.replace(startConnector + 1, endConnector - startConnector - 1, " ioredirect0875 ");
+                foundEnd = false;
+                i = endConnector;
+            }
+            else {
+                containsRedirect = userString.substr(startConnector, endConnector - startConnector - 1);
+                userString.replace(startConnector, endConnector - startConnector - 1, "ioredirect0875 ");
+                foundEnd = false;
+                i = endConnector;
+            }
+            
+            makeIOTree(containsRedirect);
+            
+        }
+
+        // case if a IORedirect symbol is found first
+    }
+}
+
+
+
+// replaces "|"with "~""
 void Input::parsePipe(std::string &userString) {
     for (int i = 1; i + 1 < userString.size(); ++i) {
         if (userString.at(i) == '|' && userString.at(i + 1) != '|' && userString.at(i - 1) != '|') {
@@ -207,6 +278,7 @@ void Input::parsePipe(std::string &userString) {
     return;
 }
 
+// replaces ">> with "`"
 void Input::parseOCon(std::string &userString) {
     for (int i = 1; i + 1 < userString.size(); ++i) {
         if (userString.at(i) == '>' && userString.at(i + 1) == '>') {
@@ -215,6 +287,8 @@ void Input::parseOCon(std::string &userString) {
         }
     }
 }
+
+
 
 /*** ADDITION FOR ASSN4 ***/
 
@@ -233,12 +307,10 @@ void Input::parseInput() {
     if (userInput.find('[') != std::string::npos) {
         parseTest(this->userInput);
     }
-    if (userInput.find('|') != std::string::npos) {
+    if (userInput.find('|') != std::string::npos || userInput.find('<') != std::string::npos || userInput.find('>')) {
         parsePipe(this->userInput);
-    }
-    if (userInput.find('>') != std::string::npos) {
         parseOCon(this->userInput);
-        std::cout << userInput << std::endl;
+        parseIO(this->userInput);
     }
     parsedStrings = parseOutConnectors(userInput);
 
@@ -247,7 +319,6 @@ void Input::parseInput() {
         std::vector<std::string> toPush = parseSpaces(parsedStrings.at(i));
         parsedNoSpace.push_back(toPush);
     }
-
     // parsedNode vector creation
     for (int i = 0; i < parsedNoSpace.size(); ++i) {
         baseNode* toPush = makeNode(parsedNoSpace.at(i));
@@ -271,7 +342,7 @@ void Input::parseInput() {
 // Adding pipe and redirect to delimiters
 // ***EDIT FOR ASSN$***
 std::vector<std::string> Input::parseOutConnectors(std::string withConnectors) {
-    std::string delimiters("&&" "||" ";" "~" "<" ">" "`");
+    std::string delimiters("&&" "||" ";");
     std::vector<std::string> parsedSubStrings;
 
     std::stringstream ss(withConnectors);
@@ -365,11 +436,24 @@ baseNode* Input::makeNode(std::vector<std::string> exec) {
 
     // ****** NEW ADDITIONS FOR ASSN3 ******//
 
-    else { //error test case
+    // ****** NEW ADDITIONS FOR ASSN4 ******//
+    // This function instantiates a new baseNode object based on the IORedirect vector,
+    // which returns the head node to a precreated IOredirect tree. Calling execute on the head
+    // of the tree will trigger execution of the redirection of the entire tree
+    if (exec.at(0) == "ioredirect0875") {
+        if (IORedirect.size() != 0) {
+            baseNode* b = IORedirect.at(0);
+            IORedirect.erase(IORedirect.begin());
+            return b;
+        }
+    }
+    // ****** NEW ADDITIONS FOR ASSN4 ******//
+
+    //else { //error test case
         baseExec* b = new baseExec();
         b->addArg(exec);
         return b;
-    }
+    //}
 }
 
 /*****
