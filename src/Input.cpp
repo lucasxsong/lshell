@@ -267,13 +267,80 @@ void Input::makeIOTree(std::string containsRedirect) {
         baseNode* toPush = makeNode(preExec.at(i));
         exec.push_back(toPush); 
     }
+
+    std::vector<Connector* > ioConnectors = parseIOConnector(containsRedirect);
+    
+    if (ioConnectors.size() > 0) {
+        baseNode* head = ioConnectors.at(0);
+        baseNode* temp = head;
+        temp->setLeft(exec.at(0));
+
+        for (int i = 0; i < ioConnectors.size(); ++i) {
+            temp->setRight(ioConnectors.at(i));
+            temp = temp->getRight();
+            temp->setLeft(exec.at(i));
+        }
+        temp->setRight(exec.at(ioConnectors.size()));
+        IORedirect.push_back(head);
+    }
+
+    
+    /*
     // test harness for initial pipe function
     OConcatenate* p = new OConcatenate();
     p->setLeft(exec.at(0));
     p->setRight(exec.at(1));
     IORedirect.push_back(p);
+    */
 }
 
+// Function that takes in the original contains redirect string and adds all of the 
+// Ioredirect symbols into a vector of connector so that the IO tree can be constructed
+std::vector<Connector* > Input::parseIOConnector(std::string userInput) {
+    std::vector<std::string> temp;
+    for (int pos = 0; pos < userInput.size(); pos++) {
+        if (userInput.at(pos) == '~') {
+            temp.push_back("~");
+            pos++;
+        }
+        if (userInput.at(pos) == '<') {
+            temp.push_back("<");
+            pos++;
+        }
+        if (userInput.at(pos) == '>') {
+            temp.push_back(">");
+            pos++;
+        }
+        if (userInput.at(pos) == '`') {
+            temp.push_back("`");
+            pos++;
+        }
+        // Need to think how to add pipe 
+    }
+    
+    //Iterate through vector of connector strings ("temp") and creates connector objects and pushes into vector of connectors ("connectors")
+    //Child pointers not set yet
+    std::vector<Connector* > connectors;
+    for (int i = 0; i < temp.size(); i++) {
+        if (temp.at(i) == "~") {
+            Pipe* c = new Pipe();
+            connectors.push_back(c);
+        }
+        if (temp.at(i) == "<") {
+            IOverwrite* c = new IOverwrite();
+            connectors.push_back(c);
+        }
+        if (temp.at(i) == ">") {
+            OOverwrite* c = new OOverwrite();
+            connectors.push_back(c);
+        }
+        if (temp.at(i) == "`") {
+            OConcatenate* c = new OConcatenate();
+            connectors.push_back(c);
+        }
+    }
+    return connectors;
+}
 
 // replaces "|"with "~""
 void Input::parsePipe(std::string &userString) {

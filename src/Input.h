@@ -63,6 +63,7 @@ class Input {
         void parseIO(std::string &userString);
         void parsePipe(std::string &userString);
         void parseOCon(std::string &userString);
+        std::vector<Connector* > parseIOConnector(std::string containsRedirect);
         // ****** NEW ADDITIONS FOR ASSN4 ******//
         void parseInput();
         std::vector<std::string>parseOutConnectors(std::string withConnectors);
