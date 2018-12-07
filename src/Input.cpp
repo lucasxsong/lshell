@@ -275,10 +275,12 @@ void Input::makeIOTree(std::string containsRedirect) {
         baseNode* head = temp;
         temp->setLeft(exec.at(0));
 
-        for (int i = 0; i < ioConnectors.size(); ++i) {
-            temp->setRight(ioConnectors.at(i));
-            temp = temp->getRight();
-            temp->setLeft(exec.at(i));
+        for (int i = 1; i < ioConnectors.size(); ++i) {
+            temp->setRight(exec.at(i));
+            head = ioConnectors.at(i);
+            // Do i need to write a conditional depending on what the connector is?
+            head->setLeft(temp);
+            temp = head;
         }
         temp->setRight(exec.at(ioConnectors.size()));
         IORedirect.push_back(head);
