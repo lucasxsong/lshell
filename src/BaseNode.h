@@ -233,7 +233,7 @@ class IOverwrite : public Connector { // SYMBOL : <
             std::string file;
             file = rightChild->get_cmd();
             in = open(file.c_str(), O_RDONLY);
-
+            printf("properly execute");
             return leftChild->execute(in,1);
         }
         std::string returnType() {
