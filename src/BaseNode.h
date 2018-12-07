@@ -38,6 +38,9 @@ class baseNode {
         virtual void setRight(baseNode* rightChild) {
             return;
         }
+        virtual baseNode* getLeft() {
+            return leftChild;
+        }
         virtual baseNode* getRight() {
             return rightChild;
         }
