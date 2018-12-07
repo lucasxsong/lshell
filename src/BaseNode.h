@@ -228,7 +228,7 @@ class IOverwrite : public Connector { // SYMBOL : <
             rightChild = NULL;
             leftChild = NULL;
         }
-        // These are just filler executes, need to be redone for redirection
+        
         bool execute(int in, int out) {
             std::string file;
             file = rightChild->get_cmd();
