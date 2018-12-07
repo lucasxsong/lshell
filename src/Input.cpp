@@ -271,8 +271,8 @@ void Input::makeIOTree(std::string containsRedirect) {
     std::vector<Connector* > ioConnectors = parseIOConnector(containsRedirect);
     
     if (ioConnectors.size() > 0) {
-        baseNode* head = ioConnectors.at(0);
-        baseNode* temp = head;
+        baseNode* temp = ioConnectors.at(0);
+        baseNode* head = temp;
         temp->setLeft(exec.at(0));
 
         for (int i = 0; i < ioConnectors.size(); ++i) {

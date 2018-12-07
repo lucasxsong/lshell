@@ -157,6 +157,7 @@ class Pipe : public Connector {
         }
          // These are just filler executes, need to be redone for redirection
         bool execute(int in, int out) {
+            std::cout << this->returnCheck() << std::endl;
             int fds[2];
             if (pipe(fds) == -1) {
                 perror("pipe");
@@ -189,6 +190,7 @@ class OOverwrite : public Connector { // SYMBOL : >
         }
         // These are just filler executes, need to be redone for redirection
         bool execute(int in, int out) {
+            std::cout << this->returnCheck() << std::endl;
             std::string ofile = rightChild->get_cmd();
             out = open(ofile.c_str(), O_WRONLY| O_TRUNC | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
 
@@ -212,6 +214,7 @@ class OConcatenate : public Connector { // SYMBOL : >>
         }
         // These are just filler executes, need to be redone for redirection
         bool execute(int in, int out) {
+            std::cout << this->returnCheck() << std::endl;
             std::string ofile = rightChild->get_cmd();
             out = open(ofile.c_str(), O_WRONLY| O_APPEND | O_CREAT, S_IRUSR | S_IRGRP | S_IWGRP | S_IWUSR);
 
@@ -233,6 +236,7 @@ class IOverwrite : public Connector { // SYMBOL : <
         }
         
         bool execute(int in, int out) {
+            std::cout << this->returnCheck() << std::endl;
             std::string file;
             file = rightChild->get_cmd();
             in = open(file.c_str(), O_RDONLY);
