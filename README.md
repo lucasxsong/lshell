@@ -1,5 +1,7 @@
 # Command Shell Program
 
+Welcome to R'Shell. Are bash, zsh, ash, or PowerShell getting too reliable? Looks like you're in the right place.
+
 ## Getting Started:
 
 To start using R'shell, simply `git clone` the repository into your desktop. `cd` into the folder and run the precompiled executable through your machine's terminal/command prompt.
