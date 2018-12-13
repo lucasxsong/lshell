@@ -135,7 +135,7 @@ TEST(InputTest, ParseIOTest) {
     string userInput = "< &&";
     Input i;
     i.parseIO(userInput);
-    EXPECT_EQ(test.at(0), IORedirect.at(0));
+    EXPECT_EQ(test.at(0), i.IORedirect.at(0));
 }
 
 // Tests parsePipe function (should replace | with ~)
