@@ -134,7 +134,7 @@ TEST(InputTest, ParseIOTest) {
     test.push_back("ioredirect0875");
     string userInput = "< &&";
     Input i;
-    i.parseIO(userInput)
+    i.parseIO(userInput);
     vector<string> toTest;
     toTest.push_back(i.containsRedirect);
     EXPECT_EQ(test.at(0), toTest.at(0));
