@@ -8,6 +8,7 @@ TEST(ExecTest, echoTest) {
     Input i("echo hi hello");
     i.parseInput();
     baseNode* b = i.returnHead();
+    cout << b->returnCheck() << endl;
     EXPECT_EQ("hi hello ", b->returnCheck());
 }
 

@@ -137,6 +137,7 @@ TEST(InputTest, ParseIOTest) {
     i.parseIO(userInput);
     vector<string> toTest;
     toTest.push_back(i.containsRedirect);
+    cout << i.containsRedirect << endl;
     EXPECT_EQ(test.at(0), toTest.at(0));
 }
 
