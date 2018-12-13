@@ -229,7 +229,7 @@ void Input::parseIO(std::string &userString) {
                     }
                 }
             }
-            std::string containsRedirect;
+            // std::string containsRedirect;
             if (startConnector != 0) {
                 containsRedirect = userString.substr(startConnector + 1, endConnector - startConnector - 1);
                 userString.replace(startConnector + 1, endConnector - startConnector - 1, " ioredirect0875 ");

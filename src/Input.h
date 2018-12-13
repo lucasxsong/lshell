@@ -32,6 +32,7 @@ class Input {
         // ADDITION FOR ASSIGNMENT 4
         //std::vector<std::string> PreIORedirect; // vector that holds the substrings that contain IOredirect
         std::vector<baseNode*> IORedirect; // vector that holds baseNode* objects that will be later used to create executables during makeExec
+        std::string containsRedirect;
     
     public:
 		Input();

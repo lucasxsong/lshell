@@ -134,8 +134,9 @@ TEST(InputTest, ParseIOTest) {
     test.push_back("ioredirect0875");
     string userInput = "< &&";
     Input i;
-    i.parseIO(userInput);
-    EXPECT_EQ(test.at(0), i.IORedirect.at(0));
+    vector<string> toTest;
+    toTest.push_back(i.parseIO(userInput));
+    EXPECT_EQ(test.at(0), toTest.at(0));
 }
 
 // Tests parsePipe function (should replace | with ~)
