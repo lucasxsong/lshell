@@ -72,7 +72,7 @@ TEST(InputTest, RemoveCommentTest) {
 }
 
 // Checks to make sure that the connectors are properly pushed back to the connector vector
-TEST(InputTest, ParseConnectorsTest) {
+TEST(InputTest, ParseConnectorsTestA) {
     vector<string> test;
     test.push_back("&&");
     test.push_back("||");
@@ -89,6 +89,12 @@ TEST(InputTest, ParseConnectorsTest) {
         EXPECT_EQ(test.at(i), toTest.at(i));
     }
 }
+
+// Added test for additional connectors (Assignment 4)
+TEST(InputTest, ParseConnectorsTestB) {
+    
+}
+
 // Tests the head node of the executable tree to make sure its been constructed properly
 TEST(InputTest, ExecutableTreeTest) {
     Input i("echo hi && ls -a || echo foo ; git status");
@@ -120,3 +126,24 @@ TEST(InputTest, NestedParTest) {
     }
 }
 
+// Added test cases for Assignment #4
+
+// Tests parseIO function (look for "ioredirect0875 ")
+TEST(InputTest, ParseIOTest) {
+    vector<string> test;
+    test.push_back("ioredirect0875");
+    string userInput = "< &&"
+    Input i;
+    vector<string> toTest = i.parseIO(userInput);
+    EXPECT_EQ(test.at(0), toTest.at(0));
+}
+
+// Tests parsePipe function (should replace | with ~)
+// TEST(InputTest, ParsePipeTest) {
+
+// }
+
+// // Tests parseOCon function (should replace >> with ~)
+// TEST(InputTest, ParseOConTest) {
+
+// }

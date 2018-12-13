@@ -53,3 +53,5 @@ TEST(ExecTest, parTest) {
     baseNode* b = i.returnHead();
     EXPECT_EQ("false", b->returnCheck());
 }
+
+// Added tests for Assignment #4
