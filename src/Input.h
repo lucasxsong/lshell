@@ -32,7 +32,6 @@ class Input {
         // ADDITION FOR ASSIGNMENT 4
         //std::vector<std::string> PreIORedirect; // vector that holds the substrings that contain IOredirect
         std::vector<baseNode*> IORedirect; // vector that holds baseNode* objects that will be later used to create executables during makeExec
-        std::string containsRedirect;
     
     public:
 		Input();
@@ -62,6 +61,7 @@ class Input {
         // ****** NEW ADDITIONS FOR ASSN4 ******//
         void makeIOTree(std::string containsRedirect);
         void parseIO(std::string &userString);
+        std::string containsRedirect;        
         void parsePipe(std::string &userString);
         void parseOCon(std::string &userString);
         std::vector<Connector* > parseIOConnector(std::string containsRedirect);
