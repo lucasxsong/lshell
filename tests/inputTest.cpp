@@ -132,7 +132,7 @@ TEST(InputTest, NestedParTest) {
 TEST(InputTest, ParseIOTest) {
     vector<string> test;
     test.push_back("ioredirect0875");
-    string userInput = "< &&"
+    string userInput = "< &&";
     Input i;
     vector<string> toTest = i.parseIO(userInput);
     EXPECT_EQ(test.at(0), toTest.at(0));
