@@ -59,5 +59,6 @@ TEST(ExecTest, pipeTest) {
     Input i("~ hi");
     i.parseInput();
     baseNode* b = i.returnHead();
+    cout << b->returnType() << " " << b->returnCheck() << endl;
     EXPECT_EQ("pipe", b->returnCheck());
 }
