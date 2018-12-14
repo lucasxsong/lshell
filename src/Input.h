@@ -46,13 +46,7 @@ class Input {
         std::vector<Connector* > returnConnectors();
         baseNode* returnHead();
 
-        void callExit();
-		bool checkExit(); // returns true if needs to exit
-        // The program will first call runInput to get the full userString
-        // Then, the program will call parsePar to construct the first tree
-        // will need to add a helper function just to concatenate based on paranthesis and connectors -> will be used for second pass
-        // ***TO DO*** need to adjust makeExecutableTree to work with paranthesis
-        void runInput();
+		void runInput();
         // ****** NEW ADDITIONS FOR ASSN3 ******//
         std::vector<std::string> parsePar(std::string &userString);
         void parseTest(std::string &userString);
