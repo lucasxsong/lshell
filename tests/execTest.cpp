@@ -56,7 +56,7 @@ TEST(ExecTest, parTest) {
 
 // Added tests for Assignment #4
 TEST(ExecTest, pipeTest) {
-    Input i("~ hi");
+    Input i("| hi");
     cout << "a" << endl;
     i.parseInput();
     cout << "b" << endl;
