@@ -82,3 +82,43 @@ TEST(DataRedirectTests, IOverwrite) {
     baseNode* b = i.returnHead();
     EXPECT_EQ("<", b->returnType());
 }
+
+TEST(DataRedirectTests, ParseIOTest) {
+    vector<string> test;
+    test.push_back("ioredirect0875 echo && hello");
+    string userInput = "helolo < yes"; //not sure what to put here
+    Input i;
+    i.parseIO(userInput);
+    vector<string> toTest;
+    toTest.push_back(i.containsRedirect);
+    cout << i.containsRedirect << endl;
+    EXPECT_EQ(toTest.at(0), toTest.at(0));
+}
+
+Test(DataRedirectTests, ParseOConTest) {
+    Input* i = new Input();
+    string toTest;
+    i->parsePipe("parse this >> parse");
+    EXPECT_EQ(toTest, toTest);
+}
+
+Test(DataRedirectTests, ParseIOverTest) {
+    Input* i = new Input();
+    string toTest;
+    i->parsePipe("parse this < parse");
+    EXPECT_EQ(toTest, toTest);
+}
+
+Test(DataRedirectTests, ParseOOverTest) {
+    Input* i = new Input();
+    string toTest;
+    i->parsePipe("parse this >> parse");
+    EXPECT_EQ(toTest, toTest);
+}
+
+Test(DataRedirectTests, ParseOConTest) {
+    Input* i = new Input();
+    string toTest;
+    i->parsePipe("parse this > parse");
+    EXPECT_EQ(toTest, toTest);
+}
