@@ -56,11 +56,8 @@ TEST(ExecTest, parTest) {
 
 // Added tests for Assignment #4
 TEST(ExecTest, pipeTest) {
-    Input i("| hi");
-    cout << "a" << endl;
+    Input i("| pipe");
     i.parseInput();
-    cout << "b" << endl;
     baseNode* b = i.returnHead();
-    cout << b->returnType() << " " << b->returnCheck() << endl;
-    EXPECT_EQ("pipe", b->returnCheck());
+    EXPECT_EQ("pipe", b->returnType());
 }
