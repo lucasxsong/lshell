@@ -354,43 +354,42 @@ class baseExec : public baseNode {
 
 //*** DERIVED "BASEEXEC" CLASSES ***//
 
-// ***** ECHO CLASS NO LONGER NEEDED AS OF ASSN4 ******
 // tag: string variable to be returned back to user
-// class echo : public baseExec {
-//     protected:
-//         std::string userInput;
-//         std::string echoReturn; //stores a string of what echo returns
-//     public: 
-//         echo() {}
-//         void addUserInput(std::string userInput) {
-//             this->userInput = userInput;
-//         }
+class echo : public baseExec {
+    protected:
+        std::string userInput;
+        std::string echoReturn; //stores a string of what echo returns
+    public: 
+        echo() {}
+        void addUserInput(std::string userInput) {
+            this->userInput = userInput;
+        }
 
-//         //prints arguments on newline 
-//         bool execute(int in, int out) {
-//                 for (int i = 1; i < a.size(); i++) {
-//                     std::cout << a.at(i) << " ";
-//                 }
+        //prints arguments on newline 
+        bool execute(int in, int out) {
+                for (int i = 1; i < a.size(); i++) {
+                    std::cout << a.at(i) << " ";
+                }
 
-//                 std::cout << std::endl;
-//                 return true;
-//         }
-//         std::string returnType() {
-//             return "echo";
-//         }
-//         //used for test case
-//         std::string returnCheck() {
-//             std::string str = "";
-//             for (int i = 1; i < a.size(); i++) {
-//                 str = a.at(i);
-//                 echoReturn += str;
-//                 echoReturn += " ";
-//             }
+                std::cout << std::endl;
+                return true;
+        }
+        std::string returnType() {
+            return "echo";
+        }
+        //used for test case
+        std::string returnCheck() {
+            std::string str = "";
+            for (int i = 1; i < a.size(); i++) {
+                str = a.at(i);
+                echoReturn += str;
+                echoReturn += " ";
+            }
 
-//             return echoReturn;
-//         }
+            return echoReturn;
+        }
         
-// };
+};
 
 // created when user input does not match a function
 class error : public baseExec { 
