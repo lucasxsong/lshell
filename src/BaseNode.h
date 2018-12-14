@@ -543,7 +543,7 @@ class test : public baseExec {
         }
         
         std::string returnType() {
-            return "test"
+            return "test";
         }
 
         std::string returnCheck() {
