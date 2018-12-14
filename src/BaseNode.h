@@ -333,7 +333,7 @@ class baseExec : public baseNode {
             return run;
         }
         virtual std::string returnType() {
-            return "";
+            return a.at(0);
         }
         baseExec() { }
 
