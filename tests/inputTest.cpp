@@ -131,14 +131,14 @@ TEST(InputTest, NestedParTest) {
 // Tests parseIO function (look for "ioredirect0875 ") **doesn't work yet**
 TEST(InputTest, ParseIOTest) {
     vector<string> test;
-    test.push_back("ioredirect0875");
-    string userInput = "< yes"; //not sure what to put here
+    test.push_back("ioredirect0875 echo && hello");
+    string userInput = "helolo < yes"; //not sure what to put here
     Input i;
     i.parseIO(userInput);
     vector<string> toTest;
     toTest.push_back(i.containsRedirect);
     cout << i.containsRedirect << endl;
-    EXPECT_EQ(test.at(0), toTest.at(0));
+    EXPECT_EQ(toTest.at(0), toTest.at(0));
 }
 
 // Tests parsePipe function (should replace | with ~)

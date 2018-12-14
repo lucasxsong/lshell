@@ -63,22 +63,22 @@ TEST(DataRedirectTests, pipeTest) {
 }
 
 TEST(DataRedirectTests, OConcatenate) {
-    Input i(">> OConcatenate");
+    Input i("echo hello >> OConcatenate");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("OConcatenate", b->returnType());
+    EXPECT_EQ(">>", b->returnType());
 }
 
 TEST(DataRedirectTests, OOverwrite) {
-    Input i("> OOverwrite");
+    Input i("echo hello > OOverwrite");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("OOverwrite", b->returnType());
+    EXPECT_EQ(">", b->returnType());
 }
 
 TEST(DataRedirectTests, IOverwrite) {
-    Input i("< IOverwrite");
+    Input i("test.txt < IOverwrite");
     i.parseInput();
     baseNode* b = i.returnHead();
-    EXPECT_EQ("IOverwrite", b->returnType());
+    EXPECT_EQ("<", b->returnType());
 }
