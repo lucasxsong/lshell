@@ -128,11 +128,11 @@ TEST(InputTest, NestedParTest) {
 
 // Added test cases for Assignment #4
 
-// Tests parseIO function (look for "ioredirect0875 ")
+// Tests parseIO function (look for "ioredirect0875 ") **doesn't work yet**
 TEST(InputTest, ParseIOTest) {
     vector<string> test;
     test.push_back("ioredirect0875");
-    string userInput = "< yes";
+    string userInput = "< yes"; //not sure what to put here
     Input i;
     i.parseIO(userInput);
     vector<string> toTest;

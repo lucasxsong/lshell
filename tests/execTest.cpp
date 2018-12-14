@@ -55,3 +55,9 @@ TEST(ExecTest, parTest) {
 }
 
 // Added tests for Assignment #4
+TEST(ExecTest, pipeTest) {
+    Input i("~ hi");
+    i.parseInput();
+    baseNode* b = i.returnHead();
+    EXPECT_EQ("pipe", b->returnCheck());
+}
