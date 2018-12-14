@@ -55,9 +55,30 @@ TEST(ExecTest, parTest) {
 }
 
 // Added tests for Assignment #4
-TEST(ExecTest, pipeTest) {
+TEST(DataRedirectTests, pipeTest) {
     Input i("| pipe");
     i.parseInput();
     baseNode* b = i.returnHead();
     EXPECT_EQ("pipe", b->returnType());
+}
+
+TEST(DataRedirectTests, OConcatenate) {
+    Input i(">> OConcatenate");
+    i.parseInput();
+    baseNode* b = i.returnHead();
+    EXPECT_EQ("OConcatenate", b->returnType());
+}
+
+TEST(DataRedirectTests, OOverwrite) {
+    Input i("> OOverwrite");
+    i.parseInput();
+    baseNode* b = i.returnHead();
+    EXPECT_EQ("OOverwrite", b->returnType());
+}
+
+TEST(DataRedirectTests, IOverwrite) {
+    Input i("< IOverwrite");
+    i.parseInput();
+    baseNode* b = i.returnHead();
+    EXPECT_EQ("IOverwrite", b->returnType());
 }
