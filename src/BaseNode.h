@@ -260,30 +260,7 @@ class baseExec : public baseNode {
         std::string comment;
         std::vector<std::string> a;
     public:
-        // Function for adding arguments to vector a with a string passed in
-        void addArg(std::vector<std::string> arg) {
-            bool comment = false;
-            int commentIndex;
-            for (int i = 0; i < arg.size(); ++i) {
-                if (arg.at(i).at(0) == '#') {
-                    comment = true;
-                    commentIndex = i;
-                }
-                a.push_back(arg.at(i));
-            }
-            // This is a hack to remove comments from the arglist. NEEDS TO BE FIXED
-            if (comment) {
-                a.clear();
-                for (int i = 0; i < commentIndex; ++i) {
-                    a.push_back(arg.at(i));
-                }
-            }
-            return;
-        }
-
-        std::string get_cmd() {
-            return a.at(0);
-        }
+        baseExec() { }
 
         virtual bool execute(int in, int out) {
             pid_t pid = fork();
@@ -332,10 +309,31 @@ class baseExec : public baseNode {
             }
             return run;
         }
+
+        // Function for adding arguments to vector a with a string passed in
+        void addArg(std::vector<std::string> arg) {
+            bool comment = false;
+            int commentIndex;
+            for (int i = 0; i < arg.size(); ++i) {
+                if (arg.at(i).at(0) == '#') {
+                    comment = true;
+                    commentIndex = i;
+                }
+                a.push_back(arg.at(i));
+            }
+            // This is a hack to remove comments from the arglist. NEEDS TO BE FIXED
+            if (comment) {
+                a.clear();
+                for (int i = 0; i < commentIndex; ++i) {
+                    a.push_back(arg.at(i));
+                }
+            }
+            return;
+        }
+
         virtual std::string returnType() {
             return a.at(0);
         }
-        baseExec() { }
 
         virtual std::string returnCheck() {
             //using string comment as temporary fix for errorTest
@@ -344,6 +342,10 @@ class baseExec : public baseNode {
             comment += a.at(0);
             comment += ": command not found\n";
             return comment;
+        }
+
+        std::string get_cmd() {
+            return a.at(0);
         }
 };
 
@@ -538,6 +540,10 @@ class test : public baseExec {
 
             return false;    
                 
+        }
+        
+        std::string returnType() {
+            return "test"
         }
 
         std::string returnCheck() {
