@@ -1,15 +1,15 @@
-# Command Shell Program
+# LShell Program
 
-Welcome to R'Shell. Are bash, zsh, ash, or PowerShell getting too reliable? Looks like you're in the right place.
+Welcome to LShell. Are bash, zsh, ash, or PowerShell getting too reliable? Looks like you're in the right place.
 
 ## Getting Started:
 
 To start using R'shell, simply `git clone` the repository into your desktop. `cd` into the folder and run the precompiled executable through your machine's terminal/command prompt.
 
 ```
-git clone https://github.com/cs100/assignment-1-raya-playa.git
-cd assignment-1-raya-playa
-./rshell
+git clone https://github.com/lucasxsong/lshell.git
+cd lshell
+./lshell
 ```
 
 If this command doesn't work, you might need to recompile the object file.
