@@ -1,10 +1,10 @@
-# LShell Program
+# lShell Program
 
 Welcome to LShell. Are bash, zsh, ash, or PowerShell getting too reliable? Looks like you're in the right place.
 
 ## Getting Started:
 
-To start using R'shell, simply `git clone` the repository into your desktop. `cd` into the folder and run the precompiled executable through your machine's terminal/command prompt.
+To start using lshell, simply `git clone` the repository into your desktop. `cd` into the folder and run the precompiled executable through your machine's terminal/command prompt.
 
 ```
 git clone https://github.com/lucasxsong/lshell.git
@@ -25,7 +25,7 @@ This will `cd` into the `src` directory to recompile the program with files Inpu
 ./rshell
 ```
 
-Once the program has successfully compiled, you should see an updated command prompt with your local system and current user logged in. This means that you have successfully compiled and run the rshell program. Feel free to experiment with basic bin commands that will be covered in the next section.
+Once the program has successfully compiled, you should see an updated command prompt with your local system and current user logged in. This means that you have successfully compiled and run the lshell program. Feel free to experiment with basic bin commands that will be covered in the next section.
 
 However, if the program does not successfully compile, check the repo to make sure that all files have been properly cloned and that you have installed cmake. 
 
@@ -66,14 +66,14 @@ The function returns `(True)` if the file/path exists and `(False)` if the file/
 
 ## Known Bugs:
 "Out of order"
-- Known bug that when flags might be entered out of order, rshell will not be able to compile the command successfully as the flags intended.
+- Known bug that when flags might be entered out of order, lshell will not be able to compile the command successfully as the flags intended.
 - Ex: `rm dirName -r != rm -r dirName`
 
 "Calling Exit"
 - The current exit object, when executed, just modifies a global variable `extern bool exitBool` to stop the input loop. This is a little bit of a shortcut that will be changed to a more graceful call in following versions.
 
 ~~"Comments"~~
-- ~~As of current release, rshell does not store comments as a specific data member. We are working a solution to have comments parsed separately and stored in a data member of the baseExec function.~~
+- ~~As of current release, lshell does not store comments as a specific data member. We are working a solution to have comments parsed separately and stored in a data member of the baseExec function.~~
 - Bug has been fixed as of release assn3
 
 
