@@ -1,4 +1,4 @@
-# lShell Program
+# lshell
 
 Welcome to LShell. Are bash, zsh, ash, or PowerShell getting too reliable? Looks like you're in the right place.
 
